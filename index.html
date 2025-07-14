@@ -4,21 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Astrology 2.0 - Consciousness-Driven Computing | HackFate</title>
-    <meta name="description" content="Advanced Astrology 2.0 with Holographic Memory, Behavioral Avatars, and Quantum-Classical Hybrid Processing" />
-    <meta name="keywords" content="astrology, consciousness, holographic memory, behavioral avatar, hackfate, quantum computing" />
+    <meta name="description" content="Advanced Astrology 2.0 with Holographic Memory, Behavioral Avatars, and Cylindrical Time Coordinates" />
+    <meta name="keywords" content="astrology, consciousness, holographic memory, behavioral avatar, hackfate, quantum computing, cylindrical time" />
     <meta name="author" content="HackFate Research" />
     
     <!-- Open Graph -->
     <meta property="og:title" content="Astrology 2.0 - Consciousness-Driven Computing" />
-    <meta property="og:description" content="Experience cutting-edge astrology with holographic memory systems and behavioral avatar technology" />
+    <meta property="og:description" content="Experience cutting-edge astrology with holographic memory systems and cylindrical time coordinates" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hackfate.us" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/src/main.tsx" as="script" />
     
     <style>
       /* Critical CSS for loading state */
@@ -53,7 +50,119 @@
         50% { opacity: 1; }
       }
       
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
       .hidden { display: none !important; }
+      
+      /* Simple astrology app */
+      .app-container {
+        min-height: 100vh;
+        background: radial-gradient(ellipse at center, #0a0e27 0%, #000000 100%);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .card {
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(16px);
+        border-radius: 24px;
+        padding: 32px;
+        border: 1px solid rgba(255,255,255,0.2);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+        background: linear-gradient(45deg, #8b5cf6, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .subtitle {
+        color: #a855f7;
+        margin-bottom: 32px;
+      }
+      
+      .form-group {
+        margin-bottom: 24px;
+        text-align: left;
+      }
+      
+      .label {
+        display: block;
+        color: #c084fc;
+        font-size: 0.875rem;
+        margin-bottom: 8px;
+      }
+      
+      .input {
+        width: 100%;
+        padding: 12px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 8px;
+        color: white;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+      
+      .input::placeholder {
+        color: rgba(255,255,255,0.5);
+      }
+      
+      .button {
+        width: 100%;
+        padding: 12px 24px;
+        background: linear-gradient(45deg, #8b5cf6, #ec4899);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+      }
+      
+      .chart-display {
+        background: rgba(139, 92, 246, 0.1);
+        border-radius: 12px;
+        padding: 24px;
+        margin-top: 24px;
+        text-align: left;
+      }
+      
+      .planet-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      
+      .planet-name {
+        color: white;
+        font-weight: 500;
+      }
+      
+      .planet-position {
+        color: #c084fc;
+        font-size: 0.875rem;
+      }
     </style>
   </head>
   <body>
@@ -62,27 +171,146 @@
         <div style="width: 64px; height: 64px; margin: 0 auto 20px; border: 3px solid #8b5cf6; border-top: 3px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
         <h1 style="font-size: 2rem; margin-bottom: 10px;">Astrology 2.0</h1>
         <p style="opacity: 0.8;">Initializing Consciousness Matrix...</p>
+        <p style="opacity: 0.6; font-size: 0.875rem;">Cylindrical Time Coordinates Active</p>
       </div>
     </div>
     
-    <div id="root"></div>
-    
+    <div id="app" class="app-container hidden">
+      <div class="card">
+        <div class="title">Astrology 2.0</div>
+        <div class="subtitle">Consciousness-Driven Computing with Cylindrical Time</div>
+        
+        <div id="onboarding-form">
+          <div class="form-group">
+            <label class="label">Full Name</label>
+            <input type="text" id="name" class="input" placeholder="Enter your full name">
+          </div>
+          
+          <div class="form-group">
+            <label class="label">Birth Date</label>
+            <input type="date" id="birthDate" class="input">
+          </div>
+          
+          <div class="form-group">
+            <label class="label">Birth Time</label>
+            <input type="time" id="birthTime" class="input">
+          </div>
+          
+          <div class="form-group">
+            <label class="label">Birth Place</label>
+            <input type="text" id="birthPlace" class="input" placeholder="City, State, Country">
+          </div>
+          
+          <button class="button" onclick="generateChart()">Generate Natal Chart</button>
+        </div>
+        
+        <div id="chart-results" class="chart-display hidden">
+          <h3 style="color: white; margin-bottom: 16px;">Your Natal Chart</h3>
+          <div id="chart-content"></div>
+          <div style="margin-top: 16px; padding: 12px; background: rgba(139, 92, 246, 0.2); border-radius: 8px;">
+            <div style="color: #c084fc; font-size: 0.875rem; margin-bottom: 4px;">Cylindrical Time Signature</div>
+            <div id="cylindrical-time" style="color: white; font-family: monospace;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
-      // Hide loading screen when React app is ready
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          document.getElementById('loading').classList.add('hidden');
-        }, 1000);
-      });
-    </script>
-    
-    <script type="module" src="/src/main.tsx"></script>
-    
-    <style>
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+      // Initialize app
+      setTimeout(() => {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+      }, 2000);
+
+      // Simple ephemeris calculations
+      function calculatePlanetPosition(planet, julianDay) {
+        const planets = {
+          sun: { longitude: (julianDay * 0.985 + 280) % 360 },
+          moon: { longitude: (julianDay * 13.176 + 145) % 360 },
+          mercury: { longitude: (julianDay * 1.607 + 210) % 360 },
+          venus: { longitude: (julianDay * 1.210 + 90) % 360 },
+          mars: { longitude: (julianDay * 0.524 + 45) % 360 },
+          jupiter: { longitude: (julianDay * 0.083 + 120) % 360 },
+          saturn: { longitude: (julianDay * 0.033 + 180) % 360 }
+        };
+        return planets[planet] || { longitude: 0 };
       }
-    </style>
+
+      function getZodiacSign(longitude) {
+        const signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 
+                      'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
+        const signIndex = Math.floor(longitude / 30);
+        const degree = longitude % 30;
+        return {
+          sign: signs[signIndex],
+          degree: Math.floor(degree),
+          minute: Math.floor((degree % 1) * 60)
+        };
+      }
+
+      function calculateCylindricalTime(x, y, z) {
+        const rho = Math.sqrt(x * x + y * y);
+        const phi = Math.atan2(y, x);
+        const PHI = 1.618033988749895;
+        
+        const spiralFactor = rho * Math.cos(phi) + z * Math.sin(phi / Math.PI);
+        const timeSpiral = spiralFactor * PHI;
+        const cylindricalTime = timeSpiral % 365.25;
+        
+        return {
+          spiral: timeSpiral.toFixed(3),
+          normalized: cylindricalTime.toFixed(3),
+          phase: ((cylindricalTime / 365.25) * 360).toFixed(1) + '°'
+        };
+      }
+
+      function generateChart() {
+        const name = document.getElementById('name').value;
+        const birthDate = document.getElementById('birthDate').value;
+        const birthTime = document.getElementById('birthTime').value;
+        const birthPlace = document.getElementById('birthPlace').value;
+
+        if (!name || !birthDate || !birthTime || !birthPlace) {
+          alert('Please fill in all fields');
+          return;
+        }
+
+        // Simple Julian day calculation
+        const date = new Date(birthDate + 'T' + birthTime);
+        const julianDay = date.getTime() / (24 * 60 * 60 * 1000) + 2440587.5;
+
+        // Calculate planetary positions
+        const planets = ['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn'];
+        let chartHtml = '';
+
+        planets.forEach(planet => {
+          const position = calculatePlanetPosition(planet, julianDay);
+          const zodiac = getZodiacSign(position.longitude);
+          
+          chartHtml += `
+            <div class="planet-item">
+              <div class="planet-name">${planet.charAt(0).toUpperCase() + planet.slice(1)}</div>
+              <div class="planet-position">${zodiac.sign} ${zodiac.degree}°${zodiac.minute}'</div>
+            </div>
+          `;
+        });
+
+        // Calculate cylindrical time for birth moment
+        const lat = 40.7128; // Default NYC coords
+        const lng = -74.0060;
+        const x = Math.cos(lng * Math.PI / 180) * Math.cos(lat * Math.PI / 180);
+        const y = Math.sin(lng * Math.PI / 180) * Math.cos(lat * Math.PI / 180);
+        const z = Math.sin(lat * Math.PI / 180);
+        
+        const cylindricalTime = calculateCylindricalTime(x, y, z);
+
+        document.getElementById('chart-content').innerHTML = chartHtml;
+        document.getElementById('cylindrical-time').innerHTML = 
+          `Spiral: ${cylindricalTime.spiral} | Phase: ${cylindricalTime.phase}`;
+
+        document.getElementById('onboarding-form').classList.add('hidden');
+        document.getElementById('chart-results').classList.remove('hidden');
+      }
+    </script>
   </body>
 </html>
