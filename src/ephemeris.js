@@ -456,21 +456,101 @@ class HighPrecisionEphemeris {
   }
 
   /**
-   * Generate complete natal chart
+   * Convert rectangular to cylindrical coordinates
+   */
+  toCylindricalCoordinates(x, y, z) {
+    const rho = Math.sqrt(x * x + y * y);
+    const phi = Math.atan2(y, x);
+    return {
+      rho: rho,
+      phi: phi * RAD_TO_DEG,
+      z: z,
+      cylindricalTime: this.calculateCylindricalTime(rho, phi, z)
+    };
+  }
+
+  /**
+   * Calculate cylindrical time - a unique temporal coordinate system
+   * Based on the cylindrical position creating a time spiral
+   */
+  calculateCylindricalTime(rho, phi, z) {
+    // Cylindrical time formula: t = rho * cos(φ) + z * sin(φ/π) 
+    const spiralFactor = rho * Math.cos(phi) + z * Math.sin(phi / Math.PI);
+    
+    // Create time spiral with golden ratio modulation
+    const phiRatio = 1.618033988749895;
+    const timeSpiral = spiralFactor * phiRatio;
+    
+    // Normalize to meaningful time units (in Julian days)
+    const cylindricalTime = timeSpiral % 365.25;
+    
+    return {
+      spiralTime: timeSpiral,
+      normalizedDays: cylindricalTime,
+      timePhase: (cylindricalTime / 365.25) * 2 * Math.PI,
+      temporalResonance: Math.sin(timeSpiral * phiRatio) * 0.5 + 0.5
+    };
+  }
+
+  /**
+   * Calculate positions with cylindrical time coordinates
+   */
+  calculatePositionsWithCylindricalTime(year, month, day, hour = 0, minute = 0, second = 0) {
+    const jd = this.getJulianDay(year, month, day, hour, minute, second);
+    const standardPositions = this.calculateAllPositions(year, month, day, hour, minute, second);
+    
+    const cylindricalPositions = {};
+    
+    for (const [planet, pos] of Object.entries(standardPositions)) {
+      const cylindrical = this.toCylindricalCoordinates(pos.x || 0, pos.y || 0, pos.z || 0);
+      
+      cylindricalPositions[planet] = {
+        ...pos,
+        cylindrical: cylindrical,
+        temporalSignature: this.calculateTemporalSignature(cylindrical.cylindricalTime, pos.longitude)
+      };
+    }
+    
+    return cylindricalPositions;
+  }
+
+  /**
+   * Calculate temporal signature based on cylindrical time
+   */
+  calculateTemporalSignature(cylindricalTime, longitude) {
+    const { spiralTime, timePhase, temporalResonance } = cylindricalTime;
+    
+    // Create unique temporal signature combining spiral time and ecliptic position
+    const temporalHarmonic = Math.sin(spiralTime + longitude * DEG_TO_RAD);
+    const phaseModulation = Math.cos(timePhase * 2);
+    
+    return {
+      harmonic: temporalHarmonic,
+      phase: timePhase * RAD_TO_DEG,
+      resonance: temporalResonance,
+      signature: (temporalHarmonic + phaseModulation + temporalResonance) / 3,
+      timeEcho: Math.sin(spiralTime * 1.618033988749895) // Golden ratio time echo
+    };
+  }
+
+  /**
+   * Generate complete natal chart with cylindrical time
    */
   generateNatalChart(birthData) {
     const { year, month, day, hour, minute, second, latitude, longitude } = birthData;
     const jd = this.getJulianDay(year, month, day, hour, minute, second);
     
-    // Calculate planetary positions
-    const positions = this.calculateAllPositions(year, month, day, hour, minute, second);
+    // Calculate planetary positions with cylindrical time
+    const positions = this.calculatePositionsWithCylindricalTime(year, month, day, hour, minute, second);
     
-    // Convert to zodiac signs
+    // Convert to zodiac signs with temporal signatures
     const zodiacPositions = {};
     for (const [planet, pos] of Object.entries(positions)) {
       zodiacPositions[planet] = {
         ...pos,
-        zodiac: this.getZodiacSign(pos.longitude)
+        zodiac: this.getZodiacSign(pos.longitude),
+        cylindricalTime: pos.cylindrical.cylindricalTime,
+        temporalSignature: pos.temporalSignature
       };
     }
     
@@ -480,13 +560,96 @@ class HighPrecisionEphemeris {
     // Calculate aspects
     const aspects = this.calculateAspects(positions);
     
+    // Calculate cylindrical time for birth moment
+    const birthMomentCylindrical = this.toCylindricalCoordinates(
+      Math.cos(longitude * DEG_TO_RAD) * Math.cos(latitude * DEG_TO_RAD),
+      Math.sin(longitude * DEG_TO_RAD) * Math.cos(latitude * DEG_TO_RAD),
+      Math.sin(latitude * DEG_TO_RAD)
+    );
+    
     return {
       positions: zodiacPositions,
       houses: houses,
       aspects: aspects,
       julianDay: jd,
+      cylindricalTime: birthMomentCylindrical.cylindricalTime,
+      temporalMatrix: this.calculateTemporalMatrix(zodiacPositions),
       timestamp: Date.now()
     };
+  }
+
+  /**
+   * Calculate temporal matrix from all planetary cylindrical times
+   */
+  calculateTemporalMatrix(positions) {
+    const matrix = [];
+    const planets = Object.keys(positions);
+    
+    for (let i = 0; i < planets.length; i++) {
+      matrix[i] = [];
+      for (let j = 0; j < planets.length; j++) {
+        const planet1 = positions[planets[i]];
+        const planet2 = positions[planets[j]];
+        
+        if (planet1.temporalSignature && planet2.temporalSignature) {
+          const temporalResonance = Math.cos(
+            planet1.temporalSignature.phase * DEG_TO_RAD - 
+            planet2.temporalSignature.phase * DEG_TO_RAD
+          );
+          
+          matrix[i][j] = {
+            resonance: temporalResonance,
+            harmonic: (planet1.temporalSignature.harmonic + planet2.temporalSignature.harmonic) / 2,
+            timeEcho: Math.abs(planet1.temporalSignature.timeEcho - planet2.temporalSignature.timeEcho)
+          };
+        } else {
+          matrix[i][j] = { resonance: 0, harmonic: 0, timeEcho: 0 };
+        }
+      }
+    }
+    
+    return {
+      matrix: matrix,
+      planets: planets,
+      dominantResonance: this.findDominantResonance(matrix),
+      temporalStability: this.calculateTemporalStability(matrix)
+    };
+  }
+
+  /**
+   * Find dominant temporal resonance in the matrix
+   */
+  findDominantResonance(matrix) {
+    let maxResonance = 0;
+    let dominantPair = null;
+    
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = i + 1; j < matrix[i].length; j++) {
+        if (matrix[i][j].resonance > maxResonance) {
+          maxResonance = matrix[i][j].resonance;
+          dominantPair = { i, j, resonance: maxResonance };
+        }
+      }
+    }
+    
+    return dominantPair;
+  }
+
+  /**
+   * Calculate overall temporal stability
+   */
+  calculateTemporalStability(matrix) {
+    let totalResonance = 0;
+    let count = 0;
+    
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = i + 1; j < matrix[i].length; j++) {
+        totalResonance += Math.abs(matrix[i][j].resonance);
+        count++;
+      }
+    }
+    
+    return count > 0 ? totalResonance / count : 0;
   }
 }
 
