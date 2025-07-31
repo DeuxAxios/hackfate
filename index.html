@@ -1,316 +1,722 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Astrology 2.0 - Consciousness-Driven Computing | HackFate</title>
-    <meta name="description" content="Advanced Astrology 2.0 with Holographic Memory, Behavioral Avatars, and Cylindrical Time Coordinates" />
-    <meta name="keywords" content="astrology, consciousness, holographic memory, behavioral avatar, hackfate, quantum computing, cylindrical time" />
-    <meta name="author" content="HackFate Research" />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Astrology 2.0 - Consciousness-Driven Computing" />
-    <meta property="og:description" content="Experience cutting-edge astrology with holographic memory systems and cylindrical time coordinates" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hackfate.us" />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Oracle Engine - Quantum Astrology Portal</title>
     <style>
-      /* Critical CSS for loading state */
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        background: radial-gradient(ellipse at center, #0a0e27 0%, #000000 100%);
-        color: white;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    :root {
+        --primary-purple: #7c3aed;
+        --dark-purple: #4c1d95;
+        --light-purple: #a78bfa;
+        --gold: #fbbf24;
+        --dark-bg: #0a0a0f;
+        --card-bg: rgba(15, 15, 25, 0.95);
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--dark-bg);
+        color: #e9d5ff;
         overflow-x: hidden;
-      }
-      
-      #loading {
+        position: relative;
+        min-height: 100vh;
+    }
+
+    /* Animated Background */
+    .cosmic-bg {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(ellipse at center, #0a0e27 0%, #000000 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-      }
-      
-      .loading-content {
-        text-align: center;
-        animation: pulse 2s infinite;
-      }
-      
-      @keyframes pulse {
-        0%, 100% { opacity: 0.5; }
-        50% { opacity: 1; }
-      }
-      
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      
-      .hidden { display: none !important; }
-      
-      /* Simple astrology app */
-      .app-container {
-        min-height: 100vh;
-        background: radial-gradient(ellipse at center, #0a0e27 0%, #000000 100%);
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .card {
-        background: rgba(0,0,0,0.3);
-        backdrop-filter: blur(16px);
-        border-radius: 24px;
-        padding: 32px;
-        border: 1px solid rgba(255,255,255,0.2);
-        max-width: 500px;
+        z-index: -1;
+        background: radial-gradient(ellipse at center, #1a0f2e 0%, #0a0a0f 100%);
+        overflow: hidden;
+    }
+
+    .stars {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background-image: 
+            radial-gradient(2px 2px at 20% 30%, white, transparent),
+            radial-gradient(2px 2px at 40% 70%, white, transparent),
+            radial-gradient(1px 1px at 50% 50%, white, transparent),
+            radial-gradient(1px 1px at 80% 10%, white, transparent);
+        background-size: 50% 50%;
+        animation: stars-rotate 200s linear infinite;
+    }
+
+    .nebula {
+        position: absolute;
         width: 100%;
-        text-align: center;
-      }
-      
-      .title {
-        font-size: 2rem;
-        font-weight: bold;
-        margin-bottom: 8px;
-        background: linear-gradient(45deg, #8b5cf6, #ec4899);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      
-      .subtitle {
-        color: #a855f7;
-        margin-bottom: 32px;
-      }
-      
-      .form-group {
-        margin-bottom: 24px;
-        text-align: left;
-      }
-      
-      .label {
-        display: block;
-        color: #c084fc;
-        font-size: 0.875rem;
-        margin-bottom: 8px;
-      }
-      
-      .input {
-        width: 100%;
-        padding: 12px;
-        background: rgba(255,255,255,0.1);
-        border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 8px;
-        color: white;
-        font-size: 1rem;
-        box-sizing: border-box;
-      }
-      
-      .input::placeholder {
-        color: rgba(255,255,255,0.5);
-      }
-      
-      .button {
-        width: 100%;
-        padding: 12px 24px;
-        background: linear-gradient(45deg, #8b5cf6, #ec4899);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      
-      .button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-      }
-      
-      .chart-display {
-        background: rgba(139, 92, 246, 0.1);
-        border-radius: 12px;
-        padding: 24px;
-        margin-top: 24px;
-        text-align: left;
-      }
-      
-      .planet-item {
+        height: 100%;
+        background: radial-gradient(circle at 70% 30%, rgba(147, 112, 219, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 30% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+        animation: nebula-drift 60s ease-in-out infinite;
+    }
+
+    @keyframes stars-rotate {
+        from { transform: rotate(0deg) translateX(-50%); }
+        to { transform: rotate(360deg) translateX(-50%); }
+    }
+
+    @keyframes nebula-drift {
+        0%, 100% { transform: scale(1) translate(0, 0); }
+        33% { transform: scale(1.1) translate(10px, -10px); }
+        66% { transform: scale(0.9) translate(-10px, 10px); }
+    }
+
+    /* Energy Particles */
+    .particle {
+        position: absolute;
+        background: var(--gold);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: particle-float 8s infinite ease-in-out;
+    }
+
+    @keyframes particle-float {
+        0%, 100% { 
+            transform: translateY(0) translateX(0) scale(1);
+            opacity: 0;
+        }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        50% { 
+            transform: translateY(-100vh) translateX(50px) scale(0.5);
+        }
+    }
+
+    /* Header */
+    .header {
+        background: linear-gradient(180deg, rgba(15, 15, 25, 0.98) 0%, rgba(15, 15, 25, 0.95) 100%);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(147, 112, 219, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        animation: header-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes header-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(147, 112, 219, 0.2); }
+        50% { box-shadow: 0 0 40px rgba(147, 112, 219, 0.4), 0 0 60px rgba(139, 92, 246, 0.2); }
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 8px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .planet-name {
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--gold) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: logo-spin 20s linear infinite;
+        box-shadow: 0 0 30px rgba(147, 112, 219, 0.5);
+    }
+
+    @keyframes logo-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .logo-text {
+        font-size: 1.75rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--light-purple) 0%, var(--gold) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 30px rgba(147, 112, 219, 0.5);
+    }
+
+    /* Main Container */
+    .main-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+    }
+
+    /* Streaming Interface */
+    .stream-section {
+        margin-bottom: 3rem;
+        animation: fade-in-up 0.8s ease-out;
+    }
+
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .stream-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(147, 112, 219, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .stream-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(147, 112, 219, 0.3);
+        border-color: rgba(147, 112, 219, 0.5);
+    }
+
+    .stream-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(147, 112, 219, 0.1) 0%, transparent 70%);
+        animation: pulse-bg 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-bg {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.1) rotate(180deg); }
+    }
+
+    .stream-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .stream-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #10b981;
+        animation: pulse 2s ease-in-out infinite;
+        box-shadow: 0 0 20px #10b981;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    .stream-content {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        min-height: 200px;
+        max-height: 400px;
+        overflow-y: auto;
+        position: relative;
+        z-index: 1;
+        border: 1px solid rgba(147, 112, 219, 0.2);
+    }
+
+    .stream-message {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: rgba(147, 112, 219, 0.1);
+        border-radius: 8px;
+        border-left: 3px solid var(--primary-purple);
+        animation: message-appear 0.5s ease-out;
+    }
+
+    @keyframes message-appear {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* App Container */
+    .app-section {
+        animation: fade-in-up 0.8s ease-out 0.3s both;
+    }
+
+    .app-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(147, 112, 219, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+        min-height: 600px;
+    }
+
+    .app-frame {
+        width: 100%;
+        height: 800px;
+        border: none;
+        border-radius: 12px;
+        background: #0a0a0f;
+    }
+
+    /* Connection Controls */
+    .controls {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
         color: white;
-        font-weight: 500;
-      }
-      
-      .planet-position {
-        color: #c084fc;
-        font-size: 0.875rem;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="loading">
-      <div class="loading-content">
-        <div style="width: 64px; height: 64px; margin: 0 auto 20px; border: 3px solid #8b5cf6; border-top: 3px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-        <h1 style="font-size: 2rem; margin-bottom: 10px;">Astrology 2.0</h1>
-        <p style="opacity: 0.8;">Initializing Consciousness Matrix...</p>
-        <p style="opacity: 0.6; font-size: 0.875rem;">Cylindrical Time Coordinates Active</p>
-      </div>
+        box-shadow: 0 5px 20px rgba(147, 112, 219, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(147, 112, 219, 0.5);
+    }
+
+    .btn-secondary {
+        background: rgba(147, 112, 219, 0.1);
+        color: var(--light-purple);
+        border: 1px solid rgba(147, 112, 219, 0.3);
+    }
+
+    .btn-secondary:hover {
+        background: rgba(147, 112, 219, 0.2);
+        border-color: rgba(147, 112, 219, 0.5);
+    }
+
+    .btn::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:active::after {
+        width: 300px;
+        height: 300px;
+    }
+
+    /* Input Field */
+    .input-group {
+        flex: 1;
+        position: relative;
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(147, 112, 219, 0.3);
+        border-radius: 10px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+        outline: none;
+        border-color: var(--primary-purple);
+        box-shadow: 0 0 20px rgba(147, 112, 219, 0.3);
+    }
+
+    /* Special Effects */
+    .glow-orb {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(147, 112, 219, 0.3) 0%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(40px);
+        animation: orb-float 10s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes orb-float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(100px, -100px) scale(1.2); }
+        66% { transform: translate(-100px, 50px) scale(0.8); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .header-content {
+            padding: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+        }
+        
+        .main-container {
+            padding: 1rem;
+        }
+        
+        .app-frame {
+            height: 600px;
+        }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--light-purple);
+    }
+
+    /* Loading Animation */
+    .loader {
+        display: none;
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(147, 112, 219, 0.3);
+        border-top-color: var(--primary-purple);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 2rem auto;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .loading .loader {
+        display: block;
+    }
+
+    .loading .app-frame {
+        display: none;
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Cosmic Background -->
+    <div class="cosmic-bg">
+        <div class="stars"></div>
+        <div class="nebula"></div>
     </div>
-    
-    <div id="app" class="app-container hidden">
-      <div class="card">
-        <div class="title">Astrology 2.0</div>
-        <div class="subtitle">Consciousness-Driven Computing with Cylindrical Time</div>
-        
-        <div id="onboarding-form">
-          <div class="form-group">
-            <label class="label">Full Name</label>
-            <input type="text" id="name" class="input" placeholder="Enter your full name">
-          </div>
-          
-          <div class="form-group">
-            <label class="label">Birth Date</label>
-            <input type="date" id="birthDate" class="input">
-          </div>
-          
-          <div class="form-group">
-            <label class="label">Birth Time</label>
-            <input type="time" id="birthTime" class="input">
-          </div>
-          
-          <div class="form-group">
-            <label class="label">Birth Place</label>
-            <input type="text" id="birthPlace" class="input" placeholder="City, State, Country">
-          </div>
-          
-          <button class="button" onclick="generateChart()">Generate Natal Chart</button>
+
+```
+<!-- Floating Particles -->
+<div id="particles"></div>
+
+<!-- Glow Orbs -->
+<div class="glow-orb" style="top: 10%; left: -10%;"></div>
+<div class="glow-orb" style="bottom: 20%; right: -10%;"></div>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-content">
+        <div class="logo-section">
+            <div class="logo">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <path d="M15 2L19.5 10.5L28 15L19.5 19.5L15 28L10.5 19.5L2 15L10.5 10.5L15 2Z" fill="white" opacity="0.9"/>
+                </svg>
+            </div>
+            <h1 class="logo-text">Celestial Oracle Engine</h1>
         </div>
-        
-        <div id="chart-results" class="chart-display hidden">
-          <h3 style="color: white; margin-bottom: 16px;">Your Natal Chart</h3>
-          <div id="chart-content"></div>
-          <div style="margin-top: 16px; padding: 12px; background: rgba(139, 92, 246, 0.2); border-radius: 8px;">
-            <div style="color: #c084fc; font-size: 0.875rem; margin-bottom: 4px;">Cylindrical Time Signature</div>
-            <div id="cylindrical-time" style="color: white; font-family: monospace;"></div>
-          </div>
-        </div>
-      </div>
+        <div class="status-indicator"></div>
     </div>
+</header>
 
-    <script>
-      // Initialize app
-      setTimeout(() => {
-        document.getElementById('loading').classList.add('hidden');
-        document.getElementById('app').classList.remove('hidden');
-      }, 2000);
+<!-- Main Content -->
+<main class="main-container">
+    <!-- Streaming Interface -->
+    <section class="stream-section">
+        <div class="stream-card">
+            <div class="stream-header">
+                <h2 class="stream-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    Claude Streaming Interface
+                </h2>
+                <span id="connection-status" style="color: #10b981;">● Connected</span>
+            </div>
+            
+            <div class="controls">
+                <div class="input-group">
+                    <input type="text" class="input-field" id="api-endpoint" placeholder="Enter streaming endpoint URL...">
+                </div>
+                <button class="btn btn-primary" onclick="connectStream()">Connect</button>
+                <button class="btn btn-secondary" onclick="clearStream()">Clear</button>
+            </div>
+            
+            <div class="stream-content" id="stream-output">
+                <div class="stream-message">
+                    Welcome to the Celestial Oracle Engine streaming interface. Connect to receive real-time astrological insights...
+                </div>
+            </div>
+        </div>
+    </section>
 
-      // Simple ephemeris calculations
-      function calculatePlanetPosition(planet, julianDay) {
-        const planets = {
-          sun: { longitude: (julianDay * 0.985 + 280) % 360 },
-          moon: { longitude: (julianDay * 13.176 + 145) % 360 },
-          mercury: { longitude: (julianDay * 1.607 + 210) % 360 },
-          venus: { longitude: (julianDay * 1.210 + 90) % 360 },
-          mars: { longitude: (julianDay * 0.524 + 45) % 360 },
-          jupiter: { longitude: (julianDay * 0.083 + 120) % 360 },
-          saturn: { longitude: (julianDay * 0.033 + 180) % 360 }
-        };
-        return planets[planet] || { longitude: 0 };
-      }
+    <!-- App Container -->
+    <section class="app-section">
+        <div class="app-card">
+            <div class="loading" id="app-container">
+                <div class="loader"></div>
+                <iframe class="app-frame" id="astrology-app" title="Celestial Oracle Engine"></iframe>
+            </div>
+        </div>
+    </section>
+</main>
 
-      function getZodiacSign(longitude) {
-        const signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 
-                      'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
-        const signIndex = Math.floor(longitude / 30);
-        const degree = longitude % 30;
-        return {
-          sign: signs[signIndex],
-          degree: Math.floor(degree),
-          minute: Math.floor((degree % 1) * 60)
-        };
-      }
-
-      function calculateCylindricalTime(x, y, z) {
-        const rho = Math.sqrt(x * x + y * y);
-        const phi = Math.atan2(y, x);
-        const PHI = 1.618033988749895;
+<script>
+    // Particle Generation
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 20;
         
-        const spiralFactor = rho * Math.cos(phi) + z * Math.sin(phi / Math.PI);
-        const timeSpiral = spiralFactor * PHI;
-        const cylindricalTime = timeSpiral % 365.25;
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = '100%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    }
+
+    // Initialize particles
+    createParticles();
+
+    // Streaming functionality
+    let eventSource = null;
+    const streamOutput = document.getElementById('stream-output');
+    const connectionStatus = document.getElementById('connection-status');
+    const apiEndpoint = document.getElementById('api-endpoint');
+
+    function connectStream() {
+        const endpoint = apiEndpoint.value || '/stream';
         
-        return {
-          spiral: timeSpiral.toFixed(3),
-          normalized: cylindricalTime.toFixed(3),
-          phase: ((cylindricalTime / 365.25) * 360).toFixed(1) + '°'
-        };
-      }
-
-      function generateChart() {
-        const name = document.getElementById('name').value;
-        const birthDate = document.getElementById('birthDate').value;
-        const birthTime = document.getElementById('birthTime').value;
-        const birthPlace = document.getElementById('birthPlace').value;
-
-        if (!name || !birthDate || !birthTime || !birthPlace) {
-          alert('Please fill in all fields');
-          return;
+        if (eventSource) {
+            eventSource.close();
         }
 
-        // Simple Julian day calculation
-        const date = new Date(birthDate + 'T' + birthTime);
-        const julianDay = date.getTime() / (24 * 60 * 60 * 1000) + 2440587.5;
+        try {
+            eventSource = new EventSource(endpoint);
+            
+            eventSource.onopen = () => {
+                connectionStatus.textContent = '● Connected';
+                connectionStatus.style.color = '#10b981';
+                addStreamMessage('Connected to streaming endpoint.', 'success');
+            };
 
-        // Calculate planetary positions
-        const planets = ['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn'];
-        let chartHtml = '';
+            eventSource.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                addStreamMessage(data.message || data, 'info');
+                
+                // If the message contains app data, update the iframe
+                if (data.type === 'app-update' && data.content) {
+                    updateApp(data.content);
+                }
+            };
 
-        planets.forEach(planet => {
-          const position = calculatePlanetPosition(planet, julianDay);
-          const zodiac = getZodiacSign(position.longitude);
-          
-          chartHtml += `
-            <div class="planet-item">
-              <div class="planet-name">${planet.charAt(0).toUpperCase() + planet.slice(1)}</div>
-              <div class="planet-position">${zodiac.sign} ${zodiac.degree}°${zodiac.minute}'</div>
-            </div>
-          `;
-        });
+            eventSource.onerror = () => {
+                connectionStatus.textContent = '● Disconnected';
+                connectionStatus.style.color = '#ef4444';
+                addStreamMessage('Connection lost. Attempting to reconnect...', 'error');
+            };
+        } catch (error) {
+            addStreamMessage('Failed to connect: ' + error.message, 'error');
+        }
+    }
 
-        // Calculate cylindrical time for birth moment
-        const lat = 40.7128; // Default NYC coords
-        const lng = -74.0060;
-        const x = Math.cos(lng * Math.PI / 180) * Math.cos(lat * Math.PI / 180);
-        const y = Math.sin(lng * Math.PI / 180) * Math.cos(lat * Math.PI / 180);
-        const z = Math.sin(lat * Math.PI / 180);
+    function addStreamMessage(message, type = 'info') {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'stream-message';
+        messageDiv.style.borderLeftColor = type === 'error' ? '#ef4444' : 
+                                          type === 'success' ? '#10b981' : 
+                                          '#8b5cf6';
         
-        const cylindricalTime = calculateCylindricalTime(x, y, z);
+        const timestamp = new Date().toLocaleTimeString();
+        messageDiv.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
+        
+        streamOutput.appendChild(messageDiv);
+        streamOutput.scrollTop = streamOutput.scrollHeight;
+        
+        // Keep only last 50 messages
+        while (streamOutput.children.length > 50) {
+            streamOutput.removeChild(streamOutput.firstChild);
+        }
+    }
 
-        document.getElementById('chart-content').innerHTML = chartHtml;
-        document.getElementById('cylindrical-time').innerHTML = 
-          `Spiral: ${cylindricalTime.spiral} | Phase: ${cylindricalTime.phase}`;
+    function clearStream() {
+        streamOutput.innerHTML = '<div class="stream-message">Stream cleared.</div>';
+    }
 
-        document.getElementById('onboarding-form').classList.add('hidden');
-        document.getElementById('chart-results').classList.remove('hidden');
-      }
-    </script>
-  </body>
+    function updateApp(content) {
+        const iframe = document.getElementById('astrology-app');
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        iframeDoc.open();
+        iframeDoc.write(content);
+        iframeDoc.close();
+    }
+
+    // Load the astrology app
+    function loadAstrologyApp() {
+        const appContainer = document.getElementById('app-container');
+        const iframe = document.getElementById('astrology-app');
+        
+        // Here you would normally load your React app
+        // For now, we'll show a placeholder
+        setTimeout(() => {
+            appContainer.classList.remove('loading');
+            iframe.srcdoc = `
+                <html>
+                <head>
+                    <style>
+                        body {
+                            margin: 0;
+                            background: #0a0a0f;
+                            color: #e9d5ff;
+                            font-family: sans-serif;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            height: 100vh;
+                            text-align: center;
+                        }
+                        .placeholder {
+                            padding: 2rem;
+                        }
+                        h2 {
+                            background: linear-gradient(135deg, #a78bfa 0%, #fbbf24 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            margin-bottom: 1rem;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="placeholder">
+                        <h2>Celestial Oracle Engine</h2>
+                        <p>Your React astrology app will be loaded here.</p>
+                        <p>Use the streaming interface above to receive real-time updates.</p>
+                    </div>
+                </body>
+                </html>
+            `;
+        }, 1500);
+    }
+
+    // Initialize app on load
+    window.addEventListener('load', loadAstrologyApp);
+
+    // Optional: WebSocket connection for bi-directional communication
+    function connectWebSocket() {
+        const ws = new WebSocket('ws://localhost:8080');
+        
+        ws.onopen = () => {
+            console.log('WebSocket connected');
+            addStreamMessage('WebSocket connection established', 'success');
+        };
+        
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            addStreamMessage(data.message, 'info');
+        };
+        
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+            addStreamMessage('WebSocket error occurred', 'error');
+        };
+        
+        return ws;
+    }
+
+    // Mouse trail effect
+    document.addEventListener('mousemove', (e) => {
+        const orbs = document.querySelectorAll('.glow-orb');
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        orbs.forEach((orb, index) => {
+            const speed = (index + 1) * 0.01;
+            orb.style.transform = `translate(${x * 50 * (index + 1)}px, ${y * 50 * (index + 1)}px)`;
+        });
+    });
+</script>
+```
+
+</body>
 </html>
