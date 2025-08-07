@@ -38,40 +38,63 @@ class ContentManager {
     }
 
     handleFileUpload(files) {
+        console.log('Files selected:', files.length);
         Array.from(files).forEach(file => {
+            console.log('Processing file:', file.name, file.type);
             if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
+                    console.log('File loaded successfully');
                     const media = {
                         type: file.type.startsWith('image/') ? 'image' : 'video',
                         data: e.target.result,
-                        name: file.name
+                        name: file.name,
+                        size: file.size
                     };
                     this.attachedMedia.push(media);
                     this.displayAttachedMedia();
+                    this.showToast(`${media.type} added: ${file.name}`);
+                };
+                reader.onerror = () => {
+                    console.error('Error reading file:', file.name);
+                    this.showToast('Error loading file');
                 };
                 reader.readAsDataURL(file);
+            } else {
+                console.log('File type not supported:', file.type);
+                this.showToast('Only images and videos are supported');
             }
         });
     }
 
     displayAttachedMedia() {
         const mediaContainer = document.getElementById('composer-media');
+        console.log('Displaying media:', this.attachedMedia.length, 'items');
         mediaContainer.innerHTML = '';
 
+        if (this.attachedMedia.length === 0) {
+            mediaContainer.style.display = 'none';
+            return;
+        }
+
+        mediaContainer.style.display = 'block';
         this.attachedMedia.forEach((media, index) => {
             const mediaPreview = document.createElement('div');
             mediaPreview.className = 'media-preview';
             
             if (media.type === 'image') {
                 mediaPreview.innerHTML = `
-                    <img src="${media.data}" alt="Preview" class="preview-image">
-                    <button class="remove-media" data-index="${index}">×</button>
+                    <img src="${media.data}" alt="Preview" class="preview-image" onload="console.log('Image loaded')" onerror="console.error('Image failed to load')">
+                    <button class="remove-media" data-index="${index}" title="Remove">×</button>
+                    <span class="media-label">📷</span>
                 `;
             } else {
                 mediaPreview.innerHTML = `
-                    <video src="${media.data}" class="preview-video" controls></video>
-                    <button class="remove-media" data-index="${index}">×</button>
+                    <video src="${media.data}" class="preview-video" controls>
+                        Your browser doesn't support video.
+                    </video>
+                    <button class="remove-media" data-index="${index}" title="Remove">×</button>
+                    <span class="media-label">🎥</span>
                 `;
             }
             
@@ -84,6 +107,7 @@ class ContentManager {
                 const index = parseInt(e.target.dataset.index);
                 this.attachedMedia.splice(index, 1);
                 this.displayAttachedMedia();
+                this.showToast('Media removed');
             });
         });
     }

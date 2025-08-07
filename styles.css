@@ -131,13 +131,18 @@ body {
 }
 
 .attach-btn {
-    background: #6b7280;
+    background: #10b981;
     color: white;
+    position: relative;
 }
 
 .attach-btn:hover {
-    background: #4b5563;
+    background: #059669;
     transform: scale(1.05);
+}
+
+.attach-btn:active {
+    transform: scale(0.95);
 }
 
 .submit-btn {
@@ -274,44 +279,75 @@ body {
 
 /* Media Preview in Composer */
 .composer-media {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 2px dashed #cbd5e1;
+}
+
+.composer-media[style*="block"] {
+    display: flex !important;
 }
 
 .media-preview {
     position: relative;
     display: inline-block;
+    background: white;
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .preview-image,
 .preview-video {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 6px;
+    display: block;
+}
+
+.preview-video {
+    background: #000;
+}
+
+.media-label {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 12px;
 }
 
 .remove-media {
     position: absolute;
     top: -8px;
     right: -8px;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     background: #ef4444;
     color: white;
     border: none;
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .remove-media:hover {
     background: #dc2626;
+    transform: scale(1.1);
 }
 
 /* Large text support */
