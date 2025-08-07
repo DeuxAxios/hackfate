@@ -211,6 +211,109 @@ body {
     }
 }
 
+/* Posts Display */
+.post {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.post-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.edit-post,
+.delete-post {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.edit-post:hover {
+    background: #f0f9ff;
+}
+
+.delete-post:hover {
+    background: #fef2f2;
+}
+
+.post-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+}
+
+.post-media {
+    margin-top: 0.5rem;
+}
+
+.post-media-item {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+/* Media Preview in Composer */
+.composer-media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.media-preview {
+    position: relative;
+    display: inline-block;
+}
+
+.preview-image,
+.preview-video {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.remove-media {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-media:hover {
+    background: #dc2626;
+}
+
 /* Large text support */
 @media (min-width: 1200px) {
     body {
