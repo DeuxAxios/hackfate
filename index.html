@@ -3,68 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOATSTUFF2.0</title>
-    <meta name="description" content="GOATSTUFF2.0 - Mobile-friendly content sharing">
+    <title>Content Editor</title>
     <link rel="stylesheet" href="styles.css">
-    <meta name="theme-color" content="#3b82f6">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <h1 class="site-title">GOATSTUFF2.0</h1>
-        </div>
-    </header>
+    <div class="container">
+        <div class="editor-card">
+            <h1>✨ Content Editor</h1>
+            <p class="subtitle">Create beautiful content for your dynamic website</p>
 
-    <!-- Main Content - Telegram-like Interface -->
-    <main class="main-content">
-        <!-- Content Display Area -->
-        <div id="content-display" class="content-display">
-            <!-- Posted content will appear here -->
-            <div class="welcome-message">
-                <h2>Welcome to GOATSTUFF2.0</h2>
-                <p>Share photos, videos, and messages with your group</p>
+            <div class="form-group">
+                <label for="websiteTitle">📝 Website Title</label>
+                <input type="text" id="websiteTitle" placeholder="Enter your website title">
             </div>
-        </div>
 
-        <!-- Telegram-like Posting Interface -->
-        <div class="telegram-interface">
-            <div class="post-composer">
-                <div class="composer-media" id="composer-media">
-                    <!-- Media previews will appear here -->
-                </div>
-                <div class="composer-input-area">
-                    <div class="composer-input-container">
-                        <textarea 
-                            id="post-text" 
-                            class="post-input" 
-                            placeholder="Share something with your group..."
-                            aria-label="Message input"
-                        ></textarea>
-                        <div class="composer-actions">
-                            <button 
-                                id="attach-media" 
-                                class="attach-btn" 
-                                title="Attach Photo/Video"
-                                aria-label="Attach media"
-                            >📎</button>
-                            <button 
-                                id="submit-post" 
-                                class="submit-btn" 
-                                title="Submit Content"
-                                aria-label="Submit post"
-                            >📤</button>
-                        </div>
-                    </div>
+            <div class="form-group">
+                <label for="cardText">💬 Content Description</label>
+                <textarea id="cardText" rows="4" placeholder="Tell your story..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="mediaFile" class="file-label">
+                    <span id="file-name">📎 Choose a picture or video...</span>
+                    <span class="file-button">Browse</span>
+                </label>
+                <input type="file" id="mediaFile" accept="image/*,video/*">
+            </div>
+
+            <div class="media-preview" id="media-preview" style="display: none;">
+                <div class="preview-container">
+                    <div id="preview-content"></div>
+                    <button type="button" id="remove-media" class="remove-btn">❌ Remove</button>
                 </div>
             </div>
-            <input type="file" id="post-media-upload" accept="image/*,video/*" multiple class="file-input">
+
+            <div class="button-group">
+                <button id="previewBtn" class="btn-secondary">👁️ Preview</button>
+                <button id="submitBtn" class="btn-primary">🚀 Generate & Save</button>
+            </div>
         </div>
-    </main>
-
-    <!-- Toast Notifications -->
-    <div id="toast-container" class="toast-container" aria-live="polite"></div>
-
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
