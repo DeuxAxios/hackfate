@@ -3,268 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="site-title">GOATSTUFF2.0</title>
+    <title>GOATSTUFF2.0</title>
+    <meta name="description" content="GOATSTUFF2.0 - Mobile-friendly content sharing">
     <link rel="stylesheet" href="styles.css">
     <meta name="theme-color" content="#3b82f6">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <h2>Loading GOATSTUFF2.0...</h2>
-        </div>
-    </div>
-
-    <!-- Header with Title and Edit Mode Toggle -->
+    <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 id="dynamic-title" class="site-title">GOATSTUFF2.0</h1>
-            <div class="header-controls">
-                <button id="preview-toggle" class="preview-toggle" title="Preview Live Website">
-                    <span class="preview-icon">👁️</span>
-                </button>
-                <button id="settings-toggle" class="settings-toggle" title="Open Settings">
-                    <span class="settings-icon">⚙️</span>
-                </button>
-                <button id="edit-mode-toggle" class="edit-toggle" title="Enter Content Mode">
-                    <span class="edit-icon">✏️</span>
-                </button>
-                <button id="menu-toggle" class="menu-toggle">
-                    <span class="hamburger"></span>
-                    <span class="hamburger"></span>
-                    <span class="hamburger"></span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Edit Mode Notice -->
-        <div id="edit-mode-notice" class="edit-notice hidden">
-            <span>📝 Content Mode Active - Tap items to edit</span>
-            <button id="save-changes" class="save-btn">Save Changes</button>
+            <h1 class="site-title">GOATSTUFF2.0</h1>
         </div>
     </header>
 
-    <!-- Rotating Menu Navigation -->
-    <nav id="rotating-menu" class="rotating-menu hidden">
-        <div class="menu-content">
-            <div class="menu-header">
-                <h3>Navigation Menu</h3>
-                <button id="close-menu" class="close-btn">×</button>
-            </div>
-            <div id="menu-items" class="menu-items">
-                <!-- Menu items will be dynamically loaded here -->
-            </div>
-            <div class="menu-footer" id="edit-menu-section">
-                <button id="add-menu-item" class="add-btn hidden">+ Add Menu Item</button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content Area -->
+    <!-- Main Content - Telegram-like Interface -->
     <main class="main-content">
-        <!-- Chatbot-like Interface -->
-        <div class="chat-container">
-            <div id="content-display" class="content-display">
-                <!-- Content will be dynamically loaded here -->
-            </div>
-            
-            <!-- Content Input Area (hidden by default) -->
-            <div id="content-input" class="content-input hidden">
-                <div class="input-header">
-                    <h4>Edit Content</h4>
-                    <button id="cancel-edit" class="cancel-btn">Cancel</button>
-                </div>
-                <div class="input-form">
-                    <input type="text" id="edit-title" placeholder="Content Title" class="input-field">
-                    <textarea id="edit-text" placeholder="Content text..." class="input-field textarea-field"></textarea>
-                    
-                    <!-- Enhanced Media Management -->
-                    <div class="media-management">
-                        <div class="media-tabs">
-                            <button type="button" id="images-tab" class="media-tab active">📸 Images</button>
-                            <button type="button" id="videos-tab" class="media-tab">🎥 Videos</button>
-                        </div>
-                        
-                        <!-- Images Section -->
-                        <div id="images-section" class="media-section active">
-                            <div class="media-section-header">
-                                <button type="button" id="add-image-url" class="add-media-btn">+ Add Image URL</button>
-                            </div>
-                            <div id="image-list" class="media-list">
-                                <!-- Dynamic image inputs will be added here -->
-                            </div>
-                            <div class="upload-options">
-                                <input type="file" id="image-upload" accept="image/*" multiple class="file-input">
-                                <label for="image-upload" class="file-upload-label">
-                                    📱 Tap to Add Images
-                                </label>
-                                <p class="upload-note">Tap to select from your phone gallery</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Videos Section -->
-                        <div id="videos-section" class="media-section">
-                            <div class="media-section-header">
-                                <button type="button" id="add-video-url" class="add-media-btn">+ Add Video URL</button>
-                            </div>
-                            <div id="video-list" class="media-list">
-                                <!-- Dynamic video inputs will be added here -->
-                            </div>
-                            <div class="upload-options">
-                                <input type="file" id="video-upload" accept="video/mp4,video/webm,video/mov" multiple class="file-input">
-                                <label for="video-upload" class="file-upload-label">
-                                    📱 Tap to Add Videos
-                                </label>
-                                <p class="upload-note">Tap to select from your phone camera/gallery</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="input-actions">
-                        <button id="save-content" class="save-content-btn">Save Content</button>
-                        <button id="delete-content" class="delete-content-btn">Delete</button>
-                    </div>
-                </div>
+        <!-- Content Display Area -->
+        <div id="content-display" class="content-display">
+            <!-- Posted content will appear here -->
+            <div class="welcome-message">
+                <h2>Welcome to GOATSTUFF2.0</h2>
+                <p>Share photos, videos, and messages with your group</p>
             </div>
         </div>
 
         <!-- Telegram-like Posting Interface -->
-        <div id="telegram-interface" class="telegram-interface">
+        <div class="telegram-interface">
             <div class="post-composer">
                 <div class="composer-media" id="composer-media">
                     <!-- Media previews will appear here -->
                 </div>
                 <div class="composer-input-area">
                     <div class="composer-input-container">
-                        <textarea id="post-text" class="post-input" placeholder="Add new content for your group..."></textarea>
+                        <textarea 
+                            id="post-text" 
+                            class="post-input" 
+                            placeholder="Share something with your group..."
+                            aria-label="Message input"
+                        ></textarea>
                         <div class="composer-actions">
-                            <button id="attach-media" class="attach-btn" title="Attach Photo/Video">📎</button>
-                            <button id="submit-post" class="submit-btn" title="Submit Content">📤</button>
+                            <button 
+                                id="attach-media" 
+                                class="attach-btn" 
+                                title="Attach Photo/Video"
+                                aria-label="Attach media"
+                            >📎</button>
+                            <button 
+                                id="submit-post" 
+                                class="submit-btn" 
+                                title="Submit Content"
+                                aria-label="Submit post"
+                            >📤</button>
                         </div>
                     </div>
                 </div>
             </div>
             <input type="file" id="post-media-upload" accept="image/*,video/*" multiple class="file-input">
         </div>
-
-        <!-- Floating Action Button for Content Mode -->
-        <div id="floating-actions" class="floating-actions hidden">
-            <button id="add-content" class="fab add-content" title="Add New Content">
-                <span>+</span>
-            </button>
-        </div>
     </main>
 
-    <!-- Settings Panel -->
-    <div id="settings-panel" class="settings-panel hidden">
-        <div class="settings-content">
-            <div class="settings-header">
-                <h3>Website Settings</h3>
-                <button id="close-settings" class="close-btn">×</button>
-            </div>
-            <div class="settings-form">
-                <div class="form-group">
-                    <label for="site-title-input">Website Title:</label>
-                    <input type="text" id="site-title-input" class="input-field" placeholder="Enter website title">
-                </div>
-                <div class="form-group">
-                    <label for="site-theme">Color Theme:</label>
-                    <select id="site-theme" class="input-field">
-                        <option value="blue">Ocean Blue</option>
-                        <option value="green">Nature Green</option>
-                        <option value="purple">Royal Purple</option>
-                        <option value="orange">Sunset Orange</option>
-                        <option value="pink">Rose Pink</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="site-description">Description:</label>
-                    <textarea id="site-description" class="input-field" placeholder="Brief description of your website"></textarea>
-                </div>
-                <div class="settings-actions">
-                    <button id="save-settings" class="save-settings-btn">Save Settings</button>
-                    <button id="export-data" class="export-btn">Export Data</button>
-                    <button id="import-data" class="import-btn">Import Data</button>
-                    <button id="share-site" class="share-btn">Share Site</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Welcome Screen for New Users -->
-    <div id="welcome-screen" class="welcome-screen hidden">
-        <div class="welcome-content">
-            <div class="welcome-header">
-                <h2>🐐 Welcome to GOATSTUFF2.0!</h2>
-                <p>Create your dynamic website that your group can follow</p>
-            </div>
-            
-            <div class="welcome-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Your Website Title</h4>
-                        <input type="text" id="welcome-title" class="input-field" placeholder="GOATSTUFF2.0" value="GOATSTUFF2.0">
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Choose Your Theme</h4>
-                        <div class="theme-options">
-                            <button class="theme-btn" data-theme="blue">🌊 Ocean</button>
-                            <button class="theme-btn" data-theme="green">🌿 Nature</button>
-                            <button class="theme-btn" data-theme="purple">💜 Royal</button>
-                            <button class="theme-btn" data-theme="orange">🧡 Sunset</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Add Content</h4>
-                        <textarea id="welcome-content" class="input-field" placeholder="Welcome to our group! Check back often for new updates..."></textarea>
-                        <div class="welcome-media-options">
-                            <input type="file" id="welcome-media-upload" accept="image/*,video/*" multiple class="file-input">
-                            <label for="welcome-media-upload" class="welcome-media-btn">
-                                📱 Attach Photo/Video
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="welcome-actions">
-                <button id="complete-setup" class="setup-complete-btn">🚀 Launch Live Website</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Toast Notifications -->
-    <div id="toast-container" class="toast-container"></div>
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-    <!-- Share Modal -->
-    <div id="share-modal" class="share-modal hidden">
-        <div class="share-content">
-            <div class="share-header">
-                <h3>Share Your Website</h3>
-                <button id="close-share-modal" class="close-btn">×</button>
-            </div>
-            <div class="share-body">
-                <p>Copy the link below to share your live website:</p>
-                <div class="share-link-container">
-                    <input type="text" id="share-url" class="share-url-input" readonly>
-                    <button id="copy-share-url" class="copy-url-btn">Copy</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
