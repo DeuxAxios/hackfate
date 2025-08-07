@@ -212,11 +212,12 @@ class ContentManager {
         const date = new Date(post.timestamp).toLocaleString();
         const editedText = post.edited ? ' (edited)' : '';
         
-        const mediaHtml = post.media.map(media => {
+        const mediaHtml = post.media.map((media, index) => {
+            console.log('Rendering media:', media.type, 'Size:', media.data?.length || 'unknown');
             if (media.type === 'image') {
-                return `<img src="${media.data}" alt="Shared image" class="post-media-item">`;
+                return `<img src="${media.data}" alt="Shared image" class="post-media-item" onload="console.log('Post image loaded')" onerror="console.error('Post image failed to load')">`;
             } else {
-                return `<video src="${media.data}" controls class="post-media-item"></video>`;
+                return `<video src="${media.data}" controls class="post-media-item">Your browser doesn't support this video.</video>`;
             }
         }).join('');
 

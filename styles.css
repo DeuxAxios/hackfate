@@ -275,6 +275,13 @@ body {
     height: auto;
     border-radius: 8px;
     margin-bottom: 0.5rem;
+    display: block;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.post-media-item:last-child {
+    margin-bottom: 0;
 }
 
 /* Media Preview in Composer */
