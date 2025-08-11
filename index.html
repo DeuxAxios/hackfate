@@ -3,68 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOATSTUFF2.0</title>
-    <meta name="description" content="GOATSTUFF2.0 - Mobile-friendly content sharing">
+    <title>GoatStuff 2.0</title>
     <link rel="stylesheet" href="styles.css">
-    <meta name="theme-color" content="#3b82f6">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <h1 class="site-title">GOATSTUFF2.0</h1>
+    <div class="container">
+        <div class="header">
+            <h1>GoatStuff 2.0</h1>
+            <p>A place for my stuff.</p>
         </div>
-    </header>
-
-    <!-- Main Content - Telegram-like Interface -->
-    <main class="main-content">
-        <!-- Content Display Area -->
-        <div id="content-display" class="content-display">
-            <!-- Posted content will appear here -->
-            <div class="welcome-message">
-                <h2>Welcome to GOATSTUFF2.0</h2>
-                <p>Share photos, videos, and messages with your group</p>
-            </div>
-        </div>
-
-        <!-- Telegram-like Posting Interface -->
-        <div class="telegram-interface">
-            <div class="post-composer">
-                <div class="composer-media" id="composer-media">
-                    <!-- Media previews will appear here -->
-                </div>
-                <div class="composer-input-area">
-                    <div class="composer-input-container">
-                        <textarea 
-                            id="post-text" 
-                            class="post-input" 
-                            placeholder="Share something with your group..."
-                            aria-label="Message input"
-                        ></textarea>
-                        <div class="composer-actions">
-                            <button 
-                                id="attach-media" 
-                                class="attach-btn" 
-                                title="Attach Photo/Video"
-                                aria-label="Attach media"
-                            >📎</button>
-                            <button 
-                                id="submit-post" 
-                                class="submit-btn" 
-                                title="Submit Content"
-                                aria-label="Submit post"
-                            >📤</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <input type="file" id="post-media-upload" accept="image/*,video/*" multiple class="file-input">
-        </div>
-    </main>
-
-    <!-- Toast Notifications -->
-    <div id="toast-container" class="toast-container" aria-live="polite"></div>
-
-    <script src="script.js"></script>
+        <main id="posts-container">
+            <!-- Posts will be loaded here by render.js -->
+        </main>
+    </div>
+    <script src="render.js"></script>
 </body>
 </html>
