@@ -1,12 +1,29 @@
 // HackFate - Interactive Scripts
 // Dark Cyberpunk Theme Interactions
 
+// Utility: Throttle function for scroll performance
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Store interval/animation IDs for cleanup
+let glitchIntervalId = null;
+let gridAnimationId = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initSmoothScroll();
     initScrollAnimations();
     initGlitchEffect();
     initGridAnimation();
+    initVisibilityHandler();
 });
 
 // Mobile Navigation Toggle
@@ -30,14 +47,14 @@ function initNavigation() {
         });
     }
 
-    // Nav background on scroll
-    window.addEventListener('scroll', () => {
+    // Nav background on scroll (throttled for performance)
+    window.addEventListener('scroll', throttle(() => {
         if (window.scrollY > 100) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
-    });
+    }, 100));
 }
 
 // Smooth Scrolling for Anchor Links
@@ -91,17 +108,31 @@ function initScrollAnimations() {
     });
 }
 
-// Animate numeric values
+// Animate numeric values (fixed to handle non-numeric values properly)
 function animateValue(element) {
-    const text = element.textContent;
-    const num = parseInt(text);
+    const text = element.textContent.trim();
 
-    if (isNaN(num) || element.dataset.animated) return;
+    // Skip non-numeric values like "O(k)", "95%+", infinity symbol
+    if (element.dataset.animated) return;
+
+    // Extract leading number if present
+    const match = text.match(/^(\d+)/);
+    if (!match) {
+        // No leading number, skip animation
+        element.dataset.animated = 'true';
+        return;
+    }
+
+    const num = parseInt(match[1], 10);
+    if (isNaN(num) || num === 0) {
+        element.dataset.animated = 'true';
+        return;
+    }
+
     element.dataset.animated = 'true';
-
+    const suffix = text.slice(match[1].length);
     const duration = 1500;
     const start = performance.now();
-    const suffix = text.replace(/[\d,]/g, '');
 
     function update(currentTime) {
         const elapsed = currentTime - start;
@@ -123,13 +154,18 @@ function animateValue(element) {
     requestAnimationFrame(update);
 }
 
-// Enhanced Glitch Effect
+// Enhanced Glitch Effect (with cleanup)
 function initGlitchEffect() {
     const glitchElement = document.querySelector('.glitch');
     if (!glitchElement) return;
 
+    // Clear any existing interval
+    if (glitchIntervalId) {
+        clearInterval(glitchIntervalId);
+    }
+
     // Random glitch intensity bursts
-    setInterval(() => {
+    glitchIntervalId = setInterval(() => {
         if (Math.random() > 0.95) {
             glitchElement.style.setProperty('--glitch-intensity', '1');
             setTimeout(() => {
@@ -219,16 +255,19 @@ function initGridAnimation() {
         }
 
         time++;
-        animationId = requestAnimationFrame(drawGrid);
+        gridAnimationId = requestAnimationFrame(drawGrid);
     }
 
     // Only animate when hero is visible
     const heroObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !document.hidden) {
                 drawGrid();
             } else {
-                cancelAnimationFrame(animationId);
+                if (gridAnimationId) {
+                    cancelAnimationFrame(gridAnimationId);
+                    gridAnimationId = null;
+                }
             }
         });
     }, { threshold: 0 });
@@ -236,17 +275,34 @@ function initGridAnimation() {
     heroObserver.observe(heroBg);
 }
 
-// Scroll indicator hide on scroll
-document.addEventListener('scroll', () => {
+// Scroll indicator hide on scroll (throttled)
+document.addEventListener('scroll', throttle(() => {
     const scrollIndicator = document.querySelector('.scroll-indicator');
     if (scrollIndicator) {
-        if (window.scrollY > 100) {
-            scrollIndicator.style.opacity = '0';
-        } else {
-            scrollIndicator.style.opacity = '1';
-        }
+        scrollIndicator.style.opacity = window.scrollY > 100 ? '0' : '1';
     }
-});
+}, 100));
+
+// Visibility change handler for cleanup/restart
+function initVisibilityHandler() {
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            // Page is hidden - pause animations to save battery
+            if (glitchIntervalId) {
+                clearInterval(glitchIntervalId);
+                glitchIntervalId = null;
+            }
+            if (gridAnimationId) {
+                cancelAnimationFrame(gridAnimationId);
+                gridAnimationId = null;
+            }
+        } else {
+            // Page is visible - restart animations
+            initGlitchEffect();
+            // Grid animation will restart via IntersectionObserver
+        }
+    });
+}
 
 // Research card expand/collapse
 document.querySelectorAll('.research-card').forEach(card => {

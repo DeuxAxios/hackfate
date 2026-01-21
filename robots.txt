@@ -1,0 +1,9 @@
+# HackFate Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://hackfate.us/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
