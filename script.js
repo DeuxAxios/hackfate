@@ -16,6 +16,7 @@ function throttle(func, limit) {
 // Store interval/animation IDs for cleanup
 let glitchIntervalId = null;
 let gridAnimationId = null;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
@@ -36,6 +37,7 @@ function initNavigation() {
         toggle.addEventListener('click', () => {
             toggle.classList.toggle('active');
             navLinks.classList.toggle('active');
+            toggle.setAttribute('aria-expanded', toggle.classList.contains('active'));
         });
 
         // Close menu when clicking a link
@@ -43,6 +45,7 @@ function initNavigation() {
             link.addEventListener('click', () => {
                 toggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
             });
         });
     }
@@ -61,15 +64,19 @@ function initNavigation() {
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') {
+                return;
+            }
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const target = document.querySelector(href);
             if (target) {
                 const navHeight = document.querySelector('.nav').offsetHeight;
                 const targetPosition = target.offsetTop - navHeight - 20;
 
                 window.scrollTo({
                     top: targetPosition,
-                    behavior: 'smooth'
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth'
                 });
             }
         });
@@ -90,8 +97,11 @@ function initScrollAnimations() {
                 entry.target.classList.add('animate-in');
 
                 // Animate stats with counting effect
-                if (entry.target.classList.contains('stat-value')) {
-                    animateValue(entry.target);
+                if (entry.target.classList.contains('stat')) {
+                    const statValue = entry.target.querySelector('.stat-value');
+                    if (statValue) {
+                        animateValue(statValue);
+                    }
                 }
             }
         });
@@ -101,6 +111,13 @@ function initScrollAnimations() {
     const animatedElements = document.querySelectorAll(
         '.research-card, .tech-card, .about-stat, .section-title, .stat'
     );
+
+    if (prefersReducedMotion) {
+        animatedElements.forEach(el => {
+            el.classList.add('animate-in');
+        });
+        return;
+    }
 
     animatedElements.forEach(el => {
         el.classList.add('animate-ready');
@@ -157,7 +174,7 @@ function animateValue(element) {
 // Enhanced Glitch Effect (with cleanup)
 function initGlitchEffect() {
     const glitchElement = document.querySelector('.glitch');
-    if (!glitchElement) return;
+    if (!glitchElement || prefersReducedMotion) return;
 
     // Clear any existing interval
     if (glitchIntervalId) {
@@ -178,7 +195,7 @@ function initGlitchEffect() {
 // Animated Grid Background
 function initGridAnimation() {
     const heroBg = document.querySelector('.hero-bg');
-    if (!heroBg) return;
+    if (!heroBg || prefersReducedMotion) return;
 
     // Create canvas for grid animation
     const canvas = document.createElement('canvas');
