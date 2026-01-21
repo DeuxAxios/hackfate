@@ -33,7 +33,7 @@ function initNavigation() {
     const navLinks = document.querySelector('.nav-links');
     const nav = document.querySelector('.nav');
 
-    if (toggle && navLinks) {
+    if (toggle && navLinks && nav) {
         toggle.addEventListener('click', () => {
             toggle.classList.toggle('active');
             navLinks.classList.toggle('active');
@@ -71,7 +71,8 @@ function initSmoothScroll() {
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
-                const navHeight = document.querySelector('.nav').offsetHeight;
+                const navElement = document.querySelector('.nav');
+                const navHeight = navElement ? navElement.offsetHeight : 0;
                 const targetPosition = target.offsetTop - navHeight - 20;
 
                 window.scrollTo({
@@ -337,47 +338,6 @@ document.querySelectorAll('.research-card').forEach(card => {
         });
     }
 });
-
-// Add CSS for animations
-const style = document.createElement('style');
-style.textContent = `
-    .animate-ready {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .animate-in {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .research-card.animate-ready,
-    .tech-card.animate-ready {
-        transform: translateY(40px);
-    }
-
-    .stat.animate-ready {
-        transform: translateY(20px);
-    }
-
-    /* Stagger animations for cards */
-    .tech-card:nth-child(2).animate-ready { transition-delay: 0.1s; }
-    .tech-card:nth-child(3).animate-ready { transition-delay: 0.2s; }
-    .tech-card:nth-child(4).animate-ready { transition-delay: 0.3s; }
-
-    .stat:nth-child(2).animate-ready { transition-delay: 0.1s; }
-    .stat:nth-child(3).animate-ready { transition-delay: 0.2s; }
-
-    .about-stat:nth-child(2).animate-ready { transition-delay: 0.15s; }
-    .about-stat:nth-child(3).animate-ready { transition-delay: 0.3s; }
-
-    .nav.scrolled {
-        background: rgba(10, 10, 15, 0.98);
-        backdrop-filter: blur(20px);
-    }
-`;
-document.head.appendChild(style);
 
 // Console Easter egg
 console.log(`

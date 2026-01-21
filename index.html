@@ -7,6 +7,8 @@
     <meta name="description" content="Independent research in post-quantum cryptography, exact computation, and chaos mathematics. Home of K-Elimination and MYSTIC.">
     <meta name="keywords" content="post-quantum cryptography, FHE, homomorphic encryption, exact arithmetic, chaos mathematics, K-elimination, MYSTIC, weather prediction">
     <meta name="author" content="Anthony Diaz">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="color-scheme" content="dark">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://hackfate.us/">
@@ -24,6 +26,7 @@
     <meta property="og:image" content="https://hackfate.us/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="HackFate — Exact Computation, Post-Quantum Security, Zero Drift">
     <meta property="og:site_name" content="HackFate">
 
     <!-- Twitter Card -->
@@ -31,6 +34,7 @@
     <meta name="twitter:title" content="HackFate | Post-Quantum Cryptography & Exact Computation">
     <meta name="twitter:description" content="Independent research solving 60-year problems in cryptography and computation.">
     <meta name="twitter:image" content="https://hackfate.us/og-image.png">
+    <meta name="twitter:image:alt" content="HackFate — Exact Computation, Post-Quantum Security, Zero Drift">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -80,13 +84,18 @@
                 <a href="#about">About</a>
                 <a href="#contact" class="nav-cta">Contact</a>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false">
+            <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
         </div>
     </nav>
+    <noscript>
+        <div class="noscript-message">
+            JavaScript is disabled. The site still works, but motion effects and smooth scrolling are unavailable.
+        </div>
+    </noscript>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
@@ -130,7 +139,7 @@
                 <h3 class="research-title">K-Elimination</h3>
                 <p class="research-headline">60-Year Problem. Solved.</p>
                 <div class="research-content">
-                    <p>For six decades, exact division in Residue Number Systems (RNS) was considered intractable. The K-Elimination theorem provides the first O(k) solution, enabling exact arithmetic at arbitrary scale.</p>
+                    <p>For six decades, exact division in Residue Number Systems (RNS) was considered intractable. K-Elimination delivers a verified breakthrough that enables exact arithmetic at arbitrary scale.</p>
 
                     <div class="research-stats">
                         <div class="stat">
@@ -149,10 +158,9 @@
 
                     <div class="research-details">
                         <h4>Key Innovation</h4>
-                        <p>The quotient class K can be recovered directly from residue differences without full CRT reconstruction:</p>
-                        <code class="formula">K' = (x_R - x_P) * C_P^(-1) mod C_R</code>
+                        <p>Direct quotient recovery in residue space enables exact division without full reconstruction.</p>
                         <h4>Verification</h4>
-                        <p>Complete formal proof in Lean4, machine-verified correctness.</p>
+                        <p>Complete formal proof in Lean4 with machine-verified correctness.</p>
                     </div>
 
                     <a href="https://github.com/Skyelabz210/k-elimination-lean4" target="_blank" rel="noopener" class="btn btn-primary">
@@ -181,11 +189,11 @@
                             <span class="stat-label">Drift</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-value">95%+</span>
-                            <span class="stat-label">Basin Accuracy</span>
+                            <span class="stat-value">Validated</span>
+                            <span class="stat-label">Historical Basins</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-value">&infin;</span>
+                            <span class="stat-value">Long</span>
                             <span class="stat-label">Horizon</span>
                         </div>
                     </div>
@@ -252,8 +260,8 @@
                     <p class="tech-tagline">Bootstrap-Free Homomorphic Encryption</p>
                     <p>14 specialized FHE variants achieving unlimited circuit depth without expensive bootstrapping operations.</p>
                     <ul class="tech-features">
-                        <li>400x faster than traditional FHE</li>
-                        <li>~170-bit post-quantum security</li>
+                        <li>Order-of-magnitude speedups</li>
+                        <li>Post-quantum security profile</li>
                         <li>Real-time encrypted computation</li>
                     </ul>
                 </div>
@@ -272,9 +280,9 @@
                     </div>
                     <h3>Neural Systems</h3>
                     <p class="tech-tagline">Integer-Only Machine Learning</p>
-                    <p>Neural networks operating entirely in residue space with zero gradient drift and remarkable efficiency.</p>
+                    <p>Neural networks operating entirely in residue space with zero gradient drift and high efficiency.</p>
                     <ul class="tech-features">
-                        <li>87% MNIST from 10 samples</li>
+                        <li>Few-shot learning on standard datasets</li>
                         <li>Encrypted training capable</li>
                         <li>One-shot learning</li>
                     </ul>
