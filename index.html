@@ -3,19 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoatStuff 2.0</title>
+    <title>HackFate | Post-Quantum Cryptography & Exact Computation</title>
+    <meta name="description" content="Independent research in post-quantum cryptography, exact computation, and chaos mathematics. Home of K-Elimination and MYSTIC.">
+    <meta name="keywords" content="post-quantum cryptography, FHE, homomorphic encryption, exact arithmetic, chaos mathematics, K-elimination, MYSTIC, weather prediction">
+    <meta name="author" content="Anthony Diaz">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="HackFate | Post-Quantum Cryptography & Exact Computation">
+    <meta property="og:description" content="Independent research solving 60-year problems in cryptography and computation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hackfate.us">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>GoatStuff 2.0</h1>
-            <p>A place for my stuff.</p>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">HACKFATE</a>
+            <div class="nav-links">
+                <a href="#research">Research</a>
+                <a href="#technology">Technology</a>
+                <a href="#about">About</a>
+                <a href="#contact" class="nav-cta">Contact</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <main id="posts-container">
-            <!-- Posts will be loaded here by render.js -->
-        </main>
-    </div>
-    <script src="render.js"></script>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title glitch" data-text="HACKFATE">HACKFATE</h1>
+            <p class="hero-tagline">"Truth cannot be approximated."</p>
+            <div class="hero-pillars">
+                <span class="pillar">Exact Computation</span>
+                <span class="pillar-divider">|</span>
+                <span class="pillar">Post-Quantum Security</span>
+                <span class="pillar-divider">|</span>
+                <span class="pillar">Zero Drift</span>
+            </div>
+            <div class="hero-cta">
+                <a href="#research" class="btn btn-primary">View Research</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="section research" id="research">
+        <div class="container">
+            <h2 class="section-title">Open Research</h2>
+            <p class="section-subtitle">Formally verified breakthroughs, publicly available</p>
+
+            <!-- K-Elimination -->
+            <div class="research-card" id="k-elimination">
+                <div class="research-header">
+                    <span class="research-tag">PUBLIC</span>
+                    <span class="research-tag tag-verified">FORMALLY VERIFIED</span>
+                </div>
+                <h3 class="research-title">K-Elimination</h3>
+                <p class="research-headline">60-Year Problem. Solved.</p>
+                <div class="research-content">
+                    <p>For six decades, exact division in Residue Number Systems (RNS) was considered intractable. The K-Elimination theorem provides the first O(k) solution, enabling exact arithmetic at arbitrary scale.</p>
+
+                    <div class="research-stats">
+                        <div class="stat">
+                            <span class="stat-value">60</span>
+                            <span class="stat-label">Years Unsolved</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">O(k)</span>
+                            <span class="stat-label">Complexity</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Exact</span>
+                        </div>
+                    </div>
+
+                    <div class="research-details">
+                        <h4>Key Innovation</h4>
+                        <p>The quotient class K can be recovered directly from residue differences without full CRT reconstruction:</p>
+                        <code class="formula">K' = (x_R - x_P) * C_P^(-1) mod C_R</code>
+                        <h4>Verification</h4>
+                        <p>Complete formal proof in Lean4, machine-verified correctness.</p>
+                    </div>
+
+                    <a href="https://github.com/Skyelabz210/k-elimination-lean4" target="_blank" rel="noopener" class="btn btn-primary">
+                        View on GitHub
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- MYSTIC -->
+            <div class="research-card" id="mystic">
+                <div class="research-header">
+                    <span class="research-tag">PUBLIC</span>
+                    <span class="research-tag tag-validated">HISTORICALLY VALIDATED</span>
+                </div>
+                <h3 class="research-title">MYSTIC</h3>
+                <p class="research-headline">Solving the Butterfly Effect</p>
+                <div class="research-content">
+                    <p>Traditional weather models accumulate floating-point errors exponentially, limiting forecasts to ~14 days. MYSTIC uses exact integer arithmetic to eliminate computational drift entirely.</p>
+
+                    <div class="research-stats">
+                        <div class="stat">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Drift</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">95%+</span>
+                            <span class="stat-label">Basin Accuracy</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">&infin;</span>
+                            <span class="stat-label">Horizon</span>
+                        </div>
+                    </div>
+
+                    <div class="research-details">
+                        <h4>Validated Against</h4>
+                        <ul class="validation-list">
+                            <li>Hurricane Harvey (2017)</li>
+                            <li>Tropical Storm Imelda (2019)</li>
+                            <li>Memorial Day Floods (2015)</li>
+                        </ul>
+                        <div class="dedication">
+                            <p><em>"In memory of Camp Mystic. No more tragedies."</em></p>
+                        </div>
+                    </div>
+
+                    <a href="https://github.com/Skyelabz210/MYSTIC" target="_blank" rel="noopener" class="btn btn-primary">
+                        View on GitHub
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="section technology" id="technology">
+        <div class="container">
+            <h2 class="section-title">Proprietary Technology</h2>
+            <p class="section-subtitle">Advanced systems built on exact arithmetic foundations</p>
+
+            <div class="tech-grid">
+                <!-- QMNF -->
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2v20M2 12h20"/>
+                            <circle cx="12" cy="12" r="4"/>
+                        </svg>
+                    </div>
+                    <h3>QMNF Framework</h3>
+                    <p class="tech-tagline">Quantum-Modular Numerical Framework</p>
+                    <p>Integer-only computational foundation eliminating floating-point contamination at every layer. 105+ innovations addressing previously impossible problems.</p>
+                    <ul class="tech-features">
+                        <li>Zero computational drift</li>
+                        <li>Arbitrary precision at native speed</li>
+                        <li>Deterministic across all platforms</li>
+                    </ul>
+                </div>
+
+                <!-- NINE65 -->
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M9 9h6v6H9z"/>
+                            <path d="M9 3v6M15 3v6M9 15v6M15 15v6M3 9h6M15 9h6M3 15h6M15 15h6"/>
+                        </svg>
+                    </div>
+                    <h3>NINE65 FHE Suite</h3>
+                    <p class="tech-tagline">Bootstrap-Free Homomorphic Encryption</p>
+                    <p>14 specialized FHE variants achieving unlimited circuit depth without expensive bootstrapping operations.</p>
+                    <ul class="tech-features">
+                        <li>400x faster than traditional FHE</li>
+                        <li>~170-bit post-quantum security</li>
+                        <li>Real-time encrypted computation</li>
+                    </ul>
+                </div>
+
+                <!-- Neural -->
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="6" cy="6" r="2"/>
+                            <circle cx="18" cy="6" r="2"/>
+                            <circle cx="6" cy="18" r="2"/>
+                            <circle cx="18" cy="18" r="2"/>
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M8 6h2M14 6h2M6 8v2M6 14v2M18 8v2M18 14v2M8 18h2M14 18h2"/>
+                        </svg>
+                    </div>
+                    <h3>Neural Systems</h3>
+                    <p class="tech-tagline">Integer-Only Machine Learning</p>
+                    <p>Neural networks operating entirely in residue space with zero gradient drift and remarkable efficiency.</p>
+                    <ul class="tech-features">
+                        <li>87% MNIST from 10 samples</li>
+                        <li>Encrypted training capable</li>
+                        <li>One-shot learning</li>
+                    </ul>
+                </div>
+
+                <!-- Advanced R&D -->
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Advanced R&D</h3>
+                    <p class="tech-tagline">Frontier Research</p>
+                    <p>Cutting-edge explorations in consciousness-grade computation, toroidal geometry, and time manifold mathematics.</p>
+                    <ul class="tech-features">
+                        <li>Cylindrical Time Manifold</li>
+                        <li>Toroidal Bit Landscape</li>
+                        <li>Consciousness thresholds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="licensing-note">
+                <p>Implementation details and source code available under licensing agreement.</p>
+                <a href="#contact" class="btn btn-secondary">Inquire About Licensing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Anthony Diaz</h3>
+                    <p class="about-role">Independent Researcher & Founder</p>
+                    <p>Building the mathematical foundations for a post-floating-point future. My work focuses on exact computation systems that eliminate the accumulated errors plaguing modern cryptography, machine learning, and scientific simulation.</p>
+                    <p>The core insight: every floating-point operation is a precision loss. At scale, these losses compound into catastrophic failures. The solution isn't better approximation&mdash;it's exact arithmetic from the ground up.</p>
+                    <div class="about-focus">
+                        <h4>Research Focus</h4>
+                        <ul>
+                            <li>Post-quantum cryptography</li>
+                            <li>Exact integer arithmetic</li>
+                            <li>Chaos theory & deterministic systems</li>
+                            <li>Formal verification (Lean4, Coq)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <span class="about-stat-value">8</span>
+                        <span class="about-stat-label">"Impossible" problems solved</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-value">105+</span>
+                        <span class="about-stat-label">Innovations developed</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-value">0</span>
+                        <span class="about-stat-label">Floating-point operations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <p class="section-subtitle">Interested in licensing, partnership, or research collaboration?</p>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h4>Email</h4>
+                        <a href="mailto:founder@hackfate.us" class="contact-link">founder@hackfate.us</a>
+                    </div>
+                    <div class="contact-item">
+                        <h4>GitHub</h4>
+                        <a href="https://github.com/Skyelabz210" target="_blank" rel="noopener" class="contact-link">@Skyelabz210</a>
+                    </div>
+                </div>
+
+                <div class="contact-inquiries">
+                    <h4>Inquiry Types</h4>
+                    <ul>
+                        <li><strong>Licensing</strong> &mdash; Enterprise and defense applications</li>
+                        <li><strong>Partnership</strong> &mdash; Integration and development</li>
+                        <li><strong>Research</strong> &mdash; Academic collaboration</li>
+                        <li><strong>Investment</strong> &mdash; Funding opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">HACKFATE</span>
+                    <p>"Truth cannot be approximated."</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#research">Research</a>
+                    <a href="#technology">Technology</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Anthony Diaz. All rights reserved.</p>
+                <p>Proprietary technology protected. Public research available under respective licenses.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
