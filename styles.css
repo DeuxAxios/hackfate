@@ -468,6 +468,17 @@ body {
     margin-bottom: 1rem;
 }
 
+.research-note {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
 .formula {
     display: block;
     font-family: 'JetBrains Mono', monospace;
@@ -581,6 +592,61 @@ body {
 
 .tech-features li::before {
     content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.catalog-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-large);
+    padding: 2rem;
+    box-shadow: var(--glow-cyan);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.catalog-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-magenta);
+    box-shadow: var(--glow-magenta);
+}
+
+.catalog-card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-cyan);
+    margin-bottom: 0.25rem;
+}
+
+.catalog-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.catalog-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.catalog-card li {
+    padding: 0.4rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-muted);
+}
+
+.catalog-card li::before {
+    content: '▹';
     position: absolute;
     left: 0;
     color: var(--accent-green);

@@ -81,6 +81,7 @@
             <div class="nav-links" id="nav-links">
                 <a href="#research">Research</a>
                 <a href="#technology">Technology</a>
+                <a href="#catalog">Innovations</a>
                 <a href="#about">About</a>
                 <a href="#contact" class="nav-cta">Contact</a>
             </div>
@@ -127,19 +128,19 @@
     <!-- Research Section -->
     <section class="section research" id="research">
         <div class="container">
-            <h2 class="section-title">Open Research</h2>
-            <p class="section-subtitle">Formally verified breakthroughs, publicly available</p>
+            <h2 class="section-title">Innovation Highlights</h2>
+            <p class="section-subtitle">Machine-checked systems & historically validated results</p>
 
             <!-- K-Elimination -->
             <div class="research-card" id="k-elimination">
                 <div class="research-header">
                     <span class="research-tag">PUBLIC</span>
-                    <span class="research-tag tag-verified">FORMALLY VERIFIED</span>
+                    <span class="research-tag tag-verified">MACHINE-CHECKED</span>
                 </div>
                 <h3 class="research-title">K-Elimination</h3>
                 <p class="research-headline">60-Year Problem. Solved.</p>
                 <div class="research-content">
-                    <p>For six decades, exact division in Residue Number Systems (RNS) was considered intractable. K-Elimination delivers a verified breakthrough that enables exact arithmetic at arbitrary scale.</p>
+                    <p>For six decades, exact division in Residue Number Systems (RNS) was considered intractable. K-Elimination delivers a breakthrough that enables exact arithmetic at arbitrary scale.</p>
 
                     <div class="research-stats">
                         <div class="stat">
@@ -156,12 +157,7 @@
                         </div>
                     </div>
 
-                    <div class="research-details">
-                        <h4>Key Innovation</h4>
-                        <p>Direct quotient recovery in residue space enables exact division without full reconstruction.</p>
-                        <h4>Verification</h4>
-                        <p>Complete formal proof in Lean4 with machine-verified correctness.</p>
-                    </div>
+                    <p class="research-note">Machine-checked verification is complete and undergoing final documentation; the public repository showcases the artifacts and operating demonstrations.</p>
 
                     <a href="https://github.com/Skyelabz210/k-elimination-lean4" target="_blank" rel="noopener" class="btn btn-primary">
                         View on GitHub
@@ -198,13 +194,8 @@
                         </div>
                     </div>
 
-                    <div class="research-details">
-                        <h4>Validated Against</h4>
-                        <ul class="validation-list">
-                            <li>Hurricane Harvey (2017)</li>
-                            <li>Tropical Storm Imelda (2019)</li>
-                            <li>Memorial Day Floods (2015)</li>
-                        </ul>
+                    <div class="validation-list">
+                        <p>Validated against Hurricane Harvey (2017), Tropical Storm Imelda (2019), and Memorial Day Floods (2015).</p>
                         <div class="dedication">
                             <p><em>"In memory of Camp Mystic. No more tragedies."</em></p>
                         </div>
@@ -311,6 +302,57 @@
             <div class="licensing-note">
                 <p>Implementation details and source code available under licensing agreement.</p>
                 <a href="#contact" class="btn btn-secondary">Inquire About Licensing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation Catalog Section -->
+    <section class="section catalog" id="catalog">
+        <div class="container">
+            <h2 class="section-title">Innovation Catalog</h2>
+            <p class="section-subtitle">Itemized focus areas we can describe publicly because they emphasize outcomes, not construction.</p>
+
+            <div class="catalog-grid">
+                <article class="catalog-card">
+                    <h3>QMNF Foundation</h3>
+                    <p>Integer-only numerical framework that removes floating-point drift, enabling exact arithmetic across all components.</p>
+                    <ul>
+                        <li>K-Elimination: deterministic RNS division at arbitrary scale.</li>
+                        <li>CRTBigInt & Dual Codex: residue/magnitude coupling for precise tracking.</li>
+                        <li>Fused Piggyback Division & Persistent Montgomery: conversion-free arithmetic cores.</li>
+                        <li>Binary GCD, Padé, CORDIC, AGM: number-theoretic primitives in pure integers.</li>
+                    </ul>
+                </article>
+                <article class="catalog-card">
+                    <h3>NINE65 Suite</h3>
+                    <p>Bootstrap-free homomorphic encryption variants focused on runtime efficiency and post-quantum security.</p>
+                    <ul>
+                        <li>GSO-FHE & Shadow Entropy: noise bounding and deterministic randomness.</li>
+                        <li>MobiusInt, MQ-ReLU, Integer Softmax: residue-native neural primitives.</li>
+                        <li>Cyclotomic Phase & Padé Engine: trig/ transcendental support inside encrypted circuits.</li>
+                        <li>Encrypted Quantum (Sparse Grover): Grover-resilient keyspaces.</li>
+                    </ul>
+                </article>
+                <article class="catalog-card">
+                    <h3>Variants & Accelerators</h3>
+                    <p>Fourteen tailored builds, some augmented with custom accelerators, targeting production, research, and hybrid stacks.</p>
+                    <ul>
+                        <li>MANA-boosted core (canonical release) with UNHAL hardware abstraction.</li>
+                        <li>SEAL-augmented variant for hybrid deployments.</li>
+                        <li>Stable production branch & security proofs package for licensing.</li>
+                        <li>MANA memory as execution substrate plus UNHAL interface.</li>
+                    </ul>
+                </article>
+                <article class="catalog-card">
+                    <h3>Applied Systems</h3>
+                    <p>Specialized research stacks that translate the numerics into real-world claims.</p>
+                    <ul>
+                        <li>MYSTIC Zero-Drift Forecasting: deterministic attractor-based prediction validated against Harvey, Imelda, Memorial Day floods.</li>
+                        <li>Toric Grover & Grover Speedups: toroidal quantum acceleration with measurable √N behavior.</li>
+                        <li>COSMOS-HD Neural & Chunked Model Delegation: integer-only learning and local LLMS on constrained RAM.</li>
+                        <li>Formal proof catalog in progress; artifacts already machine-checked and being collated for release.</li>
+                    </ul>
+                </article>
             </div>
         </div>
     </section>
