@@ -136,7 +136,7 @@ function initScrollAnimations() {
 
     // Observe elements for animation
     const animatedElements = document.querySelectorAll(
-        '.research-card, .tech-card, .about-stat, .section-title, .stat'
+        '.research-card, .tech-card, .overview-card, .catalog-card, .benchmark-card, .about-stat, .section-title, .stat'
     );
 
     if (prefersReducedMotion) {

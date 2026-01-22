@@ -1170,6 +1170,19 @@ body {
 .about-stat:nth-child(2).animate-ready { transition-delay: 0.15s; }
 .about-stat:nth-child(3).animate-ready { transition-delay: 0.3s; }
 
+.overview-card.animate-ready { transition-delay: 0s; }
+.overview-card:nth-child(2).animate-ready { transition-delay: 0.1s; }
+.overview-card:nth-child(3).animate-ready { transition-delay: 0.2s; }
+.overview-card:nth-child(4).animate-ready { transition-delay: 0.3s; }
+
+.catalog-card:nth-child(2).animate-ready { transition-delay: 0.1s; }
+.catalog-card:nth-child(3).animate-ready { transition-delay: 0.2s; }
+.catalog-card:nth-child(4).animate-ready { transition-delay: 0.3s; }
+
+.benchmark-card:nth-child(2).animate-ready { transition-delay: 0.1s; }
+.benchmark-card:nth-child(3).animate-ready { transition-delay: 0.2s; }
+.benchmark-card:nth-child(4).animate-ready { transition-delay: 0.3s; }
+
 /* Selection */
 ::selection {
     background: var(--accent-cyan);
