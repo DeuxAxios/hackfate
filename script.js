@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initGlitchEffect();
     initGridAnimation();
     initVisibilityHandler();
+    initActiveNav();
+    initBackToTop();
 });
 
 // Mobile Navigation Toggle
@@ -82,6 +84,30 @@ function initSmoothScroll() {
             }
         });
     });
+}
+
+// Highlight active navigation link based on current page
+function initActiveNav() {
+    const navLinks = document.querySelectorAll('.nav-links a[href]');
+    const path = window.location.pathname.split('/').pop() || 'index.html';
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === path) {
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+        }
+    });
+}
+
+// Back to top visibility toggle
+function initBackToTop() {
+    const backToTop = document.querySelector('.back-to-top');
+    if (!backToTop) return;
+    const toggle = throttle(() => {
+        backToTop.classList.toggle('visible', window.scrollY > 400);
+    }, 100);
+    window.addEventListener('scroll', toggle);
+    toggle();
 }
 
 // Scroll-triggered Animations

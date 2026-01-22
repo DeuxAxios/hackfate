@@ -70,7 +70,7 @@
 
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body id="top">
     <!-- Skip Navigation for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -126,342 +126,52 @@
     <!-- Main Content -->
     <main id="main-content">
 
-    <!-- Research Section -->
-    <section class="section research" id="research">
+    <section class="section overview" id="overview">
         <div class="container">
-            <h2 class="section-title">Innovation Highlights</h2>
-            <p class="section-subtitle">Machine-checked systems & historically validated results</p>
-
-            <!-- K-Elimination -->
-            <div class="research-card" id="k-elimination">
-                <div class="research-header">
-                    <span class="research-tag">PUBLIC</span>
-                    <span class="research-tag tag-verified">MACHINE-CHECKED</span>
-                </div>
-                <h3 class="research-title">K-Elimination</h3>
-                <p class="research-headline">60-Year Problem. Solved.</p>
-                <div class="research-content">
-                    <p>For six decades, exact division in Residue Number Systems (RNS) was considered intractable. K-Elimination delivers a breakthrough that enables exact arithmetic at arbitrary scale.</p>
-
-                    <div class="research-stats">
-                        <div class="stat">
-                            <span class="stat-value">60</span>
-                            <span class="stat-label">Years Unsolved</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">O(k)</span>
-                            <span class="stat-label">Complexity</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">100%</span>
-                            <span class="stat-label">Exact</span>
-                        </div>
-                    </div>
-
-                    <p class="research-note">Machine-checked verification is complete and undergoing final documentation; the public repository showcases the artifacts and operating demonstrations.</p>
-
-                    <a href="https://github.com/Skyelabz210/k-elimination-lean4" target="_blank" rel="noopener" class="btn btn-primary">
-                        View on GitHub
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <!-- MYSTIC -->
-            <div class="research-card" id="mystic">
-                <div class="research-header">
-                    <span class="research-tag">PUBLIC</span>
-                    <span class="research-tag tag-validated">HISTORICALLY VALIDATED</span>
-                </div>
-                <h3 class="research-title">MYSTIC</h3>
-                <p class="research-headline">Solving the Butterfly Effect</p>
-                <div class="research-content">
-                    <p>Traditional weather models accumulate floating-point errors exponentially, limiting forecasts to ~14 days. MYSTIC uses exact integer arithmetic to eliminate computational drift entirely.</p>
-
-                    <div class="research-stats">
-                        <div class="stat">
-                            <span class="stat-value">0</span>
-                            <span class="stat-label">Drift</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">Validated</span>
-                            <span class="stat-label">Historical Basins</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">Long</span>
-                            <span class="stat-label">Horizon</span>
-                        </div>
-                    </div>
-
-                    <div class="validation-list">
-                        <p>Validated against Hurricane Harvey (2017), Tropical Storm Imelda (2019), and Memorial Day Floods (2015).</p>
-                        <div class="dedication">
-                            <p><em>"In memory of Camp Mystic. No more tragedies."</em></p>
-                        </div>
-                    </div>
-
-                    <a href="https://github.com/Skyelabz210/MYSTIC" target="_blank" rel="noopener" class="btn btn-primary">
-                        View on GitHub
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technology Section -->
-    <section class="section technology" id="technology">
-        <div class="container">
-            <h2 class="section-title">Proprietary Technology</h2>
-            <p class="section-subtitle">Advanced systems built on exact arithmetic foundations</p>
-
-            <div class="tech-grid">
-                <!-- QMNF -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 2v20M2 12h20"/>
-                            <circle cx="12" cy="12" r="4"/>
-                        </svg>
-                    </div>
-                    <h3>QMNF Framework</h3>
-                    <p class="tech-tagline">Quantum-Modular Numerical Framework</p>
-                    <p>Integer-only computational foundation eliminating floating-point contamination at every layer. 105+ innovations addressing previously impossible problems.</p>
-                    <ul class="tech-features">
-                        <li>Zero computational drift</li>
-                        <li>Arbitrary precision at native speed</li>
-                        <li>Deterministic across all platforms</li>
-                    </ul>
-                </div>
-
-                <!-- NINE65 -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="3" y="3" width="18" height="18" rx="2"/>
-                            <path d="M9 9h6v6H9z"/>
-                            <path d="M9 3v6M15 3v6M9 15v6M15 15v6M3 9h6M15 9h6M3 15h6M15 15h6"/>
-                        </svg>
-                    </div>
-                    <h3>NINE65 FHE Suite</h3>
-                    <p class="tech-tagline">Bootstrap-Free Homomorphic Encryption</p>
-                    <p>14 specialized FHE variants achieving unlimited circuit depth without expensive bootstrapping operations.</p>
-                    <ul class="tech-features">
-                        <li>Order-of-magnitude speedups</li>
-                        <li>Post-quantum security profile</li>
-                        <li>Real-time encrypted computation</li>
-                    </ul>
-                </div>
-
-                <!-- Neural -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="6" cy="6" r="2"/>
-                            <circle cx="18" cy="6" r="2"/>
-                            <circle cx="6" cy="18" r="2"/>
-                            <circle cx="18" cy="18" r="2"/>
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M8 6h2M14 6h2M6 8v2M6 14v2M18 8v2M18 14v2M8 18h2M14 18h2"/>
-                        </svg>
-                    </div>
-                    <h3>Neural Systems</h3>
-                    <p class="tech-tagline">Integer-Only Machine Learning</p>
-                    <p>Neural networks operating entirely in residue space with zero gradient drift and high efficiency.</p>
-                    <ul class="tech-features">
-                        <li>Few-shot learning on standard datasets</li>
-                        <li>Encrypted training capable</li>
-                        <li>One-shot learning</li>
-                    </ul>
-                </div>
-
-                <!-- Advanced R&D -->
-                <div class="tech-card">
-                    <div class="tech-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <h3>Advanced R&D</h3>
-                    <p class="tech-tagline">Frontier Research</p>
-                    <p>Explorations in time manifold mathematics, toroidal geometry, and speculative system-level topology.</p>
-                    <ul class="tech-features">
-                        <li>Cylindrical Time Manifold</li>
-                        <li>Toroidal Bit Landscape</li>
-                        <li>Consciousness thresholds</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="licensing-note">
-                <p>Implementation details and source code available under licensing agreement.</p>
-                <a href="contact.html" class="btn btn-secondary">Inquire About Licensing</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Innovation Catalog Section -->
-    <section class="section catalog" id="catalog">
-        <div class="container">
-            <h2 class="section-title">Innovation Catalog</h2>
-            <p class="section-subtitle">Itemized focus areas we can describe publicly because they emphasize outcomes, not construction.</p>
-
-            <div class="catalog-grid">
-                <article class="catalog-card">
-                    <h3>QMNF Foundation</h3>
-                    <p>Integer-only numerical framework that removes floating-point drift, enabling exact arithmetic across all components.</p>
-                    <ul>
-                        <li>K-Elimination: deterministic RNS division at arbitrary scale.</li>
-                        <li>CRTBigInt & Dual Codex: residue/magnitude coupling for precise tracking.</li>
-                        <li>Fused Piggyback Division & Persistent Montgomery: conversion-free arithmetic cores.</li>
-                        <li>Binary GCD, Padé, CORDIC, AGM: number-theoretic primitives in pure integers.</li>
-                    </ul>
+            <h2 class="section-title">Overview</h2>
+            <p class="section-subtitle">Explore the public-facing outcomes of HackFate without exposing proprietary methods.</p>
+            <div class="overview-grid">
+                <article class="overview-card">
+                    <h3>Research</h3>
+                    <p>Public breakthroughs with machine-checked results and real-world validation.</p>
+                    <a href="research.html" class="btn btn-primary">Explore Research</a>
                 </article>
-                <article class="catalog-card">
-                    <h3>NINE65 Suite</h3>
-                    <p>Bootstrap-free homomorphic encryption variants focused on runtime efficiency and post-quantum security.</p>
-                    <ul>
-                        <li>GSO-FHE & Shadow Entropy: noise bounding and deterministic randomness.</li>
-                        <li>MobiusInt, MQ-ReLU, Integer Softmax: residue-native neural primitives.</li>
-                        <li>Cyclotomic Phase & Padé Engine: trig/ transcendental support inside encrypted circuits.</li>
-                        <li>Encrypted Quantum (Sparse Grover): Grover-resilient keyspaces.</li>
-                    </ul>
+                <article class="overview-card">
+                    <h3>Technology</h3>
+                    <p>High-level view of proprietary pillars powering exact computation and post-quantum security.</p>
+                    <a href="technology.html" class="btn btn-secondary">See Technology</a>
                 </article>
-                <article class="catalog-card">
-                    <h3>Variants & Accelerators</h3>
-                    <p>Fourteen tailored builds, some augmented with custom accelerators, targeting production, research, and hybrid stacks.</p>
-                    <ul>
-                        <li>MANA-boosted core (canonical release) with UNHAL hardware abstraction.</li>
-                        <li>SEAL-augmented variant for hybrid deployments.</li>
-                        <li>Stable production branch & security proofs package for licensing.</li>
-                        <li>MANA memory as execution substrate plus UNHAL interface.</li>
-                    </ul>
+                <article class="overview-card">
+                    <h3>Innovations</h3>
+                    <p>Itemized innovation catalog focused on what each system enables.</p>
+                    <a href="innovations.html" class="btn btn-secondary">Browse Innovations</a>
                 </article>
-                <article class="catalog-card">
-                    <h3>Applied Systems</h3>
-                    <p>Specialized research stacks that translate the numerics into real-world claims.</p>
-                    <ul>
-                        <li>MYSTIC Zero-Drift Forecasting: deterministic attractor-based prediction validated against Harvey, Imelda, Memorial Day floods.</li>
-                        <li>Toric Grover & Grover Speedups: toroidal quantum acceleration with measurable √N behavior.</li>
-                        <li>COSMOS-HD Neural & Chunked Model Delegation: integer-only learning and local LLMS on constrained RAM.</li>
-                        <li>Formal proof catalog in progress; artifacts already machine-checked and being collated for release.</li>
-                    </ul>
+                <article class="overview-card">
+                    <h3>Benchmarks</h3>
+                    <p>Performance highlights for the canonical NINE65 MANA-boosted variant.</p>
+                    <a href="benchmarks.html" class="btn btn-secondary">View Benchmarks</a>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- MANA Benchmark Section -->
-    <section class="section benchmark" id="benchmark">
+    <section class="section contact" id="contact-preview">
         <div class="container">
-            <h2 class="section-title">NINE65 MANA Benchmark Highlights</h2>
-            <p class="section-subtitle">Canonically wired MANA-boosted variant delivering industry-leading throughput without revealing internal algorithms.</p>
-
-            <div class="benchmark-grid">
-                <article class="benchmark-card">
-                    <h3>CRT Cycle</h3>
-                    <p>Complete CRT full cycle averages 419ns with the MANA grid, matching high-performance integer libraries.</p>
-                    <span class="benchmark-stat">419ns</span>
-                </article>
-                <article class="benchmark-card">
-                    <h3>FHE Throughput</h3>
-                    <p>400× speedup over traditional FHE stacks in production workloads, thanks to zero-bootstrapping and exact arithmetic.</p>
-                    <span class="benchmark-stat">400×</span>
-                </article>
-                <article class="benchmark-card">
-                    <h3>Binary GCD</h3>
-                    <p>Edge-to-edge operations run 2.16× faster than the Euclidean baseline, proving deterministic arithmetic scale.</p>
-                    <span class="benchmark-stat">2.16×</span>
-                </article>
-                <article class="benchmark-card">
-                    <h3>Montgomery Chain</h3>
-                    <p>Conversion-free Montgomery chain across 1,000 ops stays 50% faster than conversion-heavy counterparts.</p>
-                    <span class="benchmark-stat">~1.5×</span>
-                </article>
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Licensing, partnerships, or research collaboration.</p>
+            <div class="hero-cta">
+                <a href="contact.html" class="btn btn-primary">Contact HackFate</a>
+                <a href="benchmarks.html" class="btn btn-secondary">Request Benchmarks</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="section about" id="about">
-        <div class="container">
-            <h2 class="section-title">About</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Anthony Diaz</h3>
-                    <p class="about-role">Independent Researcher & Founder</p>
-                    <p>Building the mathematical foundations for a post-floating-point future. My work focuses on exact computation systems that eliminate the accumulated errors plaguing modern cryptography, machine learning, and scientific simulation.</p>
-                    <p>The core insight: every floating-point operation is a precision loss. At scale, these losses compound into catastrophic failures. The solution isn't better approximation&mdash;it's exact arithmetic from the ground up.</p>
-                    <div class="about-focus">
-                        <h4>Research Focus</h4>
-                        <ul>
-                            <li>Post-quantum cryptography</li>
-                            <li>Exact integer arithmetic</li>
-                            <li>Chaos theory & deterministic systems</li>
-                            <li>Formal verification (Lean4, Coq)</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="about-stats">
-                    <div class="about-stat">
-                        <span class="about-stat-value">8</span>
-                        <span class="about-stat-label">"Impossible" problems solved</span>
-                    </div>
-                    <div class="about-stat">
-                        <span class="about-stat-value">105+</span>
-                        <span class="about-stat-label">Innovations developed</span>
-                    </div>
-                    <div class="about-stat">
-                        <span class="about-stat-value">0</span>
-                        <span class="about-stat-label">Floating-point operations</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <p class="section-subtitle">Interested in licensing, partnership, or research collaboration?</p>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <h4>Email</h4>
-                        <a href="mailto:founder@hackfate.us" class="contact-link">founder@hackfate.us</a>
-                    </div>
-                    <div class="contact-item">
-                        <h4>GitHub</h4>
-                        <a href="https://github.com/Skyelabz210" target="_blank" rel="noopener" class="contact-link">@Skyelabz210</a>
-                    </div>
-                </div>
-
-                <div class="contact-inquiries">
-                    <h4>Inquiry Types</h4>
-                    <ul>
-                        <li><strong>Licensing</strong> &mdash; Enterprise and defense applications</li>
-                        <li><strong>Partnership</strong> &mdash; Integration and development</li>
-                        <li><strong>Research</strong> &mdash; Academic collaboration</li>
-                        <li><strong>Investment</strong> &mdash; Funding opportunities</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    </main>
+</main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <a href="#top" class="back-to-top" aria-label="Back to top">Top</a>
+
+<footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
