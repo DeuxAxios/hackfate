@@ -1456,6 +1456,75 @@ body {
     font-family: 'JetBrains Mono', monospace;
 }
 
+.status-badge-warn {
+    display: inline-block;
+    background: rgba(255, 170, 0, 0.15);
+    color: #ffaa00;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Benchmark Detail Grid */
+.benchmark-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.benchmark-detail-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-large);
+    padding: 1.75rem;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.benchmark-detail-card:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-4px);
+}
+
+.benchmark-detail-card h3 {
+    color: var(--accent-cyan);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.benchmark-desc {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.benchmark-metric {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.metric-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    color: var(--accent-magenta);
+    font-weight: 700;
+}
+
+.metric-unit {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.metric-note {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
 /* Code Blocks */
 .walkthrough-section pre {
     background: var(--bg-secondary);
