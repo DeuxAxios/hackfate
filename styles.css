@@ -1575,6 +1575,22 @@ body {
     text-decoration: underline;
 }
 
+/* Tech Card and Catalog Links */
+.tech-link,
+.catalog-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.tech-link:hover,
+.catalog-link:hover {
+    color: var(--accent-magenta);
+}
+
 /* Walkthrough Responsive */
 @media (max-width: 768px) {
     .walkthrough-section h2 {
