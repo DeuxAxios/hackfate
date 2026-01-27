@@ -50,8 +50,8 @@
 
     <section class="page-hero">
         <div class="container">
-            <h1>Benchmarks</h1>
-            <p>Performance highlights for the canonical NINE65 MANA-boosted variant. Results are presented without exposing internal mechanics.</p>
+            <h1>NINE65 V5 Benchmarks</h1>
+            <p>Production FHE with CSPRNG entropy, K-Elimination exact division, and bootstrap-free depth-50 circuits.</p>
         </div>
     </section>
 
@@ -60,24 +60,24 @@
             <div class="container">
                 <div class="benchmark-grid">
                     <article class="benchmark-card">
-                        <h3>CRT Cycle</h3>
-                        <p>Complete CRT full cycle averages 419ns with the MANA grid, matching high-performance integer libraries.</p>
-                        <span class="benchmark-stat">419ns</span>
+                        <h3>Depth-50 Circuit</h3>
+                        <p>50 consecutive homomorphic multiplications in symmetric mode. Zero bootstraps required.</p>
+                        <span class="benchmark-stat">1.32s</span>
                     </article>
                     <article class="benchmark-card">
-                        <h3>FHE Throughput</h3>
-                        <p>400x speedup over traditional FHE stacks in production workloads, thanks to zero-bootstrapping and exact arithmetic.</p>
-                        <span class="benchmark-stat">400x</span>
+                        <h3>FHE Multiply</h3>
+                        <p>Single homomorphic multiplication including K-Elimination rescaling, no bootstrap overhead.</p>
+                        <span class="benchmark-stat">26.5ms</span>
                     </article>
                     <article class="benchmark-card">
-                        <h3>Binary GCD</h3>
-                        <p>Edge-to-edge operations run 2.16x faster than the Euclidean baseline, proving deterministic arithmetic scale.</p>
-                        <span class="benchmark-stat">2.16x</span>
+                        <h3>RNS Arithmetic</h3>
+                        <p>4-lane parallel RNS multiply with quotient signature tracking for entropy harvesting.</p>
+                        <span class="benchmark-stat">96ns</span>
                     </article>
                     <article class="benchmark-card">
-                        <h3>Montgomery Chain</h3>
-                        <p>Conversion-free Montgomery chain across 1,000 ops stays 50% faster than conversion-heavy counterparts.</p>
-                        <span class="benchmark-stat">~1.5x</span>
+                        <h3>Shadow Entropy</h3>
+                        <p>Cryptographic randomness harvested from computational byproducts at zero extra cost.</p>
+                        <span class="benchmark-stat">284 Mbit/s</span>
                     </article>
                 </div>
                 <p class="benchmark-footnote">Benchmarks measured on the canonical MANA-boosted build; results vary by hardware and configuration.</p>
