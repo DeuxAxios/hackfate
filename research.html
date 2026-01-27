@@ -128,6 +128,36 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="research-card" id="shadow-entropy">
+                    <div class="research-header">
+                        <span class="research-tag">PUBLIC</span>
+                        <span class="research-tag tag-verified">NIST SP 800-22</span>
+                    </div>
+                    <h3 class="research-title">Shadow Entropy</h3>
+                    <p class="research-headline">Zero-Cost Cryptographic Randomness from Computation</p>
+                    <div class="research-content">
+                        <p>Harvests cryptographic entropy from the quotients discarded during modular arithmetic. By Landauer's Principle, every mod operation erases information&mdash;we capture it instead of throwing it away.</p>
+                        <div class="research-stats">
+                            <div class="stat">
+                                <span class="stat-value">284</span>
+                                <span class="stat-label">Mbit/s Rate</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">0</span>
+                                <span class="stat-label">Extra Cost</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">~12</span>
+                                <span class="stat-label">Bits/Reduction</span>
+                            </div>
+                        </div>
+                        <div class="validation-list">
+                            <p><strong>How it works:</strong> In RNS (Residue Number Systems), every multiplication computes <code>a &times; b mod m</code>, discarding the quotient <code>q = (a&times;b) / m</code>. These quotients are mixed using SipHash rounds into a 256-bit accumulator, producing NIST-compliant randomness.</p>
+                            <p><strong>Applications:</strong> FHE noise sampling, key generation seeding, Monte Carlo simulations&mdash;anywhere computation already happens, entropy comes free.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
