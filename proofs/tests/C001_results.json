@@ -1,0 +1,76 @@
+{
+  "node_id": "C001",
+  "title": "Shadow Uniform Distribution Tests",
+  "crt_tests": [
+    {
+      "test_type": "CRT_uniform",
+      "modulus": 16,
+      "samples": 100000,
+      "expected_per_bin": 6250,
+      "chi_squared_scaled": 7909,
+      "critical_value_scaled": 30578,
+      "degrees_of_freedom": 15,
+      "chi_squared_pass": true,
+      "bins_outside_3sigma": 0,
+      "max_deviation": 149,
+      "three_sigma_threshold": 237,
+      "three_sigma_pass": true,
+      "overall_pass": true
+    },
+    {
+      "test_type": "CRT_uniform",
+      "modulus": 64,
+      "samples": 100000,
+      "expected_per_bin": 1562,
+      "chi_squared_scaled": 61966,
+      "critical_value_scaled": 92010,
+      "degrees_of_freedom": 63,
+      "chi_squared_pass": true,
+      "bins_outside_3sigma": 0,
+      "max_deviation": 91,
+      "three_sigma_threshold": 117,
+      "three_sigma_pass": true,
+      "overall_pass": true
+    },
+    {
+      "test_type": "CRT_uniform",
+      "modulus": 256,
+      "samples": 100000,
+      "expected_per_bin": 390,
+      "chi_squared_scaled": 259410,
+      "critical_value_scaled": 310457,
+      "degrees_of_freedom": 255,
+      "chi_squared_pass": true,
+      "bins_outside_3sigma": 1,
+      "max_deviation": 59,
+      "three_sigma_threshold": 57,
+      "three_sigma_pass": true,
+      "overall_pass": true
+    }
+  ],
+  "quotient_tests": [
+    {
+      "test_type": "quotient_shadow",
+      "modulus": 16,
+      "samples": 100000,
+      "max_shadow": 14,
+      "min_shadow": 0,
+      "bounded": true,
+      "bounded_by": 15,
+      "note": "Quotient shadow is NOT uniform - triangular distribution",
+      "overall_pass": true
+    },
+    {
+      "test_type": "quotient_shadow",
+      "modulus": 256,
+      "samples": 100000,
+      "max_shadow": 254,
+      "min_shadow": 0,
+      "bounded": true,
+      "bounded_by": 255,
+      "note": "Quotient shadow is NOT uniform - triangular distribution",
+      "overall_pass": true
+    }
+  ],
+  "overall_pass": true
+}

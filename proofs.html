@@ -324,7 +324,7 @@
             <div class="container">
                 <div class="proof-stats">
                     <div class="stat-card">
-                        <span class="stat-number">59</span>
+                        <span class="stat-number">64</span>
                         <span class="stat-label">Total Proofs</span>
                     </div>
                     <div class="stat-card">
@@ -332,18 +332,18 @@
                         <span class="stat-label">Coq Proofs</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">26</span>
+                        <span class="stat-number">31</span>
                         <span class="stat-label">Lean4 Proofs</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">14</span>
-                        <span class="stat-label">NIST Compliance</span>
+                        <span class="stat-number">15</span>
+                        <span class="stat-label">NIST Tests</span>
                     </div>
                 </div>
 
                 <div class="filter-bar" role="tablist" aria-label="Filter proofs by type">
                     <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
-                        All<span class="count">(59)</span>
+                        All<span class="count">(64)</span>
                     </button>
                     <button class="filter-btn" data-filter="nist" role="tab" aria-selected="false">
                         NIST<span class="count">(14)</span>
@@ -352,7 +352,7 @@
                         Coq<span class="count">(19)</span>
                     </button>
                     <button class="filter-btn" data-filter="lean4" role="tab" aria-selected="false">
-                        Lean4<span class="count">(26)</span>
+                        Lean4<span class="count">(31)</span>
                     </button>
                 </div>
 
@@ -701,7 +701,52 @@
                         </div>
                         <p>Shadow entropy formalization in Lean4. Bounds min-entropy of CRT residues given partial channel observations.</p>
                         <a href="proofs/lean4/07_ShadowEntropy.lean" class="proof-link">View Source</a>
-                        <a href="shadow-entropy.html" class="proof-link" style="margin-left: 0.5rem;">Learn More</a>
+                        <a href="shadow-entropy.html" class="proof-link" style="margin-left: 0.5rem;">Walkthrough</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>ShadowSecurityDefs.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Core definitions for shadow entropy security. Formalizes min-entropy H_∞ and statistical distance Δ using Mathlib.</p>
+                        <a href="proofs/lean4/ShadowSecurityDefs.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>ShadowUniform.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Proves shadow values are uniformly distributed. For V uniform on [0,M), shadow(V) is uniform on [0,m_s).</p>
+                        <a href="proofs/lean4/ShadowUniform.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>ShadowSecurityTheorems.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Main security theorem: shadow entropy is PPT-indistinguishable from uniform random bits with negligible advantage.</p>
+                        <a href="proofs/lean4/ShadowSecurityTheorems.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>ShadowCorrelation.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Cross-channel correlation bounds. Proves |Cor(shadow_i, shadow_j)| &lt; 2^(-min log₂(m)) for coprime moduli.</p>
+                        <a href="proofs/lean4/ShadowCorrelation.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>ShadowNISTCompliance.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>NIST SP 800-22 compliance theorem. Maps all 15 NIST statistical tests to shadow entropy properties (L003, L004, L005).</p>
+                        <a href="proofs/lean4/ShadowNISTCompliance.lean" class="proof-link">View Source</a>
                     </div>
 
                     <div class="proof-card" data-type="lean4">
@@ -860,6 +905,48 @@
 
                 <div class="no-results" id="no-results">
                     No proofs found for this filter.
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="walkthroughs">
+            <div class="container">
+                <h2 class="section-title">Proof Walkthroughs</h2>
+                <p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 2rem;">
+                    Deep-dive explanations of our formally verified security proofs.
+                </p>
+
+                <div class="verification-grid">
+                    <a href="shadow-entropy.html" class="verification-card success" style="text-decoration: none; cursor: pointer;">
+                        <h3 style="color: #fff;">Shadow Entropy Security</h3>
+                        <p class="status">23/24 Verified</p>
+                        <ul>
+                            <li>15/15 NIST SP 800-22 tests</li>
+                            <li>8 Lean4 theorems</li>
+                            <li>Cryptographic security proof</li>
+                            <li>FHE noise suitability</li>
+                        </ul>
+                    </a>
+                    <a href="proofs/theorem_stack.md" class="verification-card info" style="text-decoration: none; cursor: pointer;">
+                        <h3 style="color: #fff;">Theorem Stack</h3>
+                        <p class="status">Complete DAG</p>
+                        <ul>
+                            <li>Dependency graph visualization</li>
+                            <li>Confidence metrics</li>
+                            <li>Axiom audit</li>
+                            <li>Computational evidence</li>
+                        </ul>
+                    </a>
+                    <a href="innovations.html" class="verification-card success" style="text-decoration: none; cursor: pointer;">
+                        <h3 style="color: #fff;">14 FHE Innovations</h3>
+                        <p class="status">All Verified</p>
+                        <ul>
+                            <li>K-Elimination</li>
+                            <li>GSO-FHE</li>
+                            <li>MQ-ReLU</li>
+                            <li>Bootstrap-free architecture</li>
+                        </ul>
+                    </a>
                 </div>
             </div>
         </section>

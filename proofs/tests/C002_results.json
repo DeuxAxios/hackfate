@@ -1,0 +1,57 @@
+{
+  "node_id": "C002",
+  "title": "Independence Computational Test",
+  "tests": [
+    {
+      "modulus": 64,
+      "samples": 100000,
+      "max_lag": 50,
+      "threshold": 0.01,
+      "max_autocorr": 0.007914,
+      "expected_bound": 0.003164,
+      "violations": [],
+      "num_violations": 0,
+      "pass": true,
+      "mean_scaled": 31540030,
+      "variance_scaled": 339866237,
+      "sample_autocorrs": {
+        "1": -0.005631,
+        "2": 0.003923,
+        "3": 8.4e-05,
+        "4": -0.002237,
+        "5": 0.006387,
+        "6": -0.002758,
+        "7": 0.000545,
+        "8": -0.002615,
+        "9": -0.000724,
+        "10": 0.003079
+      }
+    },
+    {
+      "modulus": 256,
+      "samples": 100000,
+      "max_lag": 50,
+      "threshold": 0.01,
+      "max_autocorr": 0.006248,
+      "expected_bound": 0.003164,
+      "violations": [],
+      "num_violations": 0,
+      "pass": true,
+      "mean_scaled": 127483720,
+      "variance_scaled": 5434060634,
+      "sample_autocorrs": {
+        "1": 0.00264,
+        "2": -0.001175,
+        "3": -0.003309,
+        "4": 0.001435,
+        "5": -0.000161,
+        "6": 0.003961,
+        "7": 0.006248,
+        "8": -0.002035,
+        "9": 0.00329,
+        "10": -0.001039
+      }
+    }
+  ],
+  "overall_pass": true
+}

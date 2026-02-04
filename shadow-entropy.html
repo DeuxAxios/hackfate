@@ -311,6 +311,13 @@
                         <p>Shadow Entropy properties have been formally verified in both Coq and Lean4 proof assistants:</p>
 
                         <div class="proof-links">
+                            <a href="proofs/theorem_stack.md" class="proof-link" target="_blank">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12l2 2 4-4"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                Theorem Stack (23/24 Verified)
+                            </a>
                             <a href="proofs/coq/CRTShadowEntropy.v" class="proof-link" target="_blank">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -318,22 +325,31 @@
                                 </svg>
                                 CRTShadowEntropy.v (Coq)
                             </a>
-                            <a href="proofs/lean4/07_ShadowEntropy.lean" class="proof-link" target="_blank">
+                            <a href="proofs/lean4/ShadowSecurityTheorems.lean" class="proof-link" target="_blank">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                                     <polyline points="14,2 14,8 20,8"/>
                                 </svg>
-                                07_ShadowEntropy.lean (Lean4)
+                                Security Theorems (Lean4)
+                            </a>
+                            <a href="proofs/lean4/ShadowNISTCompliance.lean" class="proof-link" target="_blank">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                </svg>
+                                NIST Compliance (Lean4)
                             </a>
                         </div>
 
-                        <h4 style="margin-top: 2rem; color: var(--text);">Verified Properties</h4>
+                        <h4 style="margin-top: 2rem; color: var(--text);">Verified Properties (23 Nodes)</h4>
                         <ul class="validation-list">
-                            <li><strong>shadow_bound:</strong> For all a, b, m: shadow(a, b, m) &lt; m</li>
-                            <li><strong>shadow_reconstruction:</strong> shadow * m + (a * b mod m) = a * b</li>
-                            <li><strong>entropy_per_operation:</strong> Each shadow contributes at most log2(m) bits</li>
-                            <li><strong>accumulator_entropy:</strong> XOR accumulation preserves entropy independence</li>
-                            <li><strong>uniform_distribution:</strong> Uniform inputs yield uniform shadow distribution</li>
+                            <li><strong>T001 Shadow Security:</strong> PPT-indistinguishable from uniform random</li>
+                            <li><strong>T002 NIST Compliance:</strong> Passes all 15 NIST SP 800-22 statistical tests</li>
+                            <li><strong>T003 FHE Suitability:</strong> Bounded noise, approximately Gaussian, independent samples</li>
+                            <li><strong>T004 Landauer Compliance:</strong> No thermodynamic violation in entropy harvesting</li>
+                            <li><strong>L003 Uniform Distribution:</strong> shadow(V) is uniform on [0, m_s) for uniform V</li>
+                            <li><strong>L004 Min-Entropy:</strong> H_∞(shadow) ≥ log₂(m_s) bits per shadow</li>
+                            <li><strong>L006 Cross-Channel:</strong> |Cor(shadow_i, shadow_j)| &lt; 2^(-64) for 64-bit moduli</li>
                         </ul>
                     </div>
                 </div>
