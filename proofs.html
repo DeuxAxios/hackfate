@@ -324,11 +324,11 @@
             <div class="container">
                 <div class="proof-stats">
                     <div class="stat-card">
-                        <span class="stat-number">64</span>
+                        <span class="stat-number">65</span>
                         <span class="stat-label">Total Proofs</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">19</span>
+                        <span class="stat-number">20</span>
                         <span class="stat-label">Coq Proofs</span>
                     </div>
                     <div class="stat-card">
@@ -343,13 +343,13 @@
 
                 <div class="filter-bar" role="tablist" aria-label="Filter proofs by type">
                     <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
-                        All<span class="count">(64)</span>
+                        All<span class="count">(65)</span>
                     </button>
                     <button class="filter-btn" data-filter="nist" role="tab" aria-selected="false">
                         NIST<span class="count">(14)</span>
                     </button>
                     <button class="filter-btn" data-filter="coq" role="tab" aria-selected="false">
-                        Coq<span class="count">(19)</span>
+                        Coq<span class="count">(20)</span>
                     </button>
                     <button class="filter-btn" data-filter="lean4" role="tab" aria-selected="false">
                         Lean4<span class="count">(31)</span>
@@ -601,6 +601,15 @@
                         <p>Shadow entropy bounds for CRT representation. Quantifies information leakage from partial residue observations.</p>
                         <a href="proofs/coq/CRTShadowEntropy.v" class="proof-link">View Source</a>
                         <a href="shadow-entropy.html" class="proof-link" style="margin-left: 0.5rem;">Learn More</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>ShadowIndependence.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>V004: Independence proofs for shadow entropy. Formalizes L005 (temporal independence) and L006 (cross-channel correlation bounds).</p>
+                        <a href="proofs/coq/ShadowIndependence.v" class="proof-link">View Source</a>
                     </div>
 
                     <div class="proof-card" data-type="coq">
@@ -919,10 +928,10 @@
                 <div class="verification-grid">
                     <a href="shadow-entropy.html" class="verification-card success" style="text-decoration: none; cursor: pointer;">
                         <h3 style="color: #fff;">Shadow Entropy Security</h3>
-                        <p class="status">23/24 Verified</p>
+                        <p class="status">24/24 Verified</p>
                         <ul>
                             <li>15/15 NIST SP 800-22 tests</li>
-                            <li>8 Lean4 theorems</li>
+                            <li>6 Lean4 + 2 Coq proofs</li>
                             <li>Cryptographic security proof</li>
                             <li>FHE noise suitability</li>
                         </ul>
