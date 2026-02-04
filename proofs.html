@@ -58,8 +58,6 @@
             color: rgba(255,255,255,0.7);
             font-size: 0.9rem;
         }
-
-        /* Filter Bar */
         .filter-bar {
             display: flex;
             gap: 1rem;
@@ -95,11 +93,9 @@
             margin-left: 0.5rem;
             opacity: 0.7;
         }
-
-        /* Proof Grid */
         .proof-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 1.5rem;
             margin: 2rem 0;
         }
@@ -116,10 +112,6 @@
         }
         .proof-card.hidden {
             display: none;
-        }
-        .proof-card.highlight {
-            border-color: #00ff88;
-            background: rgba(0, 255, 136, 0.05);
         }
         .proof-card-header {
             display: flex;
@@ -140,6 +132,8 @@
             border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
         }
         .proof-type-badge.nist {
             background: rgba(0, 170, 255, 0.2);
@@ -174,8 +168,6 @@
         .proof-link::after {
             content: '\2192';
         }
-
-        /* Verification Section */
         .verification-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -218,8 +210,6 @@
             font-size: 0.9rem;
             padding: 0.25rem 0;
         }
-
-        /* Key Results */
         .key-results {
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
@@ -242,8 +232,6 @@
         .key-results strong {
             color: #00ff88;
         }
-
-        /* CTA Section */
         .cta-section {
             text-align: center;
             padding: 3rem 0;
@@ -287,12 +275,9 @@
             border: 2px solid #00ff88;
             color: #00ff88;
         }
-
         .alt-bg {
             background: rgba(255,255,255,0.02);
         }
-
-        /* No results message */
         .no-results {
             text-align: center;
             padding: 3rem;
@@ -330,7 +315,7 @@
     <section class="page-hero">
         <div class="container">
             <h1>Formal Verification Proofs</h1>
-            <p>Machine-checked mathematical proofs in Coq and Lean4 for bootstrap-free FHE, NIST compliance, and exact computation algorithms.</p>
+            <p>Machine-checked proofs in Coq and Lean4. These formalizations verify correctness of algorithms and security properties.</p>
         </div>
     </section>
 
@@ -356,7 +341,6 @@
                     </div>
                 </div>
 
-                <!-- Filter Bar -->
                 <div class="filter-bar" role="tablist" aria-label="Filter proofs by type">
                     <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
                         All<span class="count">(59)</span>
@@ -372,452 +356,503 @@
                     </button>
                 </div>
 
-                <!-- Proof Grid -->
                 <div class="proof-grid" id="proof-grid">
-                    <!-- NIST Proofs -->
-                    <div class="proof-card highlight" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>NISTCompliance.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>FIPS-203 ML-KEM compliance. Verifies QMNF achieves 256-bit security (AES-256 equivalent, Category 5).</p>
-                        <a href="proofs/nist/NISTCompliance.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>SecurityComplete.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>Complete security proof combining all security lemmas and reductions.</p>
-                        <a href="proofs/nist/SecurityComplete.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>INDCPAGame.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>IND-CPA security game formalization and proof.</p>
-                        <a href="proofs/nist/INDCPAGame.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>HomomorphicSecurity.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>Homomorphic encryption security proofs.</p>
-                        <a href="proofs/nist/HomomorphicSecurity.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>AHOPSecurity.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>AHOP security framework.</p>
-                        <a href="proofs/nist/AHOPSecurity.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>AHOPHardness.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>AHOP hardness assumptions and reductions.</p>
-                        <a href="proofs/nist/AHOPHardness.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>Security.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>Core security definitions.</p>
-                        <a href="proofs/nist/Security.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>SecurityLemmas.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>Supporting security lemmas.</p>
-                        <a href="proofs/nist/SecurityLemmas.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>CRT.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>Chinese Remainder Theorem formalization.</p>
-                        <a href="proofs/nist/CRT.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>RingDefinitions.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>Ring-LWE definitions.</p>
-                        <a href="proofs/nist/RingDefinitions.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>KElimination.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>K-Elimination security proof.</p>
-                        <a href="proofs/nist/KElimination.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>AHOPAlgebra.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>AHOP algebraic structures.</p>
-                        <a href="proofs/nist/AHOPAlgebra.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="nist">
-                        <div class="proof-card-header">
-                            <h3>AHOPParameters.lean</h3>
-                            <span class="proof-type-badge nist">NIST</span>
-                        </div>
-                        <p>AHOP parameter sets.</p>
-                        <a href="proofs/nist/AHOPParameters.lean" class="proof-link">View Source</a>
-                    </div>
+                    <!-- NIST Proofs - Ordered: Foundations → Security Definitions → Specific Properties → Complete Proofs -->
                     <div class="proof-card" data-type="nist">
                         <div class="proof-card-header">
                             <h3>Basic.lean</h3>
                             <span class="proof-type-badge nist">NIST</span>
                         </div>
-                        <p>Basic definitions and utilities.</p>
+                        <p>Core type definitions and utility lemmas used throughout the security proofs. Provides foundational structures for cryptographic formalizations.</p>
                         <a href="proofs/nist/Basic.lean" class="proof-link">View Source</a>
                     </div>
 
-                    <!-- Coq Proofs -->
-                    <div class="proof-card highlight" data-type="coq">
+                    <div class="proof-card" data-type="nist">
                         <div class="proof-card-header">
-                            <h3>KElimination.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
+                            <h3>RingDefinitions.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
                         </div>
-                        <p>Core K-Elimination algorithm. Eliminates tracking overhead in RNS division.</p>
-                        <a href="proofs/coq/KElimination.v" class="proof-link">View Source</a>
+                        <p>Formalizes polynomial ring R_q = Z_q[X]/(X^n + 1) used in Ring-LWE based schemes. Defines ring operations and their properties.</p>
+                        <a href="proofs/nist/RingDefinitions.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card highlight" data-type="coq">
+
+                    <div class="proof-card" data-type="nist">
                         <div class="proof-card-header">
-                            <h3>GSOFHE.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
+                            <h3>CRT.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
                         </div>
-                        <p>Generalized Sigma Orbit FHE. Bootstrap-free homomorphic encryption.</p>
-                        <a href="proofs/coq/GSOFHE.v" class="proof-link">View Source</a>
+                        <p>Chinese Remainder Theorem formalization. Proves existence and uniqueness of CRT representation for coprime moduli.</p>
+                        <a href="proofs/nist/CRT.lean" class="proof-link">View Source</a>
                     </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>Security.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Defines IND-CPA security game structure, negligible functions, and security parameter relationships. Game skeleton for FHE security.</p>
+                        <a href="proofs/nist/Security.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>SecurityLemmas.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Supporting lemmas for security reductions. Includes bounds on adversary advantages and composition theorems.</p>
+                        <a href="proofs/nist/SecurityLemmas.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>INDCPAGame.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Formalizes the IND-CPA (Indistinguishability under Chosen Plaintext Attack) security game for the FHE scheme.</p>
+                        <a href="proofs/nist/INDCPAGame.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>KElimination.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Security analysis of K-Elimination algorithm. Proves that eliminating overflow tracking does not leak information about plaintexts.</p>
+                        <a href="proofs/nist/KElimination.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>AHOPAlgebra.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Algebraic structures for AHOP (Algebraic Homomorphic Operations Protocol). Defines ring homomorphisms and their preservation properties.</p>
+                        <a href="proofs/nist/AHOPAlgebra.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>AHOPParameters.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Parameter selection for AHOP. Specifies constraints on n, q, and t that ensure both correctness and security.</p>
+                        <a href="proofs/nist/AHOPParameters.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>AHOPHardness.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Hardness assumptions underlying AHOP security. Formalizes Ring-LWE assumption and its relationship to lattice problems.</p>
+                        <a href="proofs/nist/AHOPHardness.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>AHOPSecurity.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Security reduction for AHOP. Shows that breaking AHOP implies solving Ring-LWE with non-negligible advantage.</p>
+                        <a href="proofs/nist/AHOPSecurity.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>HomomorphicSecurity.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Proves that homomorphic operations preserve IND-CPA security. Evaluation of circuits on ciphertexts does not leak plaintext information.</p>
+                        <a href="proofs/nist/HomomorphicSecurity.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>SecurityComplete.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Combines all security lemmas into a complete proof. Establishes end-to-end security of the FHE scheme under stated assumptions.</p>
+                        <a href="proofs/nist/SecurityComplete.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>NISTCompliance.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Verifies FIPS-203 ML-KEM parameter compliance. Proves that chosen parameters meet NIST Category 5 (256-bit) security requirements.</p>
+                        <a href="proofs/nist/NISTCompliance.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <!-- Coq Proofs - Ordered: Foundations → Core Algorithms → FHE → Applications -->
                     <div class="proof-card" data-type="coq">
                         <div class="proof-card-header">
                             <h3>03_QMNF_Coq_Proofs.v</h3>
                             <span class="proof-type-badge coq">Coq</span>
                         </div>
-                        <p>Core QMNF mathematical foundations.</p>
+                        <p>Core QMNF mathematical foundations. Formalizes exact rational arithmetic, CRT representation, and basic number-theoretic lemmas.</p>
                         <a href="proofs/coq/03_QMNF_Coq_Proofs.v" class="proof-link">View Source</a>
                     </div>
+
                     <div class="proof-card" data-type="coq">
                         <div class="proof-card-header">
-                            <h3>OrderFinding.v</h3>
+                            <h3>KElimination.v</h3>
                             <span class="proof-type-badge coq">Coq</span>
                         </div>
-                        <p>Quantum-resistant order finding algorithm.</p>
-                        <a href="proofs/coq/OrderFinding.v" class="proof-link">View Source</a>
+                        <p>K-Elimination algorithm correctness. Proves that overflow count k can be computed from anchor residues without storing k explicitly during RNS operations.</p>
+                        <a href="proofs/coq/KElimination.v" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>PeriodGrover.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Period finding via Grover optimization.</p>
-                        <a href="proofs/coq/PeriodGrover.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>ToricGrover.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Toric variety Grover search.</p>
-                        <a href="proofs/coq/ToricGrover.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>MontgomeryPersistent.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Persistent Montgomery multiplication for FHE.</p>
-                        <a href="proofs/coq/MontgomeryPersistent.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>MQReLU.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Modular Quantized ReLU activation function.</p>
-                        <a href="proofs/coq/MQReLU.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>IntegerSoftmax.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Integer-only softmax implementation.</p>
-                        <a href="proofs/coq/IntegerSoftmax.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>CyclotomicPhase.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Cyclotomic phase computation.</p>
-                        <a href="proofs/coq/CyclotomicPhase.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>CRTShadowEntropy.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>CRT shadow entropy bounds.</p>
-                        <a href="proofs/coq/CRTShadowEntropy.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>PadeEngine.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Pade approximation engine.</p>
-                        <a href="proofs/coq/PadeEngine.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>MobiusInt.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Mobius function integration.</p>
-                        <a href="proofs/coq/MobiusInt.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>ExactCoefficient.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Exact coefficient extraction.</p>
-                        <a href="proofs/coq/ExactCoefficient.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>StateCompression.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Quantum state compression.</p>
-                        <a href="proofs/coq/StateCompression.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>EncryptedQuantum.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Encrypted quantum operations.</p>
-                        <a href="proofs/coq/EncryptedQuantum.v" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="coq">
-                        <div class="proof-card-header">
-                            <h3>SideChannelResistance.v</h3>
-                            <span class="proof-type-badge coq">Coq</span>
-                        </div>
-                        <p>Side-channel resistance proofs.</p>
-                        <a href="proofs/coq/SideChannelResistance.v" class="proof-link">View Source</a>
-                    </div>
+
                     <div class="proof-card" data-type="coq">
                         <div class="proof-card-header">
                             <h3>K_Elimination.v</h3>
                             <span class="proof-type-badge coq">Coq</span>
                         </div>
-                        <p>Alternative K-Elimination formalization.</p>
+                        <p>Alternative K-Elimination formalization using different proof strategy. Provides independent verification of the algorithm's correctness.</p>
                         <a href="proofs/coq/K_Elimination.v" class="proof-link">View Source</a>
                     </div>
 
-                    <!-- Lean4 Proofs -->
-                    <div class="proof-card highlight" data-type="lean4">
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>GSOFHE.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>GSO (Gravitational Swarm Optimization) noise bounding. Models noise as particles in attractor basins; proves noise reduction without bootstrapping.</p>
+                        <a href="proofs/coq/GSOFHE.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>OrderFinding.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Order finding algorithm formalization. Computes multiplicative order of elements in Z_n using classical methods.</p>
+                        <a href="proofs/coq/OrderFinding.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>PeriodGrover.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Period finding formalization. Proves correctness of period detection for periodic functions using number-theoretic techniques.</p>
+                        <a href="proofs/coq/PeriodGrover.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>ToricGrover.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Toric variety search formalization. Applies algebraic geometry constructions to structured search problems.</p>
+                        <a href="proofs/coq/ToricGrover.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>MontgomeryPersistent.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Montgomery multiplication correctness. Proves that persistent Montgomery form preserves correctness across sequences of modular operations.</p>
+                        <a href="proofs/coq/MontgomeryPersistent.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>CyclotomicPhase.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Cyclotomic polynomial phase computation. Formalizes roots of unity in cyclotomic fields and their arithmetic properties.</p>
+                        <a href="proofs/coq/CyclotomicPhase.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>PadeEngine.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Pade approximation correctness. Proves rational function approximations achieve specified error bounds for transcendental functions.</p>
+                        <a href="proofs/coq/PadeEngine.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>MobiusInt.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Mobius function and inversion formula. Formalizes the Mobius function mu(n) and proves the inversion theorem for arithmetic functions.</p>
+                        <a href="proofs/coq/MobiusInt.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>ExactCoefficient.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Exact coefficient extraction from polynomials. Proves algorithms for recovering polynomial coefficients from evaluations.</p>
+                        <a href="proofs/coq/ExactCoefficient.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>CRTShadowEntropy.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Shadow entropy bounds for CRT representation. Quantifies information leakage from partial residue observations.</p>
+                        <a href="proofs/coq/CRTShadowEntropy.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>MQReLU.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Modular Quantized ReLU activation. Proves integer-only ReLU implementation matches standard ReLU behavior within quantization bounds.</p>
+                        <a href="proofs/coq/MQReLU.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>IntegerSoftmax.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Integer-only softmax formalization. Proves fixed-point softmax approximation achieves bounded relative error.</p>
+                        <a href="proofs/coq/IntegerSoftmax.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>StateCompression.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>State compression for computation traces. Proves lossy compression preserves essential state information for verification.</p>
+                        <a href="proofs/coq/StateCompression.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>EncryptedQuantum.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Encrypted quantum state operations. Formalizes homomorphic operations on encrypted representations of quantum states.</p>
+                        <a href="proofs/coq/EncryptedQuantum.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>SideChannelResistance.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Constant-time execution proofs. Verifies that operations execute in data-independent time to prevent timing side-channel attacks.</p>
+                        <a href="proofs/coq/SideChannelResistance.v" class="proof-link">View Source</a>
+                    </div>
+
+                    <!-- Lean4 Proofs - Ordered: Core Math → CRT → K-Elimination → Algorithms → FHE → Applications -->
+                    <div class="proof-card" data-type="lean4">
                         <div class="proof-card-header">
                             <h3>02_QMNF_Lean4_Proofs.lean</h3>
                             <span class="proof-type-badge lean4">Lean4</span>
                         </div>
-                        <p>Core QMNF mathematical foundations and CRT arithmetic.</p>
+                        <p>Core QMNF mathematical foundations in Lean4. Formalizes exact arithmetic, rational numbers, and fundamental number theory using Mathlib.</p>
                         <a href="proofs/lean4/02_QMNF_Lean4_Proofs.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card highlight" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>05_KElimination.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>K-Elimination correctness and complexity proofs.</p>
-                        <a href="proofs/lean4/05_KElimination.lean" class="proof-link">View Source</a>
-                    </div>
+
                     <div class="proof-card" data-type="lean4">
                         <div class="proof-card-header">
                             <h3>06_CRTBigInt.lean</h3>
                             <span class="proof-type-badge lean4">Lean4</span>
                         </div>
-                        <p>CRT BigInteger operations and overflow handling.</p>
+                        <p>CRT-based big integer representation. Proves parallel residue arithmetic preserves correctness and bounds dynamic range.</p>
                         <a href="proofs/lean4/06_CRTBigInt.lean" class="proof-link">View Source</a>
                     </div>
+
                     <div class="proof-card" data-type="lean4">
                         <div class="proof-card-header">
-                            <h3>07_ShadowEntropy.lean</h3>
+                            <h3>05_KElimination.lean</h3>
                             <span class="proof-type-badge lean4">Lean4</span>
                         </div>
-                        <p>Shadow entropy bounds proof.</p>
-                        <a href="proofs/lean4/07_ShadowEntropy.lean" class="proof-link">View Source</a>
+                        <p>K-Elimination in Lean4. Proves the anchor-based overflow recovery formula: k = (x_A - x_M * M_inv) / A where M_inv is M^(-1) mod A.</p>
+                        <a href="proofs/lean4/05_KElimination.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>08_PadeEngine.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Pade approximation correctness.</p>
-                        <a href="proofs/lean4/08_PadeEngine.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>09_MobiusInt.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Mobius integration proofs.</p>
-                        <a href="proofs/lean4/09_MobiusInt.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>10_PersistentMontgomery.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Montgomery multiplication correctness.</p>
-                        <a href="proofs/lean4/10_PersistentMontgomery.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>11_IntegerNN.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Integer neural network foundations.</p>
-                        <a href="proofs/lean4/11_IntegerNN.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>12_CyclotomicPhase.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Cyclotomic phase computations.</p>
-                        <a href="proofs/lean4/12_CyclotomicPhase.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>13_MQReLU.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Modular quantized ReLU proofs.</p>
-                        <a href="proofs/lean4/13_MQReLU.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>14_BinaryGCD.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Binary GCD algorithm correctness.</p>
-                        <a href="proofs/lean4/14_BinaryGCD.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>15_PLMGRails.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>PLMG rails system proofs.</p>
-                        <a href="proofs/lean4/15_PLMGRails.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>16_DCBigIntHelix.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>DC BigInt helix structure.</p>
-                        <a href="proofs/lean4/16_DCBigIntHelix.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>17_GroverSwarm.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Grover swarm optimization.</p>
-                        <a href="proofs/lean4/17_GroverSwarm.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>18_WASSAN.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>WASSAN security proofs.</p>
-                        <a href="proofs/lean4/18_WASSAN.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>19_TimeCrystal.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Time crystal computations.</p>
-                        <a href="proofs/lean4/19_TimeCrystal.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>20_GSO.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Generalized Sigma Orbit proofs.</p>
-                        <a href="proofs/lean4/20_GSO.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>21_MANA.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>MANA FHE framework proofs.</p>
-                        <a href="proofs/lean4/21_MANA.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>22_RayRam.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Ray-RAM architecture proofs.</p>
-                        <a href="proofs/lean4/22_RayRam.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>23_ClockworkPrime.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Clockwork prime generation algorithm.</p>
-                        <a href="proofs/lean4/23_ClockworkPrime.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card highlight" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>24_BootstrapFreeFHE.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Bootstrap-free FHE correctness proof.</p>
-                        <a href="proofs/lean4/24_BootstrapFreeFHE.lean" class="proof-link">View Source</a>
-                    </div>
-                    <div class="proof-card" data-type="lean4">
-                        <div class="proof-card-header">
-                            <h3>25_RealTimeFHE.lean</h3>
-                            <span class="proof-type-badge lean4">Lean4</span>
-                        </div>
-                        <p>Real-time FHE operations.</p>
-                        <a href="proofs/lean4/25_RealTimeFHE.lean" class="proof-link">View Source</a>
-                    </div>
+
                     <div class="proof-card" data-type="lean4">
                         <div class="proof-card-header">
                             <h3>KElimination.lean</h3>
                             <span class="proof-type-badge lean4">Lean4</span>
                         </div>
-                        <p>K-Elimination module.</p>
+                        <p>K-Elimination module definitions. Provides the interface and core types used by K-Elimination implementations.</p>
                         <a href="proofs/lean4/KElimination.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>14_BinaryGCD.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Binary GCD (Stein's algorithm) correctness. Proves division-free GCD using only subtraction and bit shifts matches Euclidean GCD.</p>
+                        <a href="proofs/lean4/14_BinaryGCD.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>07_ShadowEntropy.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Shadow entropy formalization in Lean4. Bounds min-entropy of CRT residues given partial channel observations.</p>
+                        <a href="proofs/lean4/07_ShadowEntropy.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>08_PadeEngine.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Pade approximant construction. Formalizes rational approximations to analytic functions and their convergence properties.</p>
+                        <a href="proofs/lean4/08_PadeEngine.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>09_MobiusInt.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Mobius function formalization using Mathlib. Proves Mobius inversion and Euler's totient function relationships.</p>
+                        <a href="proofs/lean4/09_MobiusInt.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>10_PersistentMontgomery.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Persistent Montgomery representation. Proves correctness of keeping values in Montgomery form across operation sequences.</p>
+                        <a href="proofs/lean4/10_PersistentMontgomery.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>12_CyclotomicPhase.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Cyclotomic field arithmetic. Formalizes primitive roots of unity and operations in cyclotomic extensions using Mathlib.</p>
+                        <a href="proofs/lean4/12_CyclotomicPhase.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>15_PLMGRails.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>PLMG (Parallel Limb Modular Generation) rails. Formalizes parallel modular reduction across multiple limbs.</p>
+                        <a href="proofs/lean4/15_PLMGRails.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>16_DCBigIntHelix.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Divide-and-conquer big integer structure. Proves recursive decomposition for efficient large integer operations.</p>
+                        <a href="proofs/lean4/16_DCBigIntHelix.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>23_ClockworkPrime.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Deterministic prime generation. Proves correctness of prime candidate generation using clock arithmetic patterns.</p>
+                        <a href="proofs/lean4/23_ClockworkPrime.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>20_GSO.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Gravitational Swarm Optimization in Lean4. Formalizes attractor basin dynamics for noise control in FHE.</p>
+                        <a href="proofs/lean4/20_GSO.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>24_BootstrapFreeFHE.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Bootstrap-free FHE correctness. Proves that K-Elimination combined with GSO maintains decryption correctness without bootstrapping.</p>
+                        <a href="proofs/lean4/24_BootstrapFreeFHE.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>25_RealTimeFHE.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Real-time FHE operation bounds. Proves upper bounds on operation latency under the bootstrap-free scheme.</p>
+                        <a href="proofs/lean4/25_RealTimeFHE.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>21_MANA.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>MANA (Modular Anchor Noise Attenuation) framework. Formalizes the anchor-based noise reduction mechanism.</p>
+                        <a href="proofs/lean4/21_MANA.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>11_IntegerNN.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Integer neural network foundations. Formalizes fixed-point neural network operations and their approximation bounds.</p>
+                        <a href="proofs/lean4/11_IntegerNN.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>13_MQReLU.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Modular Quantized ReLU in Lean4. Proves integer ReLU preserves non-negativity and approximates continuous ReLU.</p>
+                        <a href="proofs/lean4/13_MQReLU.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>17_GroverSwarm.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Grover-inspired search optimization. Formalizes swarm-based amplitude amplification for structured search.</p>
+                        <a href="proofs/lean4/17_GroverSwarm.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>18_WASSAN.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>WASSAN (Weighted Adaptive Swarm Search with Anchor Navigation) formalization. Proves convergence properties of the search algorithm.</p>
+                        <a href="proofs/lean4/18_WASSAN.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>19_TimeCrystal.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Time crystal periodic structure formalization. Models discrete time-translation symmetry breaking in computational schedules.</p>
+                        <a href="proofs/lean4/19_TimeCrystal.lean" class="proof-link">View Source</a>
+                    </div>
+
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>22_RayRam.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Ray-RAM memory access pattern formalization. Proves access patterns reveal no information about stored values.</p>
+                        <a href="proofs/lean4/22_RayRam.lean" class="proof-link">View Source</a>
                     </div>
                 </div>
 
@@ -834,40 +869,40 @@
                 <div class="verification-grid">
                     <div class="verification-card success">
                         <h3>Coq Proofs</h3>
-                        <p class="status">Fully Verified</p>
+                        <p class="status">Verified</p>
                         <ul>
-                            <li>Coq 8.18+ compatible</li>
+                            <li>Compatible with Coq 8.18+</li>
                             <li>19 proof files</li>
                             <li>0 admitted statements</li>
                         </ul>
                     </div>
                     <div class="verification-card success">
                         <h3>Lean 4 Proofs</h3>
-                        <p class="status">Fully Verified</p>
+                        <p class="status">Verified</p>
                         <ul>
-                            <li>Mathlib compatible</li>
+                            <li>Uses Mathlib</li>
                             <li>26 proof files</li>
                             <li>0 sorry statements</li>
                         </ul>
                     </div>
                     <div class="verification-card info">
-                        <h3>Axioms Used</h3>
-                        <p class="status">3 Justified</p>
+                        <h3>Axioms</h3>
+                        <p class="status">3 Used</p>
                         <ul>
-                            <li>coreSVP hardness (standard)</li>
-                            <li>RLWE reduction (standard)</li>
-                            <li>BKZ cost estimation (empirical)</li>
+                            <li>Core-SVP hardness assumption</li>
+                            <li>Ring-LWE to SVP reduction</li>
+                            <li>BKZ cost model (empirical)</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="key-results">
-                    <h3>Key Verified Results</h3>
+                    <h3>Verified Properties</h3>
                     <ul>
-                        <li><strong>NIST Category 5:</strong> QMNF achieves 256-bit security (AES-256 equivalent)</li>
-                        <li><strong>ML-KEM Comparison:</strong> Security exceeds ML-KEM-1024 requirements</li>
-                        <li><strong>Bootstrap-Free:</strong> K-Elimination enables deep circuits without bootstrapping</li>
-                        <li><strong>Determinism:</strong> Integer-only computation guarantees reproducibility</li>
+                        <li><strong>NIST Category 5:</strong> Parameters satisfy 256-bit security bounds per FIPS-203</li>
+                        <li><strong>K-Elimination Correctness:</strong> Overflow count recoverable from anchor residues</li>
+                        <li><strong>Noise Bounds:</strong> GSO maintains decryption correctness without bootstrapping</li>
+                        <li><strong>Constant-Time:</strong> Operations execute in data-independent time</li>
                     </ul>
                 </div>
             </div>
@@ -875,13 +910,13 @@
 
         <section class="section cta-section">
             <div class="container">
-                <h2>Download All Proofs</h2>
-                <p>Clone the complete proof repository for verification:</p>
+                <h2>Source Code</h2>
+                <p>Clone the repository to verify proofs locally:</p>
                 <div class="code-block"><code>git clone https://github.com/DeuxAxios/hackfate.git
 cd hackfate/proofs</code></div>
                 <div class="cta-buttons">
                     <a href="https://github.com/DeuxAxios/hackfate" class="btn btn-primary">View on GitHub</a>
-                    <a href="proofs/README.md" class="btn btn-secondary">Read Documentation</a>
+                    <a href="proofs/README.md" class="btn btn-secondary">Documentation</a>
                 </div>
             </div>
         </section>
@@ -906,7 +941,6 @@ cd hackfate/proofs</code></div>
 
     <script src="script.js"></script>
     <script>
-        // Proof filtering functionality
         document.addEventListener('DOMContentLoaded', function() {
             const filterBtns = document.querySelectorAll('.filter-btn');
             const proofCards = document.querySelectorAll('.proof-card');
@@ -916,7 +950,6 @@ cd hackfate/proofs</code></div>
                 btn.addEventListener('click', function() {
                     const filter = this.dataset.filter;
 
-                    // Update active state
                     filterBtns.forEach(b => {
                         b.classList.remove('active');
                         b.setAttribute('aria-selected', 'false');
@@ -924,7 +957,6 @@ cd hackfate/proofs</code></div>
                     this.classList.add('active');
                     this.setAttribute('aria-selected', 'true');
 
-                    // Filter cards
                     let visibleCount = 0;
                     proofCards.forEach(card => {
                         const type = card.dataset.type;
@@ -936,7 +968,6 @@ cd hackfate/proofs</code></div>
                         }
                     });
 
-                    // Show/hide no results message
                     if (visibleCount === 0) {
                         noResults.classList.add('visible');
                     } else {
