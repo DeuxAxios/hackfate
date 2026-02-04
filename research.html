@@ -36,7 +36,7 @@
                 <a href="technology.html">Technology</a>
                 <a href="innovations.html">Innovations</a>
                 <a href="benchmarks.html">Benchmarks</a>
-                <a href="walkthrough.html">Walkthrough</a>
+                <a href="proofs.html">Proofs</a>
                 <a href="about.html">About</a>
                 <a href="contact.html" class="nav-cta">Contact</a>
             </div>
@@ -156,6 +156,34 @@
                             <p><strong>How it works:</strong> In RNS (Residue Number Systems), every multiplication computes <code>a &times; b mod m</code>, discarding the quotient <code>q = (a&times;b) / m</code>. These quotients are mixed using SipHash rounds into a 256-bit accumulator, producing NIST-compliant randomness.</p>
                             <p><strong>Applications:</strong> FHE noise sampling, key generation seeding, Monte Carlo simulations&mdash;anywhere computation already happens, entropy comes free.</p>
                         </div>
+                    </div>
+                </div>
+
+                <div class="research-card" id="verification">
+                    <div class="research-header">
+                        <span class="research-tag">PUBLIC</span>
+                        <span class="research-tag tag-verified">AUDIT</span>
+                    </div>
+                    <h3 class="research-title">Independent Verification</h3>
+                    <p class="research-headline">NINE65 FHE v5 Audit Snapshot (2026-01-27)</p>
+                    <div class="research-content">
+                        <p>Independent testing confirms bootstrap-free operation, full test suite pass rate, and strong parallel performance. The audit also documents areas for continued hardening (formal proof audit and float-free parameter modeling).</p>
+                        <div class="research-stats">
+                            <div class="stat">
+                                <span class="stat-value">465/465</span>
+                                <span class="stat-label">Tests Passed</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">4.9x</span>
+                                <span class="stat-label">Parallel Speedup</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">28.10ms</span>
+                                <span class="stat-label">10 Encryptions</span>
+                            </div>
+                        </div>
+                        <p class="research-note">Download the audit, claims verification, and benchmark evidence pack for full details.</p>
+                        <a href="benchmarks-detailed.html#audit-2026" class="btn btn-primary">View Audit Evidence</a>
                     </div>
                 </div>
             </div>

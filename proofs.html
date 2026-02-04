@@ -26,6 +26,283 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .proof-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: #00ff88;
+        }
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00ff88;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .stat-label {
+            display: block;
+            margin-top: 0.5rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+        }
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+        .filter-btn.active {
+            background: #00ff88;
+            border-color: #00ff88;
+            color: #000;
+        }
+        .filter-btn .count {
+            margin-left: 0.5rem;
+            opacity: 0.7;
+        }
+
+        /* Proof Grid */
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .proof-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, border-color 0.2s, opacity 0.3s;
+        }
+        .proof-card:hover {
+            transform: translateY(-2px);
+            border-color: #00ff88;
+        }
+        .proof-card.hidden {
+            display: none;
+        }
+        .proof-card.highlight {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+        .proof-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        .proof-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: #fff;
+            margin: 0;
+        }
+        .proof-type-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .proof-type-badge.nist {
+            background: rgba(0, 170, 255, 0.2);
+            color: #00aaff;
+        }
+        .proof-type-badge.coq {
+            background: rgba(255, 170, 0, 0.2);
+            color: #ffaa00;
+        }
+        .proof-type-badge.lean4 {
+            background: rgba(170, 0, 255, 0.2);
+            color: #aa00ff;
+        }
+        .proof-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .proof-link {
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .proof-link:hover {
+            text-decoration: underline;
+        }
+        .proof-link::after {
+            content: '\2192';
+        }
+
+        /* Verification Section */
+        .verification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .verification-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid;
+        }
+        .verification-card.success {
+            border-left-color: #00ff88;
+        }
+        .verification-card.info {
+            border-left-color: #00aaff;
+        }
+        .verification-card h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .verification-card .status {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .verification-card.success .status {
+            color: #00ff88;
+        }
+        .verification-card.info .status {
+            color: #00aaff;
+        }
+        .verification-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .verification-card li {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            padding: 0.25rem 0;
+        }
+
+        /* Key Results */
+        .key-results {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .key-results h3 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .key-results ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .key-results li {
+            padding: 0.5rem 0;
+            color: rgba(255,255,255,0.8);
+        }
+        .key-results strong {
+            color: #00ff88;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .code-block {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem auto;
+            max-width: 500px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            text-align: left;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-primary {
+            background: #00ff88;
+            color: #000;
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #00ff88;
+            color: #00ff88;
+        }
+
+        .alt-bg {
+            background: rgba(255,255,255,0.02);
+        }
+
+        /* No results message */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255,255,255,0.5);
+            display: none;
+        }
+        .no-results.visible {
+            display: block;
+        }
+    </style>
 </head>
 <body id="top">
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -50,17 +327,21 @@
         </div>
     </nav>
 
-    <main id="main-content">
-        <section class="section hero-section">
-            <div class="container">
-                <h1 class="section-title">Formal Verification Proofs</h1>
-                <p class="section-subtitle">Machine-checked mathematical proofs in Coq and Lean4 for bootstrap-free FHE, NIST compliance, and exact computation algorithms.</p>
-            </div>
-        </section>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Formal Verification Proofs</h1>
+            <p>Machine-checked mathematical proofs in Coq and Lean4 for bootstrap-free FHE, NIST compliance, and exact computation algorithms.</p>
+        </div>
+    </section>
 
+    <main id="main-content">
         <section class="section">
             <div class="container">
                 <div class="proof-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">59</span>
+                        <span class="stat-label">Total Proofs</span>
+                    </div>
                     <div class="stat-card">
                         <span class="stat-number">19</span>
                         <span class="stat-label">Coq Proofs</span>
@@ -73,194 +354,484 @@
                         <span class="stat-number">14</span>
                         <span class="stat-label">NIST Compliance</span>
                     </div>
-                    <div class="stat-card">
-                        <span class="stat-number">0</span>
-                        <span class="stat-label">Sorry Statements</span>
-                    </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="section" id="nist">
-            <div class="container">
-                <h2 class="section-heading">NIST Compliance Proofs</h2>
-                <p class="section-description">Security proofs aligned with NIST FIPS-203 ML-KEM standard. QMNF achieves Category 5 (256-bit) security.</p>
+                <!-- Filter Bar -->
+                <div class="filter-bar" role="tablist" aria-label="Filter proofs by type">
+                    <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+                        All<span class="count">(59)</span>
+                    </button>
+                    <button class="filter-btn" data-filter="nist" role="tab" aria-selected="false">
+                        NIST<span class="count">(14)</span>
+                    </button>
+                    <button class="filter-btn" data-filter="coq" role="tab" aria-selected="false">
+                        Coq<span class="count">(19)</span>
+                    </button>
+                    <button class="filter-btn" data-filter="lean4" role="tab" aria-selected="false">
+                        Lean4<span class="count">(26)</span>
+                    </button>
+                </div>
 
-                <div class="proof-grid">
-                    <div class="proof-card highlight">
-                        <h3>NISTCompliance.lean</h3>
-                        <p>FIPS-203 ML-KEM compliance proof. Verifies QMNF achieves 256-bit security (AES-256 equivalent).</p>
+                <!-- Proof Grid -->
+                <div class="proof-grid" id="proof-grid">
+                    <!-- NIST Proofs -->
+                    <div class="proof-card highlight" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>NISTCompliance.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>FIPS-203 ML-KEM compliance. Verifies QMNF achieves 256-bit security (AES-256 equivalent, Category 5).</p>
                         <a href="proofs/nist/NISTCompliance.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>SecurityComplete.lean</h3>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>SecurityComplete.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
                         <p>Complete security proof combining all security lemmas and reductions.</p>
                         <a href="proofs/nist/SecurityComplete.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>INDCPAGame.lean</h3>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>INDCPAGame.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
                         <p>IND-CPA security game formalization and proof.</p>
                         <a href="proofs/nist/INDCPAGame.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>HomomorphicSecurity.lean</h3>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>HomomorphicSecurity.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
                         <p>Homomorphic encryption security proofs.</p>
                         <a href="proofs/nist/HomomorphicSecurity.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>AHOPSecurity.lean</h3>
-                        <p>AHOP (Algebraic Homomorphic Operations Protocol) security framework.</p>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>AHOPSecurity.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>AHOP security framework.</p>
                         <a href="proofs/nist/AHOPSecurity.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>AHOPHardness.lean</h3>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>AHOPHardness.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
                         <p>AHOP hardness assumptions and reductions.</p>
                         <a href="proofs/nist/AHOPHardness.lean" class="proof-link">View Source</a>
                     </div>
-                </div>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>Security.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Core security definitions.</p>
+                        <a href="proofs/nist/Security.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>SecurityLemmas.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Supporting security lemmas.</p>
+                        <a href="proofs/nist/SecurityLemmas.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>CRT.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Chinese Remainder Theorem formalization.</p>
+                        <a href="proofs/nist/CRT.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>RingDefinitions.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Ring-LWE definitions.</p>
+                        <a href="proofs/nist/RingDefinitions.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>KElimination.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>K-Elimination security proof.</p>
+                        <a href="proofs/nist/KElimination.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>AHOPAlgebra.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>AHOP algebraic structures.</p>
+                        <a href="proofs/nist/AHOPAlgebra.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>AHOPParameters.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>AHOP parameter sets.</p>
+                        <a href="proofs/nist/AHOPParameters.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="nist">
+                        <div class="proof-card-header">
+                            <h3>Basic.lean</h3>
+                            <span class="proof-type-badge nist">NIST</span>
+                        </div>
+                        <p>Basic definitions and utilities.</p>
+                        <a href="proofs/nist/Basic.lean" class="proof-link">View Source</a>
+                    </div>
 
-                <details class="proof-details">
-                    <summary>All NIST Proofs</summary>
-                    <ul class="proof-list">
-                        <li><a href="proofs/nist/Basic.lean">Basic.lean</a> - Core definitions</li>
-                        <li><a href="proofs/nist/CRT.lean">CRT.lean</a> - Chinese Remainder Theorem</li>
-                        <li><a href="proofs/nist/RingDefinitions.lean">RingDefinitions.lean</a> - Ring-LWE definitions</li>
-                        <li><a href="proofs/nist/Security.lean">Security.lean</a> - Security definitions</li>
-                        <li><a href="proofs/nist/SecurityLemmas.lean">SecurityLemmas.lean</a> - Supporting lemmas</li>
-                        <li><a href="proofs/nist/KElimination.lean">KElimination.lean</a> - K-Elimination security</li>
-                        <li><a href="proofs/nist/AHOPAlgebra.lean">AHOPAlgebra.lean</a> - AHOP algebraic structures</li>
-                        <li><a href="proofs/nist/AHOPParameters.lean">AHOPParameters.lean</a> - AHOP parameter sets</li>
-                    </ul>
-                </details>
-            </div>
-        </section>
-
-        <section class="section alt-bg" id="coq">
-            <div class="container">
-                <h2 class="section-heading">Coq Proofs</h2>
-                <p class="section-description">Verified innovations from NINE65 bootstrap-free FHE system. All proofs compile with Coq 8.18+.</p>
-
-                <div class="proof-grid">
-                    <div class="proof-card highlight">
-                        <h3>KElimination.v</h3>
+                    <!-- Coq Proofs -->
+                    <div class="proof-card highlight" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>KElimination.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
                         <p>Core K-Elimination algorithm. Eliminates tracking overhead in RNS division.</p>
                         <a href="proofs/coq/KElimination.v" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card highlight">
-                        <h3>GSOFHE.v</h3>
+                    <div class="proof-card highlight" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>GSOFHE.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
                         <p>Generalized Sigma Orbit FHE. Bootstrap-free homomorphic encryption.</p>
                         <a href="proofs/coq/GSOFHE.v" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>OrderFinding.v</h3>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>03_QMNF_Coq_Proofs.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Core QMNF mathematical foundations.</p>
+                        <a href="proofs/coq/03_QMNF_Coq_Proofs.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>OrderFinding.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
                         <p>Quantum-resistant order finding algorithm.</p>
                         <a href="proofs/coq/OrderFinding.v" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>PeriodGrover.v</h3>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>PeriodGrover.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
                         <p>Period finding via Grover optimization.</p>
                         <a href="proofs/coq/PeriodGrover.v" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>MontgomeryPersistent.v</h3>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>ToricGrover.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Toric variety Grover search.</p>
+                        <a href="proofs/coq/ToricGrover.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>MontgomeryPersistent.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
                         <p>Persistent Montgomery multiplication for FHE.</p>
                         <a href="proofs/coq/MontgomeryPersistent.v" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>MQReLU.v</h3>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>MQReLU.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
                         <p>Modular Quantized ReLU activation function.</p>
                         <a href="proofs/coq/MQReLU.v" class="proof-link">View Source</a>
                     </div>
-                </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>IntegerSoftmax.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Integer-only softmax implementation.</p>
+                        <a href="proofs/coq/IntegerSoftmax.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>CyclotomicPhase.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Cyclotomic phase computation.</p>
+                        <a href="proofs/coq/CyclotomicPhase.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>CRTShadowEntropy.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>CRT shadow entropy bounds.</p>
+                        <a href="proofs/coq/CRTShadowEntropy.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>PadeEngine.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Pade approximation engine.</p>
+                        <a href="proofs/coq/PadeEngine.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>MobiusInt.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Mobius function integration.</p>
+                        <a href="proofs/coq/MobiusInt.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>ExactCoefficient.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Exact coefficient extraction.</p>
+                        <a href="proofs/coq/ExactCoefficient.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>StateCompression.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Quantum state compression.</p>
+                        <a href="proofs/coq/StateCompression.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>EncryptedQuantum.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Encrypted quantum operations.</p>
+                        <a href="proofs/coq/EncryptedQuantum.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>SideChannelResistance.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Side-channel resistance proofs.</p>
+                        <a href="proofs/coq/SideChannelResistance.v" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="coq">
+                        <div class="proof-card-header">
+                            <h3>K_Elimination.v</h3>
+                            <span class="proof-type-badge coq">Coq</span>
+                        </div>
+                        <p>Alternative K-Elimination formalization.</p>
+                        <a href="proofs/coq/K_Elimination.v" class="proof-link">View Source</a>
+                    </div>
 
-                <details class="proof-details">
-                    <summary>All Coq Proofs</summary>
-                    <ul class="proof-list">
-                        <li><a href="proofs/coq/03_QMNF_Coq_Proofs.v">03_QMNF_Coq_Proofs.v</a> - Core QMNF foundations</li>
-                        <li><a href="proofs/coq/K_Elimination.v">K_Elimination.v</a> - Alternative formalization</li>
-                        <li><a href="proofs/coq/IntegerSoftmax.v">IntegerSoftmax.v</a> - Integer-only softmax</li>
-                        <li><a href="proofs/coq/CyclotomicPhase.v">CyclotomicPhase.v</a> - Cyclotomic computations</li>
-                        <li><a href="proofs/coq/CRTShadowEntropy.v">CRTShadowEntropy.v</a> - Shadow entropy bounds</li>
-                        <li><a href="proofs/coq/PadeEngine.v">PadeEngine.v</a> - Pade approximation</li>
-                        <li><a href="proofs/coq/MobiusInt.v">MobiusInt.v</a> - Mobius integration</li>
-                        <li><a href="proofs/coq/ExactCoefficient.v">ExactCoefficient.v</a> - Coefficient extraction</li>
-                        <li><a href="proofs/coq/StateCompression.v">StateCompression.v</a> - State compression</li>
-                        <li><a href="proofs/coq/EncryptedQuantum.v">EncryptedQuantum.v</a> - Encrypted operations</li>
-                        <li><a href="proofs/coq/SideChannelResistance.v">SideChannelResistance.v</a> - Side-channel proofs</li>
-                        <li><a href="proofs/coq/ToricGrover.v">ToricGrover.v</a> - Toric variety search</li>
-                    </ul>
-                </details>
-            </div>
-        </section>
-
-        <section class="section" id="lean4">
-            <div class="container">
-                <h2 class="section-heading">Lean 4 Proofs</h2>
-                <p class="section-description">Formalized mathematical foundations using Mathlib. Comprehensive coverage of QMNF innovations.</p>
-
-                <div class="proof-grid">
-                    <div class="proof-card highlight">
-                        <h3>02_QMNF_Lean4_Proofs.lean</h3>
+                    <!-- Lean4 Proofs -->
+                    <div class="proof-card highlight" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>02_QMNF_Lean4_Proofs.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
                         <p>Core QMNF mathematical foundations and CRT arithmetic.</p>
                         <a href="proofs/lean4/02_QMNF_Lean4_Proofs.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card highlight">
-                        <h3>05_KElimination.lean</h3>
+                    <div class="proof-card highlight" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>05_KElimination.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
                         <p>K-Elimination correctness and complexity proofs.</p>
                         <a href="proofs/lean4/05_KElimination.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>06_CRTBigInt.lean</h3>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>06_CRTBigInt.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
                         <p>CRT BigInteger operations and overflow handling.</p>
                         <a href="proofs/lean4/06_CRTBigInt.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>14_BinaryGCD.lean</h3>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>07_ShadowEntropy.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Shadow entropy bounds proof.</p>
+                        <a href="proofs/lean4/07_ShadowEntropy.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>08_PadeEngine.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Pade approximation correctness.</p>
+                        <a href="proofs/lean4/08_PadeEngine.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>09_MobiusInt.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Mobius integration proofs.</p>
+                        <a href="proofs/lean4/09_MobiusInt.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>10_PersistentMontgomery.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Montgomery multiplication correctness.</p>
+                        <a href="proofs/lean4/10_PersistentMontgomery.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>11_IntegerNN.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Integer neural network foundations.</p>
+                        <a href="proofs/lean4/11_IntegerNN.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>12_CyclotomicPhase.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Cyclotomic phase computations.</p>
+                        <a href="proofs/lean4/12_CyclotomicPhase.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>13_MQReLU.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Modular quantized ReLU proofs.</p>
+                        <a href="proofs/lean4/13_MQReLU.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>14_BinaryGCD.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
                         <p>Binary GCD algorithm correctness.</p>
                         <a href="proofs/lean4/14_BinaryGCD.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>23_ClockworkPrime.lean</h3>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>15_PLMGRails.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>PLMG rails system proofs.</p>
+                        <a href="proofs/lean4/15_PLMGRails.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>16_DCBigIntHelix.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>DC BigInt helix structure.</p>
+                        <a href="proofs/lean4/16_DCBigIntHelix.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>17_GroverSwarm.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Grover swarm optimization.</p>
+                        <a href="proofs/lean4/17_GroverSwarm.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>18_WASSAN.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>WASSAN security proofs.</p>
+                        <a href="proofs/lean4/18_WASSAN.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>19_TimeCrystal.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Time crystal computations.</p>
+                        <a href="proofs/lean4/19_TimeCrystal.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>20_GSO.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Generalized Sigma Orbit proofs.</p>
+                        <a href="proofs/lean4/20_GSO.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>21_MANA.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>MANA FHE framework proofs.</p>
+                        <a href="proofs/lean4/21_MANA.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>22_RayRam.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Ray-RAM architecture proofs.</p>
+                        <a href="proofs/lean4/22_RayRam.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>23_ClockworkPrime.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
                         <p>Clockwork prime generation algorithm.</p>
                         <a href="proofs/lean4/23_ClockworkPrime.lean" class="proof-link">View Source</a>
                     </div>
-                    <div class="proof-card">
-                        <h3>24_BootstrapFreeFHE.lean</h3>
+                    <div class="proof-card highlight" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>24_BootstrapFreeFHE.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
                         <p>Bootstrap-free FHE correctness proof.</p>
                         <a href="proofs/lean4/24_BootstrapFreeFHE.lean" class="proof-link">View Source</a>
                     </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>25_RealTimeFHE.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>Real-time FHE operations.</p>
+                        <a href="proofs/lean4/25_RealTimeFHE.lean" class="proof-link">View Source</a>
+                    </div>
+                    <div class="proof-card" data-type="lean4">
+                        <div class="proof-card-header">
+                            <h3>KElimination.lean</h3>
+                            <span class="proof-type-badge lean4">Lean4</span>
+                        </div>
+                        <p>K-Elimination module.</p>
+                        <a href="proofs/lean4/KElimination.lean" class="proof-link">View Source</a>
+                    </div>
                 </div>
 
-                <details class="proof-details">
-                    <summary>All Lean4 Proofs</summary>
-                    <ul class="proof-list">
-                        <li><a href="proofs/lean4/07_ShadowEntropy.lean">07_ShadowEntropy.lean</a> - Shadow entropy</li>
-                        <li><a href="proofs/lean4/08_PadeEngine.lean">08_PadeEngine.lean</a> - Pade approximation</li>
-                        <li><a href="proofs/lean4/09_MobiusInt.lean">09_MobiusInt.lean</a> - Mobius integration</li>
-                        <li><a href="proofs/lean4/10_PersistentMontgomery.lean">10_PersistentMontgomery.lean</a> - Montgomery multiplication</li>
-                        <li><a href="proofs/lean4/11_IntegerNN.lean">11_IntegerNN.lean</a> - Integer neural networks</li>
-                        <li><a href="proofs/lean4/12_CyclotomicPhase.lean">12_CyclotomicPhase.lean</a> - Cyclotomic phase</li>
-                        <li><a href="proofs/lean4/13_MQReLU.lean">13_MQReLU.lean</a> - Modular ReLU</li>
-                        <li><a href="proofs/lean4/15_PLMGRails.lean">15_PLMGRails.lean</a> - PLMG rails</li>
-                        <li><a href="proofs/lean4/16_DCBigIntHelix.lean">16_DCBigIntHelix.lean</a> - DC BigInt helix</li>
-                        <li><a href="proofs/lean4/17_GroverSwarm.lean">17_GroverSwarm.lean</a> - Grover swarm</li>
-                        <li><a href="proofs/lean4/18_WASSAN.lean">18_WASSAN.lean</a> - WASSAN security</li>
-                        <li><a href="proofs/lean4/19_TimeCrystal.lean">19_TimeCrystal.lean</a> - Time crystal</li>
-                        <li><a href="proofs/lean4/20_GSO.lean">20_GSO.lean</a> - Generalized Sigma Orbit</li>
-                        <li><a href="proofs/lean4/21_MANA.lean">21_MANA.lean</a> - MANA framework</li>
-                        <li><a href="proofs/lean4/22_RayRam.lean">22_RayRam.lean</a> - Ray-RAM</li>
-                        <li><a href="proofs/lean4/25_RealTimeFHE.lean">25_RealTimeFHE.lean</a> - Real-time FHE</li>
-                        <li><a href="proofs/lean4/KElimination.lean">KElimination.lean</a> - K-Elimination module</li>
-                    </ul>
-                </details>
+                <div class="no-results" id="no-results">
+                    No proofs found for this filter.
+                </div>
             </div>
         </section>
 
         <section class="section alt-bg" id="verification">
             <div class="container">
-                <h2 class="section-heading">Verification Status</h2>
+                <h2 class="section-title">Verification Status</h2>
 
-                <div class="verification-summary">
+                <div class="verification-grid">
                     <div class="verification-card success">
                         <h3>Coq Proofs</h3>
                         <p class="status">Fully Verified</p>
@@ -306,8 +877,8 @@
             <div class="container">
                 <h2>Download All Proofs</h2>
                 <p>Clone the complete proof repository for verification:</p>
-                <pre class="code-block"><code>git clone https://github.com/DeuxAxios/hackfate.git
-cd hackfate/proofs</code></pre>
+                <div class="code-block"><code>git clone https://github.com/DeuxAxios/hackfate.git
+cd hackfate/proofs</code></div>
                 <div class="cta-buttons">
                     <a href="https://github.com/DeuxAxios/hackfate" class="btn btn-primary">View on GitHub</a>
                     <a href="proofs/README.md" class="btn btn-secondary">Read Documentation</a>
@@ -334,207 +905,46 @@ cd hackfate/proofs</code></pre>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Proof filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const proofCards = document.querySelectorAll('.proof-card');
+            const noResults = document.getElementById('no-results');
 
-    <style>
-        .proof-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .stat-card {
-            background: var(--card-bg, rgba(255,255,255,0.05));
-            border: 1px solid var(--border-color, rgba(255,255,255,0.1));
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        .stat-number {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent, #00ff88);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .stat-label {
-            display: block;
-            margin-top: 0.5rem;
-            color: var(--text-secondary, rgba(255,255,255,0.7));
-            font-size: 0.9rem;
-        }
-        .proof-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .proof-card {
-            background: var(--card-bg, rgba(255,255,255,0.05));
-            border: 1px solid var(--border-color, rgba(255,255,255,0.1));
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-        .proof-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent, #00ff88);
-        }
-        .proof-card.highlight {
-            border-color: var(--accent, #00ff88);
-            background: rgba(0, 255, 136, 0.05);
-        }
-        .proof-card h3 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary, #fff);
-        }
-        .proof-card p {
-            color: var(--text-secondary, rgba(255,255,255,0.7));
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-        .proof-link {
-            color: var(--accent, #00ff88);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .proof-link:hover {
-            text-decoration: underline;
-        }
-        .proof-details {
-            margin-top: 1.5rem;
-            background: var(--card-bg, rgba(255,255,255,0.03));
-            border-radius: 8px;
-            padding: 1rem;
-        }
-        .proof-details summary {
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--accent, #00ff88);
-        }
-        .proof-list {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0 0 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 0.5rem;
-        }
-        .proof-list li a {
-            color: var(--text-secondary, rgba(255,255,255,0.7));
-            text-decoration: none;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-        }
-        .proof-list li a:hover {
-            color: var(--accent, #00ff88);
-        }
-        .verification-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .verification-card {
-            background: var(--card-bg, rgba(255,255,255,0.05));
-            border-radius: 12px;
-            padding: 1.5rem;
-            border-left: 4px solid;
-        }
-        .verification-card.success {
-            border-left-color: #00ff88;
-        }
-        .verification-card.info {
-            border-left-color: #00aaff;
-        }
-        .verification-card h3 {
-            margin-bottom: 0.5rem;
-        }
-        .verification-card .status {
-            color: var(--accent, #00ff88);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        .verification-card.info .status {
-            color: #00aaff;
-        }
-        .verification-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .verification-card li {
-            color: var(--text-secondary, rgba(255,255,255,0.7));
-            font-size: 0.9rem;
-            padding: 0.25rem 0;
-        }
-        .key-results {
-            background: var(--card-bg, rgba(255,255,255,0.05));
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-        .key-results h3 {
-            margin-bottom: 1rem;
-        }
-        .key-results ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .key-results li {
-            padding: 0.5rem 0;
-            color: var(--text-secondary, rgba(255,255,255,0.8));
-        }
-        .key-results strong {
-            color: var(--accent, #00ff88);
-        }
-        .cta-section {
-            text-align: center;
-        }
-        .code-block {
-            background: rgba(0,0,0,0.3);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem auto;
-            max-width: 500px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s;
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-        .btn-primary {
-            background: var(--accent, #00ff88);
-            color: #000;
-        }
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--accent, #00ff88);
-            color: var(--accent, #00ff88);
-        }
-        .alt-bg {
-            background: rgba(255,255,255,0.02);
-        }
-    </style>
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+
+                    // Update active state
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-selected', 'false');
+                    });
+                    this.classList.add('active');
+                    this.setAttribute('aria-selected', 'true');
+
+                    // Filter cards
+                    let visibleCount = 0;
+                    proofCards.forEach(card => {
+                        const type = card.dataset.type;
+                        if (filter === 'all' || type === filter) {
+                            card.classList.remove('hidden');
+                            visibleCount++;
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+
+                    // Show/hide no results message
+                    if (visibleCount === 0) {
+                        noResults.classList.add('visible');
+                    } else {
+                        noResults.classList.remove('visible');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

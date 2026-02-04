@@ -36,7 +36,7 @@
                 <a href="technology.html">Technology</a>
                 <a href="innovations.html">Innovations</a>
                 <a href="benchmarks.html">Benchmarks</a>
-                <a href="walkthrough.html">Walkthrough</a>
+                <a href="proofs.html">Proofs</a>
                 <a href="about.html">About</a>
                 <a href="contact.html" class="nav-cta">Contact</a>
             </div>
@@ -51,7 +51,7 @@
     <section class="page-hero">
         <div class="container">
             <h1>NINE65 V5 Benchmarks</h1>
-            <p>Production-grade FHE with CSPRNG key generation, K-Elimination exact arithmetic, and GSO noise bounding. 460+ passing tests.</p>
+            <p>Production-grade FHE with CSPRNG key generation, K-Elimination exact arithmetic, and GSO noise bounding. 465/465 audited tests passed (Jan 27, 2026).</p>
         </div>
     </section>
 
@@ -108,7 +108,176 @@
                         </table>
                     </div>
 
-                    <p><strong>Total: 460+ tests passed</strong> | 0 failures | 4 ignored (deprecated APIs)</p>
+                    <p><strong>Total: 465 tests passed</strong> | 0 failures | 44 ignored (documentation tests)</p>
+                </article>
+
+                <!-- Independent Audit Snapshot -->
+                <article class="walkthrough-section" id="audit-2026">
+                    <h2>Independent Audit Snapshot (2026-01-27)</h2>
+                    <p>Summary highlights from the NINE65 FHE v5 technical audit and claims verification.</p>
+
+                    <div class="component-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Audit Metric</th>
+                                    <th>Result</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Build Time</strong></td>
+                                    <td>17.31s</td>
+                                    <td>Release build on x86_64</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Test Suite</strong></td>
+                                    <td>465/465</td>
+                                    <td>All functional tests passed</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Parallel Encrypt (10x)</strong></td>
+                                    <td>28.10ms</td>
+                                    <td>~4.9x speedup vs sequential</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Batch Decode (64)</strong></td>
+                                    <td>1.378µs</td>
+                                    <td>46.45 Melem/s throughput</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="component-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Claim</th>
+                                    <th>Status</th>
+                                    <th>Audit Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bootstrap-free FHE</td>
+                                    <td><span class="status-badge">Confirmed</span></td>
+                                    <td>All homomorphic tests completed without bootstrapping</td>
+                                </tr>
+                                <tr>
+                                    <td>Open Benchmarks</td>
+                                    <td><span class="status-badge">Confirmed</span></td>
+                                    <td>Benchmarks reproducible with open harness</td>
+                                </tr>
+                                <tr>
+                                    <td>Formal verification (Coq/Lean4)</td>
+                                    <td><span class="status-badge-warn">Partially Verified</span></td>
+                                    <td>Proof claims noted; independent audit pending</td>
+                                </tr>
+                                <tr>
+                                    <td>400x speedup claim</td>
+                                    <td><span class="status-badge-warn">Plausible</span></td>
+                                    <td>Requires comparative benchmarking</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p><strong>Operations testing:</strong> Encryption/decryption, homomorphic add/mul, and dual-track RNS operations all passed across multiple configs.</p>
+                    <p><strong>Audit caveats:</strong> The independent audit flagged floating-point usage in modeling and parameterization components (not in the core cryptographic data path) and noted a minor subtraction issue in the demo binary. These findings are tracked for remediation.</p>
+                </article>
+
+                <!-- Audit Benchmarks -->
+                <article class="walkthrough-section" id="audit-benchmarks">
+                    <h2>Audit Benchmarks (Batch + Parallel)</h2>
+                    <p>Performance from the independent audit run (Ubuntu 22.04, Rust 1.93.0, release build).</p>
+
+                    <div class="component-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Batch Size</th>
+                                    <th>Encode Time (µs)</th>
+                                    <th>Encode Throughput (Melem/s)</th>
+                                    <th>Decode Time (µs)</th>
+                                    <th>Decode Throughput (Melem/s)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>64</td>
+                                    <td>15.022</td>
+                                    <td>4.26</td>
+                                    <td>1.378</td>
+                                    <td>46.45</td>
+                                </tr>
+                                <tr>
+                                    <td>256</td>
+                                    <td>15.525</td>
+                                    <td>16.49</td>
+                                    <td>6.312</td>
+                                    <td>40.56</td>
+                                </tr>
+                                <tr>
+                                    <td>512</td>
+                                    <td>18.463</td>
+                                    <td>27.73</td>
+                                    <td>10.531</td>
+                                    <td>48.62</td>
+                                </tr>
+                                <tr>
+                                    <td>1024</td>
+                                    <td>23.674</td>
+                                    <td>43.26</td>
+                                    <td>21.426</td>
+                                    <td>47.79</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="component-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mode</th>
+                                    <th>10 Encryptions (ms)</th>
+                                    <th>Throughput (elem/s)</th>
+                                    <th>Speedup</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Sequential</td>
+                                    <td>137.64</td>
+                                    <td>72.65</td>
+                                    <td>1.0x</td>
+                                </tr>
+                                <tr>
+                                    <td>Parallel</td>
+                                    <td>28.101</td>
+                                    <td>355.86</td>
+                                    <td>4.9x</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <!-- Downloads -->
+                <article class="walkthrough-section" id="audit-downloads">
+                    <h2>Audit & Verification Downloads</h2>
+                    <p>Public evidence pack (audit, benchmarks, and claims verification).</p>
+                    <ul class="download-list">
+                        <li><a href="reports/hackfate-claims-verification.md">HackFate Website Claims Verification (MD)</a></li>
+                        <li><a href="reports/hackfate-claims-verification.docx">HackFate Website Claims Verification (DOCX)</a></li>
+                        <li><a href="reports/nine65-v5-technical-audit.md">Comprehensive Technical Audit & Independent Verification (MD)</a></li>
+                        <li><a href="reports/nine65-v5-benchmark-results.md">Benchmark Results (MD)</a></li>
+                        <li><a href="reports/nine65-v5-operations-testing.md">Operations Testing Results (MD)</a></li>
+                        <li><a href="reports/nine65-v5-test-results-summary.md">Test Results Summary (MD)</a></li>
+                        <li><a href="reports/test-nine65-fhe.pdf">Test NINE65 FHE (PDF)</a></li>
+                    </ul>
                 </article>
 
                 <!-- Core Operation Benchmarks -->
