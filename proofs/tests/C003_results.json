@@ -11,36 +11,35 @@
         {
           "test": "frequency",
           "n_bits": 1000000,
-          "ones_count": 500235,
-          "zeros_count": 499765,
-          "proportion": 0.500235,
-          "chi_squared": 0.2209,
+          "ones_count": 497926,
+          "zeros_count": 502074,
+          "proportion": 0.497926,
+          "chi_squared": 17.205904,
           "critical_value": 6.635,
-          "pass": true
+          "pass": false
         },
         {
           "test": "block_frequency",
           "n_bits": 1000000,
           "block_size": 128,
           "n_blocks": 7812,
-          "chi_squared": 7925.625,
+          "chi_squared": 7997.34375,
           "critical_value": 8103.2406798508755,
           "pass": true
         },
         {
           "test": "runs",
-          "n_bits": 1000000,
-          "runs_count": 500315,
-          "expected_runs": 500000.88955,
-          "z_statistic": 0.6282216669961039,
-          "pass": true
+          "error": "frequency_pretest_failed",
+          "pi": 0.497926,
+          "tau": 0.002,
+          "pass": false
         },
         {
           "test": "longest_run",
           "n_bits": 1000000,
           "block_size": 10000,
           "n_blocks": 100,
-          "chi_squared": 4.089983600737685,
+          "chi_squared": 4.220699208712524,
           "critical_value": 16.812,
           "pass": true
         },
@@ -49,10 +48,10 @@
           "n_bits": 1000000,
           "matrix_size": "32x32",
           "n_matrices": 976,
-          "full_rank": 281,
-          "rank_M_minus_1": 573,
-          "other": 122,
-          "chi_squared": 0.6951688501204734,
+          "full_rank": 277,
+          "rank_M_minus_1": 570,
+          "other": 129,
+          "chi_squared": 0.16856167778878423,
           "critical_value": 9.21,
           "pass": true
         },
@@ -60,9 +59,9 @@
           "test": "dft_spectral",
           "n_bits": 10000,
           "threshold": 173.08183826022852,
-          "peaks_below_threshold": 4770,
+          "peaks_below_threshold": 4741,
           "expected_below": 4750.0,
-          "d_statistic": 1.835325870964494,
+          "d_statistic": -0.8258966419340223,
           "pass": true
         },
         {
@@ -73,9 +72,9 @@
           "n_blocks": 968,
           "block_size": 1032,
           "mean": 2.0,
-          "chi_squared": 867.2448516169446,
+          "chi_squared": 1282.3934225980738,
           "critical_value": 1070.52,
-          "pass": true
+          "pass": false
         },
         {
           "test": "overlapping_template",
@@ -84,14 +83,14 @@
           "n_blocks": 968,
           "block_size": 1032,
           "bin_counts": [
-            356,
+            346,
             167,
-            136,
-            96,
-            78,
-            135
+            153,
+            106,
+            71,
+            125
           ],
-          "chi_squared": 2.379444044617359,
+          "chi_squared": 5.122379830442671,
           "critical_value": 15.086,
           "pass": true
         },
@@ -101,9 +100,9 @@
           "L": 7,
           "Q": 1280,
           "K": 141577,
-          "f_n": 6.196526767047336,
+          "f_n": 6.19176653608382,
           "expected_mean": 6.1962507,
-          "z_statistic": 0.04158697772860233,
+          "z_statistic": -0.6754983135910476,
           "pass": true
         },
         {
@@ -112,15 +111,15 @@
           "block_size": 500,
           "n_blocks": 2000,
           "bin_counts": [
-            26,
-            69,
-            224,
-            1031,
-            497,
-            117,
-            36
+            23,
+            56,
+            266,
+            1026,
+            475,
+            112,
+            42
           ],
-          "chi_squared": 6.9224593691884415,
+          "chi_squared": 5.205864868838765,
           "critical_value": 16.812,
           "pass": true
         },
@@ -128,45 +127,197 @@
           "test": "serial",
           "n_bits": 1000000,
           "pattern_length": 3,
-          "delta_psi": 2.8637040000176057,
-          "delta2_psi": 2.248420000076294,
+          "delta_psi": 57.01912000006996,
+          "delta2_psi": 29.496272000134923,
           "critical_value_1": 10.590235200658624,
           "critical_value_2": 6.66,
-          "pass": true
+          "pass": false
         },
         {
           "test": "approximate_entropy",
           "n_bits": 1000000,
           "block_length": 4,
-          "apen": 0.693140355359966,
-          "chi_squared": 13.650399958597959,
+          "apen": 0.6930816797820194,
+          "chi_squared": 131.001555851773,
           "critical_value": 29.180470401317248,
-          "pass": true
+          "pass": false
         },
         {
           "test": "cumulative_sums",
           "n_bits": 1000000,
-          "max_excursion_forward": 1197,
-          "max_excursion_backward": 797,
+          "max_excursion_forward": 4214,
+          "max_excursion_backward": 4228,
           "critical_value": 2576.0,
-          "pass_forward": true,
-          "pass_backward": true,
-          "pass": true
+          "pass_forward": false,
+          "pass_backward": false,
+          "pass": false
         },
         {
           "test": "random_excursions",
-          "status": "not_applicable",
-          "J": 450,
+          "n_bits": 1000000,
+          "n_cycles": 791,
+          "state_results": {
+            "-4": {
+              "chi_squared": 4.690750174375284,
+              "critical_value": 15.086,
+              "pass": true
+            },
+            "-3": {
+              "chi_squared": 2.7846362007566507,
+              "critical_value": 15.086,
+              "pass": true
+            },
+            "-2": {
+              "chi_squared": 2.293507728060445,
+              "critical_value": 15.086,
+              "pass": true
+            },
+            "-1": {
+              "chi_squared": 13.223470585756425,
+              "critical_value": 15.086,
+              "pass": true
+            },
+            "1": {
+              "chi_squared": 7.6855277026808,
+              "critical_value": 15.086,
+              "pass": true
+            },
+            "2": {
+              "chi_squared": 4.531210689826015,
+              "critical_value": 15.086,
+              "pass": true
+            },
+            "3": {
+              "chi_squared": 4.098656288758336,
+              "critical_value": 15.086,
+              "pass": true
+            },
+            "4": {
+              "chi_squared": 6.756185018074473,
+              "critical_value": 15.086,
+              "pass": true
+            }
+          },
           "pass": true
         },
         {
           "test": "random_excursions_variant",
-          "status": "not_applicable",
-          "J": 450,
+          "n_bits": 1000000,
+          "n_cycles": 791,
+          "state_results": {
+            "-9": {
+              "visits": 776,
+              "expected": 791,
+              "z_statistic": -0.091466815456421,
+              "pass": true
+            },
+            "-8": {
+              "visits": 757,
+              "expected": 791,
+              "z_statistic": -0.22071408455689176,
+              "pass": true
+            },
+            "-7": {
+              "visits": 720,
+              "expected": 791,
+              "z_statistic": -0.4950891776093072,
+              "pass": true
+            },
+            "-6": {
+              "visits": 709,
+              "expected": 791,
+              "z_statistic": -0.621604672354748,
+              "pass": true
+            },
+            "-5": {
+              "visits": 732,
+              "expected": 791,
+              "z_statistic": -0.4944558475683646,
+              "pass": true
+            },
+            "-4": {
+              "visits": 771,
+              "expected": 791,
+              "z_statistic": -0.19005431578221124,
+              "pass": true
+            },
+            "-3": {
+              "visits": 789,
+              "expected": 791,
+              "z_statistic": -0.022487529905799403,
+              "pass": true
+            },
+            "-2": {
+              "visits": 741,
+              "expected": 791,
+              "z_statistic": -0.7257819068541861,
+              "pass": true
+            },
+            "-1": {
+              "visits": 783,
+              "expected": 791,
+              "z_statistic": -0.20113458206170762,
+              "pass": true
+            },
+            "1": {
+              "visits": 727,
+              "expected": 791,
+              "z_statistic": -1.609076656493661,
+              "pass": true
+            },
+            "2": {
+              "visits": 720,
+              "expected": 791,
+              "z_statistic": -1.0306103077329443,
+              "pass": true
+            },
+            "3": {
+              "visits": 733,
+              "expected": 791,
+              "z_statistic": -0.6521383672681826,
+              "pass": true
+            },
+            "4": {
+              "visits": 775,
+              "expected": 791,
+              "z_statistic": -0.152043452625769,
+              "pass": true
+            },
+            "5": {
+              "visits": 796,
+              "expected": 791,
+              "z_statistic": 0.04190303792952242,
+              "pass": true
+            },
+            "6": {
+              "visits": 827,
+              "expected": 791,
+              "z_statistic": 0.272899612253304,
+              "pass": true
+            },
+            "7": {
+              "visits": 826,
+              "expected": 791,
+              "z_statistic": 0.2440580453003627,
+              "pass": true
+            },
+            "8": {
+              "visits": 768,
+              "expected": 791,
+              "z_statistic": -0.149306586612015,
+              "pass": true
+            },
+            "9": {
+              "visits": 752,
+              "expected": 791,
+              "z_statistic": -0.2378137201866946,
+              "pass": true
+            }
+          },
           "pass": true
         }
       ],
-      "overall_pass": true
+      "overall_pass": false
     },
     {
       "node_id": "C003",
@@ -177,10 +328,10 @@
         {
           "test": "frequency",
           "n_bits": 1000000,
-          "ones_count": 499807,
-          "zeros_count": 500193,
-          "proportion": 0.499807,
-          "chi_squared": 0.148996,
+          "ones_count": 500104,
+          "zeros_count": 499896,
+          "proportion": 0.500104,
+          "chi_squared": 0.043264,
           "critical_value": 6.635,
           "pass": true
         },
@@ -189,16 +340,16 @@
           "n_bits": 1000000,
           "block_size": 128,
           "n_blocks": 7812,
-          "chi_squared": 7957.25,
+          "chi_squared": 7809.96875,
           "critical_value": 8103.2406798508755,
           "pass": true
         },
         {
           "test": "runs",
           "n_bits": 1000000,
-          "runs_count": 499262,
-          "expected_runs": 500000.925502,
-          "z_statistic": -1.4778527020476366,
+          "runs_count": 500400,
+          "expected_runs": 500000.978368,
+          "z_statistic": 0.7980440965710535,
           "pass": true
         },
         {
@@ -206,7 +357,7 @@
           "n_bits": 1000000,
           "block_size": 10000,
           "n_blocks": 100,
-          "chi_squared": 5.512706335231149,
+          "chi_squared": 3.868959849141941,
           "critical_value": 16.812,
           "pass": true
         },
@@ -215,10 +366,10 @@
           "n_bits": 1000000,
           "matrix_size": "32x32",
           "n_matrices": 976,
-          "full_rank": 294,
-          "rank_M_minus_1": 552,
-          "other": 130,
-          "chi_squared": 0.7676852824481366,
+          "full_rank": 317,
+          "rank_M_minus_1": 527,
+          "other": 132,
+          "chi_squared": 6.792539976810377,
           "critical_value": 9.21,
           "pass": true
         },
@@ -226,9 +377,9 @@
           "test": "dft_spectral",
           "n_bits": 10000,
           "threshold": 173.08183826022852,
-          "peaks_below_threshold": 4742,
+          "peaks_below_threshold": 4748,
           "expected_below": 4750.0,
-          "d_statistic": -0.7341303483857976,
+          "d_statistic": -0.1835325870964494,
           "pass": true
         },
         {
@@ -239,9 +390,9 @@
           "n_blocks": 968,
           "block_size": 1032,
           "mean": 2.0,
-          "chi_squared": 1039.6674966721478,
+          "chi_squared": 1094.0627358859917,
           "critical_value": 1070.52,
-          "pass": true
+          "pass": false
         },
         {
           "test": "overlapping_template",
@@ -250,14 +401,14 @@
           "n_blocks": 968,
           "block_size": 1032,
           "bin_counts": [
-            331,
-            171,
-            149,
-            85,
-            71,
-            161
+            361,
+            179,
+            138,
+            80,
+            75,
+            135
           ],
-          "chi_squared": 9.725135269449495,
+          "chi_squared": 4.057797244067181,
           "critical_value": 15.086,
           "pass": true
         },
@@ -267,9 +418,9 @@
           "L": 7,
           "Q": 1280,
           "K": 141577,
-          "f_n": 6.198565810330481,
+          "f_n": 6.192217328882728,
           "expected_mean": 6.1962507,
-          "z_statistic": 0.34875021369634013,
+          "z_statistic": -0.6075904981915937,
           "pass": true
         },
         {
@@ -278,15 +429,15 @@
           "block_size": 500,
           "n_blocks": 2000,
           "bin_counts": [
-            28,
+            19,
             66,
-            250,
-            998,
-            481,
-            138,
-            39
+            208,
+            1037,
+            509,
+            114,
+            47
           ],
-          "chi_squared": 4.909379887879109,
+          "chi_squared": 10.595293791315616,
           "critical_value": 16.812,
           "pass": true
         },
@@ -294,8 +445,8 @@
           "test": "serial",
           "n_bits": 1000000,
           "pattern_length": 3,
-          "delta_psi": 3.234311999985948,
-          "delta2_psi": 0.9067400000058115,
+          "delta_psi": 6.374783999985084,
+          "delta2_psi": 5.691519999993034,
           "critical_value_1": 10.590235200658624,
           "critical_value_2": 6.66,
           "pass": true
@@ -304,16 +455,16 @@
           "test": "approximate_entropy",
           "n_bits": 1000000,
           "block_length": 4,
-          "apen": 0.69313318143461,
-          "chi_squared": 27.998250670568936,
+          "apen": 0.6931410138430518,
+          "chi_squared": 12.333433786926307,
           "critical_value": 29.180470401317248,
           "pass": true
         },
         {
           "test": "cumulative_sums",
           "n_bits": 1000000,
-          "max_excursion_forward": 606,
-          "max_excursion_backward": 992,
+          "max_excursion_forward": 619,
+          "max_excursion_backward": 827,
           "critical_value": 2576.0,
           "pass_forward": true,
           "pass_backward": true,
@@ -322,45 +473,45 @@
         {
           "test": "random_excursions",
           "n_bits": 1000000,
-          "n_cycles": 870,
+          "n_cycles": 1610,
           "state_results": {
             "-4": {
-              "chi_squared": 8.908541882628915,
+              "chi_squared": 8.902651583991542,
               "critical_value": 15.086,
               "pass": true
             },
             "-3": {
-              "chi_squared": 5.862033455351251,
+              "chi_squared": 9.570852201990144,
               "critical_value": 15.086,
               "pass": true
             },
             "-2": {
-              "chi_squared": 5.6218863966702415,
+              "chi_squared": 2.973131126954648,
               "critical_value": 15.086,
               "pass": true
             },
             "-1": {
-              "chi_squared": 6.477515178308284,
+              "chi_squared": 3.6543527631788506,
               "critical_value": 15.086,
               "pass": true
             },
             "1": {
-              "chi_squared": 5.905455054524022,
+              "chi_squared": 3.6968754578754583,
               "critical_value": 15.086,
               "pass": true
             },
             "2": {
-              "chi_squared": 3.8177263431057047,
+              "chi_squared": 0.7399345892006336,
               "critical_value": 15.086,
               "pass": true
             },
             "3": {
-              "chi_squared": 5.420071758889895,
+              "chi_squared": 3.31923563872487,
               "critical_value": 15.086,
               "pass": true
             },
             "4": {
-              "chi_squared": 2.525415169781634,
+              "chi_squared": 0.7799103340728545,
               "critical_value": 15.086,
               "pass": true
             }
@@ -370,125 +521,125 @@
         {
           "test": "random_excursions_variant",
           "n_bits": 1000000,
-          "n_cycles": 870,
+          "n_cycles": 1610,
           "state_results": {
             "-9": {
-              "visits": 889,
-              "expected": 870,
-              "z_statistic": 0.11047258493235432,
+              "visits": 1813,
+              "expected": 1610,
+              "z_statistic": 0.8676481425282582,
               "pass": true
             },
             "-8": {
-              "visits": 917,
-              "expected": 870,
-              "z_statistic": 0.2909226964773813,
+              "visits": 1801,
+              "expected": 1610,
+              "z_statistic": 0.869080092419184,
               "pass": true
             },
             "-7": {
-              "visits": 892,
-              "expected": 870,
-              "z_statistic": 0.14627711307920632,
+              "visits": 1788,
+              "expected": 1610,
+              "z_statistic": 0.8700022790772549,
               "pass": true
             },
             "-6": {
-              "visits": 912,
-              "expected": 870,
-              "z_statistic": 0.3035836118837588,
+              "visits": 1776,
+              "expected": 1610,
+              "z_statistic": 0.8820309196371375,
               "pass": true
             },
             "-5": {
-              "visits": 973,
-              "expected": 870,
-              "z_statistic": 0.8230786675499094,
+              "visits": 1777,
+              "expected": 1610,
+              "z_statistic": 0.9809960994499193,
               "pass": true
             },
             "-4": {
-              "visits": 983,
-              "expected": 870,
-              "z_statistic": 1.0238935315135091,
+              "visits": 1816,
+              "expected": 1610,
+              "z_statistic": 1.3721142178393189,
               "pass": true
             },
             "-3": {
-              "visits": 954,
-              "expected": 870,
-              "z_statistic": 0.9005745292637477,
+              "visits": 1759,
+              "expected": 1610,
+              "z_statistic": 1.17428450529626,
               "pass": true
             },
             "-2": {
-              "visits": 975,
-              "expected": 870,
-              "z_statistic": 1.4532958974404495,
+              "visits": 1648,
+              "expected": 1610,
+              "z_statistic": 0.38662954058932786,
               "pass": true
             },
             "-1": {
-              "visits": 952,
-              "expected": 870,
-              "z_statistic": 1.965799536090075,
+              "visits": 1605,
+              "expected": 1610,
+              "z_statistic": -0.08811342210628018,
               "pass": true
             },
             "1": {
-              "visits": 888,
-              "expected": 870,
-              "z_statistic": 0.43151697133684574,
+              "visits": 1624,
+              "expected": 1610,
+              "z_statistic": 0.24671758189758447,
               "pass": true
             },
             "2": {
-              "visits": 940,
-              "expected": 870,
-              "z_statistic": 0.9688639316269664,
+              "visits": 1610,
+              "expected": 1610,
+              "z_statistic": 0.0,
               "pass": true
             },
             "3": {
-              "visits": 937,
-              "expected": 870,
-              "z_statistic": 0.7183153983413225,
+              "visits": 1628,
+              "expected": 1610,
+              "z_statistic": 0.1418598731230381,
               "pass": true
             },
             "4": {
-              "visits": 874,
-              "expected": 870,
-              "z_statistic": 0.03624401881463749,
+              "visits": 1622,
+              "expected": 1610,
+              "z_statistic": 0.07992898356345547,
               "pass": true
             },
             "5": {
-              "visits": 826,
-              "expected": 870,
-              "z_statistic": -0.3516064210892817,
+              "visits": 1607,
+              "expected": 1610,
+              "z_statistic": -0.017622684421256033,
               "pass": true
             },
             "6": {
-              "visits": 837,
-              "expected": 870,
-              "z_statistic": -0.2385299807658105,
+              "visits": 1572,
+              "expected": 1610,
+              "z_statistic": -0.2019106924470556,
               "pass": true
             },
             "7": {
-              "visits": 874,
-              "expected": 870,
-              "z_statistic": 0.026595838741673875,
+              "visits": 1525,
+              "expected": 1610,
+              "z_statistic": -0.41545052652565545,
               "pass": true
             },
             "8": {
-              "visits": 928,
-              "expected": 870,
-              "z_statistic": 0.3590109871423003,
+              "visits": 1453,
+              "expected": 1610,
+              "z_statistic": -0.7143747356534654,
               "pass": true
             },
             "9": {
-              "visits": 901,
-              "expected": 870,
-              "z_statistic": 0.18024474383699915,
+              "visits": 1369,
+              "expected": 1610,
+              "z_statistic": -1.0300650362034987,
               "pass": true
             }
           },
           "pass": true
         }
       ],
-      "overall_pass": true
+      "overall_pass": false
     }
   ],
-  "overall_pass": true,
-  "core_tests_pass": true,
+  "overall_pass": false,
+  "core_tests_pass": false,
   "excursion_tests_note": "Random excursions may show marginal variance within 8% statistical expectation",
   "tests_implemented": 15,
   "tests_total": 15
