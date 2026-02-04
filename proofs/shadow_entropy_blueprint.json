@@ -4,7 +4,7 @@
   "main_goal": "Complete formal verification of cryptographic security properties for shadow entropy harvesting from CRT quotients",
   "context": "QMNF integer-only arithmetic, coprime moduli, FHE noise generation, NIST SP 800-22 compliance",
   "created_at": "2026-02-03T00:00:00Z",
-  "rounds_completed": 5,
+  "rounds_completed": 6,
   "seed_artifacts": [
     "proofs/coq/CRTShadowEntropy.v",
     "proofs/lean4/07_ShadowEntropy.lean"
