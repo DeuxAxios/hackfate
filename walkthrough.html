@@ -134,12 +134,12 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Homomorphic Multiplication</strong></td>
-                                    <td><code>BFVEvaluator::mul</code> and <code>relinearize</code> for ciphertext multiplication</td>
+                                    <td><code>RNSFHEContext::mul_dual_public</code> (standard) or <code>mul_dual_symmetric</code> (single-party) with auto mod-switch at depth 3+</td>
                                     <td><span class="status-badge">Fully Functional</span></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Deep Circuits (Symmetric)</strong></td>
-                                    <td>Multi-level consecutive multiplications without bootstrapping</td>
+                                    <td><strong>Deep Circuits (Public + Symmetric)</strong></td>
+                                    <td>Multi-level consecutive multiplications without bootstrapping; auto mod-switch enables deeper public-mode circuits</td>
                                     <td><span class="status-badge">Fully Functional</span></td>
                                 </tr>
                             </tbody>
@@ -230,20 +230,18 @@ println!("Homomorphic Subtraction: {} - {} = {}", m1, m2, diff_result);
 assert_eq!(diff_result, m1 - m2);</code></pre>
 
                     <h3>Multiplication</h3>
-                    <p>Homomorphic multiplication is the most powerful and noise-intensive operation. After each multiplication, a <code>relinearize</code> step is required. This step uses the <code>EvaluationKey</code> to reduce the size of the resulting ciphertext back to its original form, making it suitable for further operations.</p>
+                    <p>Homomorphic multiplication is the most powerful and noise-intensive operation. The recommended API is <code>RNSFHEContext::mul_dual_public</code> (for public-key mode) or <code>mul_dual_symmetric</code> (for single-party mode). These handle relinearization and K-Elimination rescaling internally, and auto-apply modulus switching at depth 3+ for deeper circuits.</p>
 
                     <pre><code class="language-rust">let m3 = 7u64;
 let m4 = 8u64;
 let ct3 = encryptor.encrypt(m3, &mut rng);
 let ct4 = encryptor.encrypt(m4, &mut rng);
 
-// Perform homomorphic multiplication. This operation returns a `Result`.
-let ct_prod_large = evaluator.mul(&ct3, &ct4).unwrap();
+// Perform homomorphic multiplication via the Dual-RNS API.
+// mul_dual_public handles rescaling and auto mod-switch internally.
+let ct_prod = ctx.mul_dual_public(&ct3, &ct4).unwrap();
 
-// Relinearize the resulting ciphertext to reduce its size and make it usable.
-let ct_prod_relin = evaluator.relinearize(&ct_prod_large).unwrap();
-
-let prod_result = decryptor.decrypt(&ct_prod_relin);
+let prod_result = decryptor.decrypt(&ct_prod);
 println!("Homomorphic Multiplication: {} * {} = {}", m3, m4, prod_result);
 assert_eq!(prod_result, m3 * m4);</code></pre>
                 </article>
@@ -251,7 +249,7 @@ assert_eq!(prod_result, m3 * m4);</code></pre>
                 <!-- Deep Circuits -->
                 <article class="walkthrough-section" id="deep-circuits">
                     <h2>6. Deep Circuits (Symmetric Mode)</h2>
-                    <p>NINE65's flagship capability is executing deep computational graphs <strong>without bootstrapping</strong>. This functionality is fully operational and most effective in <strong>symmetric encryption mode</strong>. In this mode, the <code>SecretKey</code> is used for both encryption and decryption, which is ideal for scenarios where the data owner is also performing the computation.</p>
+                    <p>NINE65's flagship capability is executing deep computational graphs <strong>without bootstrapping</strong>. With the auto mod-switch enhancement, deep circuits now work in both <strong>symmetric and public-key modes</strong>. Symmetric mode uses the <code>SecretKey</code> for both encryption and decryption (ideal when the data owner performs the computation), while public mode supports multi-party scenarios with auto mod-switch enabling deeper circuits at level 3+.</p>
 
                     <p>This example calculates <code>3<sup>16</sup></code> homomorphically, a task that requires a multiplicative depth of 4 and would necessitate bootstrapping in most other FHE libraries.</p>
 
@@ -265,10 +263,10 @@ let base = 3u64;
 let mut ct_power = symmetric_encryptor.encrypt(base, &mut rng);
 
 // 3. Perform 4 consecutive squaring operations (multiplications).
+// mul_dual_symmetric handles rescaling and auto mod-switch internally.
 println!("Calculating 3^16 homomorphically...");
 for i in 1..=4 {
-    let ct_squared = evaluator.mul(&ct_power, &ct_power).unwrap();
-    ct_power = evaluator.relinearize(&ct_squared).unwrap();
+    ct_power = ctx.mul_dual_symmetric(&ct_power, &ct_power).unwrap();
 
     let power = 2u64.pow(i + 1);
     let current_val = decryptor.decrypt(&ct_power);
@@ -327,7 +325,7 @@ match encode_result {
                         <li><strong>Implementing</strong> robust applications with built-in secure defaults and comprehensive error handling</li>
                     </ul>
 
-                    <p>The primary limitation to be aware of is that the deep circuit capability is currently optimized for <strong>symmetric mode</strong>. Public key operations are fully functional but are best suited for shallower circuits with the existing parameter sets.</p>
+                    <p>With the auto mod-switch enhancement (February 2026), deep circuits now work in both symmetric and public-key modes. Auto modulus switching at level 3+ enables deeper public-mode circuits without manual noise management.</p>
 
                     <p>NINE65 provides a powerful and efficient toolset for privacy-preserving computation, offering a unique and practical solution for deep circuit evaluation on standard CPU hardware.</p>
 

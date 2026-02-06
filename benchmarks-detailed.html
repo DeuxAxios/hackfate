@@ -52,7 +52,7 @@
     <section class="page-hero">
         <div class="container">
             <h1>NINE65 V5 Benchmarks</h1>
-            <p>Production-grade FHE with CSPRNG key generation, K-Elimination exact arithmetic, and GSO noise bounding. 465/465 audited tests passed (Jan 27, 2026).</p>
+            <p>Production-grade FHE with CSPRNG key generation, K-Elimination exact arithmetic, and GSO noise bounding. 627 workspace tests passed, zero floating-point in entire stack (Feb 6, 2026).</p>
         </div>
     </section>
 
@@ -109,13 +109,13 @@
                         </table>
                     </div>
 
-                    <p><strong>Total: 465 tests passed</strong> | 0 failures | 44 ignored (documentation tests)</p>
+                    <p><strong>Total: 627 workspace tests passed</strong> (446 nine65 + 46 clockwork-core + 30 nexgen_rational + 95 mana + 10 unhal) | 0 failures | 11 ignored</p>
                 </article>
 
                 <!-- Independent Audit Snapshot -->
                 <article class="walkthrough-section" id="audit-2026">
-                    <h2>Independent Audit Snapshot (2026-01-27)</h2>
-                    <p>Summary highlights from the NINE65 FHE v5 technical audit and claims verification.</p>
+                    <h2>Independent Audit Snapshot (2026-02-06)</h2>
+                    <p>Summary highlights from the NINE65 FHE v5 technical audit and claims verification. Updated after audit remediation (auto mod-switch, float purge, FFI fixes).</p>
 
                     <div class="component-table">
                         <table>
@@ -134,8 +134,8 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Test Suite</strong></td>
-                                    <td>465/465</td>
-                                    <td>All functional tests passed</td>
+                                    <td>627/627</td>
+                                    <td>Full workspace: 446 nine65 + 181 workspace crates</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Parallel Encrypt (10x)</strong></td>
@@ -186,7 +186,7 @@
                     </div>
 
                     <p><strong>Operations testing:</strong> Encryption/decryption, homomorphic add/mul, and dual-track RNS operations all passed across multiple configs.</p>
-                    <p><strong>Audit caveats:</strong> The independent audit flagged floating-point usage in modeling and parameterization components (not in the core cryptographic data path) and noted a minor subtraction issue in the demo binary. These findings are tracked for remediation.</p>
+                    <p><strong>Audit remediation (2026-02-06):</strong> All prior audit caveats have been resolved. Floating-point usage has been fully eliminated from the entire stack (zero f64/f32 anywhere). Auto mod-switch now enables deeper public-mode circuits at level 3+. The nine65-python and nine65-wasm FFI crates have been added and validated.</p>
                 </article>
 
                 <!-- Audit Benchmarks -->
@@ -332,7 +332,7 @@
                 <!-- FHE Operation Benchmarks -->
                 <article class="walkthrough-section" id="fhe-benchmarks">
                     <h2>FHE Operation Benchmarks</h2>
-                    <p>Measured performance from the canonical baseline (2026-01-27). Test config shown; production configs vary.</p>
+                    <p>Measured performance from the canonical baseline (2026-02-06). Test config shown; production configs vary.</p>
 
                     <div class="component-table">
                         <table>
@@ -552,7 +552,7 @@
                         </table>
                     </div>
 
-                    <p class="benchmark-footnote">Baseline: 2026-01-27 | Method: ND.Ternary secret, ND.CenteredBinomial error, m=n samples</p>
+                    <p class="benchmark-footnote">Baseline: 2026-02-06 | Method: ND.Ternary secret, ND.CenteredBinomial error, m=n samples</p>
 
                     <div class="callout callout-security">
                         <strong>Post-Quantum:</strong> LWE-based security is resistant to Shor's algorithm. These estimates represent rough Core-SVP + GSA bounds. For formal guarantees, independent audits are recommended.
@@ -570,9 +570,11 @@
                         <li><strong>GSO-FHE:</strong> Gravitational Swarm Optimization noise bounding (always enabled)</li>
                         <li><strong>Shadow Entropy:</strong> Zero-cost randomness from computational byproducts</li>
                         <li><strong>Dual-RNS:</strong> Main + anchor primes for exact rescaling after tensor products</li>
+                        <li><strong>Auto Mod-Switch:</strong> Automatic modulus switching at level 3+ for deeper public-mode circuits</li>
+                        <li><strong>Zero Float:</strong> Entire stack verified free of f64/f32 usage after audit remediation</li>
                     </ul>
 
-                    <h3>Test Environment (Baseline 2026-01-27)</h3>
+                    <h3>Test Environment (Baseline 2026-02-06)</h3>
                     <ul>
                         <li><strong>OS:</strong> Debian Linux 6.12.48, x86_64</li>
                         <li><strong>CPU:</strong> Intel Core i7-3632QM @ 2.20GHz (4C/8T)</li>

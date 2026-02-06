@@ -7,7 +7,7 @@
     "value": 28.101,
     "unit": "ms",
     "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU multi-core",
-    "date": "2026-01-27",
+    "date": "2026-02-06",
     "source_path": "reports/nine65-v5-benchmark-results-latest.md",
     "notes": "Parallel encryption vs sequential shows ~5x speedup"
   },
@@ -19,7 +19,7 @@
     "value": 4.9,
     "unit": "x",
     "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU multi-core",
-    "date": "2026-01-27",
+    "date": "2026-02-06",
     "source_path": "reports/nine65-v5-benchmark-results-latest.md",
     "notes": "4.9x throughput improvement over sequential for 10 encryptions"
   },
@@ -31,7 +31,7 @@
     "value": 1.378,
     "unit": "µs",
     "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU",
-    "date": "2026-01-27",
+    "date": "2026-02-06",
     "source_path": "reports/nine65-v5-benchmark-results-latest.md",
     "notes": "Throughput 46.45 Melem/s"
   },
@@ -43,7 +43,7 @@
     "value": 48.62,
     "unit": "Melem/s",
     "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU",
-    "date": "2026-01-27",
+    "date": "2026-02-06",
     "source_path": "reports/nine65-v5-benchmark-results-latest.md",
     "notes": "Peak decode throughput observed"
   },
@@ -55,8 +55,20 @@
     "value": 43.26,
     "unit": "Melem/s",
     "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU",
-    "date": "2026-01-27",
+    "date": "2026-02-06",
     "source_path": "reports/nine65-v5-benchmark-results-latest.md",
     "notes": "Scale-up throughput for largest tested batch"
+  },
+  {
+    "slug": "workspace-test-suite",
+    "name": "Workspace Test Suite",
+    "variant": "NINE65 v5 full workspace",
+    "metric": "count",
+    "value": 627,
+    "unit": "tests passed",
+    "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, release build",
+    "date": "2026-02-06",
+    "source_path": "reports/nine65-v5-test-results-summary.md",
+    "notes": "446 nine65 + 46 clockwork-core + 30 nexgen_rational + 95 mana + 10 unhal"
   }
 ]

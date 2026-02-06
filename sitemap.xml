@@ -2,61 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://hackfate.us/</loc>
-        <lastmod>2026-01-22</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://hackfate.us/research.html</loc>
-        <lastmod>2026-01-22</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hackfate.us/technology.html</loc>
-        <lastmod>2026-01-22</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hackfate.us/innovations.html</loc>
-        <lastmod>2026-01-22</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hackfate.us/benchmarks.html</loc>
-        <lastmod>2026-01-26</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hackfate.us/benchmarks-detailed.html</loc>
-        <lastmod>2026-01-26</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://hackfate.us/about.html</loc>
-        <lastmod>2026-01-22</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://hackfate.us/contact.html</loc>
-        <lastmod>2026-01-22</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://hackfate.us/privacy.html</loc>
-        <lastmod>2026-01-22</lastmod>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.2</priority>
     </url>
     <url>
         <loc>https://hackfate.us/walkthrough.html</loc>
-        <lastmod>2026-01-26</lastmod>
+        <lastmod>2026-02-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://hackfate.us/proofs.html</loc>
+        <lastmod>2026-02-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

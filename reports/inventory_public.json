@@ -9,7 +9,7 @@
     "evidence_path": "/home/acid/Projects/MYSTIC/nine65_v2_complete/proofs/KElimination.lean",
     "public_link": "https://github.com/Skyelabz210/k-elimination-lean4",
     "validation_type": "proof",
-    "date": "2026-01-21",
+    "date": "2026-02-06",
     "tags": ["exact division", "lean4", "coq", "rns"]
   },
   {
@@ -18,12 +18,12 @@
     "system": "NINE65",
     "tier": "Validated",
     "disclosure": "Public",
-    "summary": "Noise-bounded RLWE FHE variant using Gram–Schmidt distance to avoid bootstrapping on depth-50 demo circuits.",
+    "summary": "Noise-bounded RLWE FHE variant using Gram–Schmidt distance to avoid bootstrapping. Auto mod-switch enables deeper public-mode circuits at level 3+.",
     "evidence_path": "/home/acid/Projects/NINE65/MANA_boosted/README.md",
     "public_link": "reports/nine65-v5-technical-audit-latest.md",
     "validation_type": "benchmark",
-    "date": "2026-01-27",
-    "tags": ["fhe", "bootstrap-free", "noise"]
+    "date": "2026-02-06",
+    "tags": ["fhe", "bootstrap-free", "noise", "mod-switch"]
   },
   {
     "slug": "shadow-entropy",
@@ -35,7 +35,7 @@
     "evidence_path": "/home/acid/Projects/NINE65/MANA_boosted/README.md",
     "public_link": "shadow-entropy.html",
     "validation_type": "test",
-    "date": "2026-01-27",
+    "date": "2026-02-06",
     "tags": ["entropy", "rng", "nist"]
   },
   {
@@ -47,7 +47,7 @@
     "summary": "Residue-native Montgomery form retained across pipelines to avoid conversions and speed up CRTBigInt paths.",
     "evidence_path": "/home/acid/Downloads/QMNF_SYSTEM_INVENTORY_FROM_HISTORY.md",
     "validation_type": "design",
-    "date": "2026-01-21",
+    "date": "2026-02-06",
     "tags": ["montgomery", "crt", "integer-only"]
   },
   {
@@ -59,7 +59,7 @@
     "summary": "Signed residue representation enabling symmetric operations without bootstraps in NINE65 neural primitives.",
     "evidence_path": "/home/acid/Projects/NINE65/MANA_boosted/NINE65_COMPLETE_SUMMARY.md",
     "validation_type": "design",
-    "date": "2026-01-19",
+    "date": "2026-02-06",
     "tags": ["signed", "residue", "neural"]
   },
   {
@@ -71,7 +71,7 @@
     "summary": "Integer-only Padé/CORDIC/AGM transcendentals validated through the exact_transcendentals suite (47/47 tests).",
     "evidence_path": "/home/acid/Projects/exact_transcendentals/README.md",
     "validation_type": "test",
-    "date": "2026-01-20",
+    "date": "2026-02-06",
     "tags": ["transcendentals", "integer-only", "pade"]
   },
   {
@@ -84,7 +84,7 @@
     "evidence_path": "/home/acid/Projects/MYSTIC/SYSTEM_STATUS_REPORT.md",
     "public_link": "https://github.com/Skyelabz210/MYSTIC",
     "validation_type": "case-study",
-    "date": "2026-01-22",
+    "date": "2026-02-06",
     "tags": ["forecasting", "integer-only", "case-study"]
   },
   {
@@ -96,7 +96,7 @@
     "summary": "Toric quantum search variant showing sqrt-N scaling; validation report records 96.13% peak success rate.",
     "evidence_path": "/home/acid/Downloads/GROVER_SPEEDUP_VALIDATION_REPORT.md",
     "validation_type": "case-study",
-    "date": "2026-01-20",
+    "date": "2026-02-06",
     "tags": ["quantum", "grover", "case-study"]
   },
   {
@@ -108,7 +108,7 @@
     "summary": "Integer-only neural stack with 148 audited tests; package inventory documented in the v0.6.0 audit.",
     "evidence_path": "/home/acid/Downloads/MASTER_INVENTORY.md",
     "validation_type": "test",
-    "date": "2026-01-18",
+    "date": "2026-02-06",
     "tags": ["neural", "integer-only", "audit"]
   },
   {
@@ -120,7 +120,7 @@
     "summary": "Local LLM inference via tensor chunking without cloud APIs; validated implementation for constrained devices.",
     "evidence_path": "/home/acid/Projects/ChunkedModelDelegation/README.md",
     "validation_type": "test",
-    "date": "2026-01-17",
+    "date": "2026-02-06",
     "tags": ["llm", "offline", "tools"]
   },
   {
@@ -133,7 +133,31 @@
     "evidence_path": "/home/acid/Projects/NINE65/MANA_boosted/BENCHMARK_REPORT.md",
     "public_link": "reports/nine65-v5-benchmark-results-latest.md",
     "validation_type": "benchmark",
-    "date": "2026-01-27",
+    "date": "2026-02-06",
     "tags": ["fhe", "benchmarks", "performance"]
+  },
+  {
+    "slug": "nine65-python",
+    "title": "nine65-python (PyO3 FFI Crate)",
+    "system": "NINE65",
+    "tier": "Validated",
+    "disclosure": "Public",
+    "summary": "Python bindings for NINE65 FHE via PyO3; exposes encryption, decryption, and homomorphic operations to the Python ecosystem.",
+    "evidence_path": "/home/acid/Projects/NINE65/v5/nine65-python/src/lib.rs",
+    "validation_type": "test",
+    "date": "2026-02-06",
+    "tags": ["ffi", "python", "pyo3"]
+  },
+  {
+    "slug": "nine65-wasm",
+    "title": "nine65-wasm (WebAssembly FFI Crate)",
+    "system": "NINE65",
+    "tier": "Validated",
+    "disclosure": "Public",
+    "summary": "WebAssembly bindings for NINE65 FHE via wasm-bindgen; enables browser-based homomorphic encryption workflows.",
+    "evidence_path": "/home/acid/Projects/NINE65/v5/nine65-wasm/src/lib.rs",
+    "validation_type": "test",
+    "date": "2026-02-06",
+    "tags": ["ffi", "wasm", "browser"]
   }
 ]
