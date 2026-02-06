@@ -59,53 +59,11 @@
     <main id="main-content">
         <section class="section benchmark" id="benchmark">
             <div class="container">
-                <div class="benchmark-grid">
-                    <article class="benchmark-card">
-                        <h3>Depth-50 Circuit</h3>
-                        <p>50 consecutive homomorphic multiplications in symmetric mode. Zero bootstraps required.</p>
-                        <span class="benchmark-stat">1.32s</span>
-                    </article>
-                    <article class="benchmark-card">
-                        <h3>FHE Multiply</h3>
-                        <p>Single homomorphic multiplication including K-Elimination rescaling, no bootstrap overhead.</p>
-                        <span class="benchmark-stat">26.5ms</span>
-                    </article>
-                    <article class="benchmark-card">
-                        <h3>RNS Arithmetic</h3>
-                        <p>4-lane parallel RNS multiply with quotient signature tracking for entropy harvesting.</p>
-                        <span class="benchmark-stat">96ns</span>
-                    </article>
-                    <article class="benchmark-card">
-                        <h3>Shadow Entropy</h3>
-                        <p>Cryptographic randomness harvested from computational byproducts at zero extra cost.</p>
-                        <span class="benchmark-stat">284 Mbit/s</span>
-                    </article>
+                <div class="benchmark-meta" data-benchmark-meta>Loading curated benchmarks...</div>
+                <div class="benchmark-grid" data-benchmark-grid>
+                    <!-- Populated from reports/benchmarks_curated.json via script.js -->
                 </div>
-                <h2 class="section-title">Audit Snapshot (2026-01-27)</h2>
-                <p class="section-subtitle">Independent verification results from the NINE65 FHE v5 audit run.</p>
-                <div class="benchmark-grid">
-                    <article class="benchmark-card">
-                        <h3>Parallel Encrypt (10x)</h3>
-                        <p>10 encryptions on multi-core CPU, audited run.</p>
-                        <span class="benchmark-stat">28.10ms</span>
-                    </article>
-                    <article class="benchmark-card">
-                        <h3>Batch Decode (64)</h3>
-                        <p>Batch decode time on audited build.</p>
-                        <span class="benchmark-stat">1.378µs</span>
-                    </article>
-                    <article class="benchmark-card">
-                        <h3>Test Suite</h3>
-                        <p>All functional tests passing in audit.</p>
-                        <span class="benchmark-stat">465/465</span>
-                    </article>
-                    <article class="benchmark-card">
-                        <h3>Parallel Speedup</h3>
-                        <p>Parallel vs sequential encryption throughput.</p>
-                        <span class="benchmark-stat">4.9x</span>
-                    </article>
-                </div>
-                <p class="benchmark-footnote">Benchmarks measured on the canonical MANA-boosted build; audit snapshot values come from an independent CPU-only run. Results vary by hardware and configuration.</p>
+                <p class="benchmark-footnote">Benchmarks measured on the canonical MANA-boosted build; values may vary by hardware and configuration.</p>
                 <div class="licensing-note">
                     <p>View comprehensive benchmark data, audit summaries, and test evidence.</p>
                     <a href="benchmarks-detailed.html#audit-2026" class="btn btn-primary">View Audit & Benchmarks</a>

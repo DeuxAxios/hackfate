@@ -1,0 +1,12 @@
+slug,title,disclosure,rationale
+k-elimination,K-Elimination (Exact RNS Division),Public,Proof artifact and paper are already public on GitHub.
+gso-fhe,GSO-FHE (Bootstrap-Free Bounded Noise),Public,Audit summary and benchmarks are present in public reports/ folder.
+shadow-entropy,Shadow Entropy (Zero-Cost RNG),Public,Public-facing page and NIST test summary available.
+persistent-montgomery,Persistent Montgomery Arithmetic,Public,Design-level description only; no proprietary parameters disclosed.
+mobiusint,MobiusInt Signed Residues,Public,High-level description only; no sensitive constants.
+pade-engine,Padé Transcendental Engine,Public,Test results documented without proprietary inputs.
+mystic-v3,MYSTIC V3 Basin Classification,Public,Case-study validation only; no proprietary model parameters exposed.
+toric-grover,Toric Grover Speedup,Public,Validation report is shareable and contains no private keys.
+cosmos-hd-neural,COSMOS-HD-Neural v0.6.0,Public,Audit inventory is public-safe and free of proprietary datasets.
+chunked-model-delegation,Chunked Model Delegation,Public,Repository intended for public/local use; no cloud secrets.
+mana-boosted-fhe,MANA-Boosted NINE65 Core,Public,Benchmark summaries are public-safe; cryptographic parameters remain undisclosed.

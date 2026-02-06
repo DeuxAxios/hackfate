@@ -27,7 +27,174 @@ document.addEventListener('DOMContentLoaded', () => {
     initVisibilityHandler();
     initActiveNav();
     initBackToTop();
+    loadInventorySections();
+    loadBenchmarkSection();
 });
+
+// ---------- Data-driven content loaders ----------
+let inventoryCache = null;
+let benchmarkCache = null;
+
+async function loadInventoryData() {
+    if (inventoryCache) return inventoryCache;
+    const response = await fetch('reports/inventory_public.json');
+    if (!response.ok) throw new Error('Unable to load inventory_public.json');
+    inventoryCache = await response.json();
+    return inventoryCache;
+}
+
+async function loadBenchmarkData() {
+    if (benchmarkCache) return benchmarkCache;
+    const response = await fetch('reports/benchmarks_curated.json');
+    if (!response.ok) throw new Error('Unable to load benchmarks_curated.json');
+    benchmarkCache = await response.json();
+    return benchmarkCache;
+}
+
+function renderTags(tags = []) {
+    return tags
+        .slice(0, 3)
+        .map(tag => `<span class="research-tag">${tag}</span>`)
+        .join('');
+}
+
+function renderTierBadge(tier) {
+    const cls = tier === 'Proved' ? 'tag-verified' : tier === 'Validated' ? 'tag-validated' : '';
+    return `<span class="research-tag ${cls}">${tier}</span>`;
+}
+
+function renderSystemBadge(system) {
+    return `<span class="research-tag">${system}</span>`;
+}
+
+function safeSummary(text) {
+    return text || 'Summary available on request.';
+}
+
+async function loadInventorySections() {
+    try {
+        const data = await loadInventoryData();
+        renderInnovations(data);
+        renderTechnology(data);
+        renderResearch(data);
+        renderProofs(data);
+    } catch (err) {
+        console.warn('Inventory load failed:', err);
+    }
+}
+
+function renderInnovations(data) {
+    const target = document.querySelector('[data-inventory-grid]');
+    if (!target) return;
+    const items = data.filter(item => item.disclosure === 'Public');
+    const sorted = items.sort((a, b) => a.system.localeCompare(b.system) || a.title.localeCompare(b.title));
+    target.innerHTML = sorted.map(item => `
+        <article class="catalog-card">
+            <div class="catalog-card-header">${renderSystemBadge(item.system)} ${renderTierBadge(item.tier)}</div>
+            <h3>${item.title}</h3>
+            <p>${safeSummary(item.summary)}</p>
+            <div class="catalog-tags">${renderTags(item.tags)}</div>
+            ${item.public_link ? `<a class="catalog-link" href="${item.public_link}">Evidence &rarr;</a>` : `<span class="catalog-link">Evidence available on request</span>`}
+        </article>
+    `).join('');
+}
+
+function renderTechnology(data) {
+    const target = document.querySelector('[data-tech-grid]');
+    if (!target) return;
+    const publicItems = data.filter(item => item.disclosure === 'Public');
+    const systems = Array.from(new Set(publicItems.map(i => i.system)));
+    target.innerHTML = systems.map(system => {
+        const items = publicItems.filter(i => i.system === system);
+        return `
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>
+                </div>
+                <h3>${system}</h3>
+                <p class="tech-tagline">${items.length} public items</p>
+                <ul class="tech-features">
+                    ${items.map(i => `<li>${i.title}</li>`).join('')}
+                </ul>
+                <p class="tech-note">${items[0] ? safeSummary(items[0].summary) : ''}</p>
+            </div>
+        `;
+    }).join('');
+}
+
+function renderResearch(data) {
+    const target = document.querySelector('[data-research-grid]');
+    if (!target) return;
+    const items = data.filter(i => i.disclosure === 'Public' && (i.tier === 'Proved' || i.tier === 'Validated'));
+    target.innerHTML = items.map(item => `
+        <div class="research-card">
+            <div class="research-header">${renderSystemBadge(item.system)} ${renderTierBadge(item.tier)}</div>
+            <h3 class="research-title">${item.title}</h3>
+            <p class="research-headline">${safeSummary(item.summary)}</p>
+            <div class="research-stats">
+                <div class="stat">
+                    <span class="stat-value">${item.validation_type || 'evidence'}</span>
+                    <span class="stat-label">Validation</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">${item.date || '2026'}</span>
+                    <span class="stat-label">Last update</span>
+                </div>
+            </div>
+            ${item.public_link ? `<a href="${item.public_link}" class="btn btn-primary">View Evidence</a>` : `<span class="research-tag">Evidence on request</span>`}
+        </div>
+    `).join('');
+}
+
+function renderProofs(data) {
+    const target = document.querySelector('[data-proof-grid]');
+    const stats = document.querySelector('[data-proof-stats]');
+    if (!target && !stats) return;
+    const proved = data.filter(i => i.tier === 'Proved' && i.disclosure === 'Public');
+    if (stats) {
+        const total = proved.length;
+        stats.textContent = `${total} proof${total === 1 ? '' : 's'} tracked in inventory.`;
+    }
+    if (!target) return;
+    if (!proved.length) {
+        target.innerHTML = '<p class="no-results visible">No public proofs listed yet.</p>';
+        return;
+    }
+    target.innerHTML = proved.map(item => `
+        <div class="proof-card" data-type="proof">
+            <div class="proof-card-header">
+                <h3>${item.title}</h3>
+                <span class="proof-type-badge coq">Proved</span>
+            </div>
+            <p>${safeSummary(item.summary)}</p>
+            ${item.public_link ? `<a href="${item.public_link}" class="proof-link">View Proof</a>` : '<span class="proof-link">Proof available on request</span>'}
+        </div>
+    `).join('');
+}
+
+async function loadBenchmarkSection() {
+    const target = document.querySelector('[data-benchmark-grid]');
+    const meta = document.querySelector('[data-benchmark-meta]');
+    if (!target) return;
+    try {
+        const data = await loadBenchmarkData();
+        if (meta && data.length) {
+            meta.textContent = `Curated benchmark set · Updated ${data[0].date}`;
+        }
+        target.innerHTML = data.map(entry => `
+            <article class="benchmark-card">
+                <h3>${entry.name}</h3>
+                <p>${entry.variant}</p>
+                <span class="benchmark-stat">${entry.value} ${entry.unit}</span>
+                <p class="benchmark-note">${entry.notes || ''}</p>
+                <p class="benchmark-meta">${entry.hardware}</p>
+            </article>
+        `).join('');
+    } catch (err) {
+        console.warn('Benchmark load failed:', err);
+        target.innerHTML = '<p class="benchmark-footnote">Benchmarks unavailable right now.</p>';
+    }
+}
 
 // Mobile Navigation Toggle
 function initNavigation() {

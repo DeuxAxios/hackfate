@@ -59,48 +59,8 @@
     <main id="main-content">
         <section class="section catalog" id="catalog">
             <div class="container">
-                <div class="catalog-grid">
-                    <article class="catalog-card">
-                        <h3>QMNF Foundation</h3>
-                        <p>Integer-only numerical framework that removes floating-point drift across every layer.</p>
-                        <ul>
-                            <li>K-Elimination: deterministic RNS division at arbitrary scale.</li>
-                            <li>CRTBigInt & Dual Codex: residue/magnitude coupling for precise tracking.</li>
-                            <li>Fused Piggyback Division & Persistent Montgomery: conversion-free arithmetic cores.</li>
-                            <li>Binary GCD, Padé, CORDIC, AGM: number-theoretic primitives in pure integers.</li>
-                        </ul>
-                    </article>
-                    <article class="catalog-card">
-                        <h3>NINE65 Suite</h3>
-                        <p>Bootstrap-free homomorphic encryption variants optimized for speed and post-quantum security.</p>
-                        <ul>
-                            <li>GSO-FHE & <a href="shadow-entropy.html">Shadow Entropy</a>: bounded-noise encrypted computation.</li>
-                            <li>MobiusInt, MQ-ReLU, Integer Softmax: residue-native neural primitives.</li>
-                            <li>Cyclotomic Phase & Padé Engine: trig and transcendental support inside ciphertexts.</li>
-                            <li>Encrypted Quantum (Sparse Grover): Grover-resilient keyspace design.</li>
-                        </ul>
-                        <a href="walkthrough.html" class="catalog-link">Try the Walkthrough &rarr;</a>
-                    </article>
-                    <article class="catalog-card">
-                        <h3>Variants & Accelerators</h3>
-                        <p>Fourteen tailored builds for production, research, and hybrid deployments.</p>
-                        <ul>
-                            <li>MANA-boosted canonical core with UNHAL abstraction.</li>
-                            <li>SEAL-augmented hybrid variant.</li>
-                            <li>Stable production branch & security proofs package.</li>
-                            <li>MANA execution substrate and UNHAL interface.</li>
-                        </ul>
-                    </article>
-                    <article class="catalog-card">
-                        <h3>Applied Systems</h3>
-                        <p>Research stacks that translate the numerics into real-world claims.</p>
-                        <ul>
-                            <li>MYSTIC zero-drift forecasting validated against major storms.</li>
-                            <li>Toric Grover speedups with measurable sqrt-N behavior.</li>
-                            <li>COSMOS-HD Neural and Chunked Model Delegation for constrained inference.</li>
-                            <li>Formal proof catalog in progress; artifacts are machine-checked.</li>
-                        </ul>
-                    </article>
+                <div class="catalog-grid" data-inventory-grid>
+                    <!-- Populated from reports/inventory_public.json via script.js -->
                 </div>
             </div>
         </section>

@@ -682,10 +682,25 @@ body {
     margin-bottom: 0.25rem;
 }
 
+.catalog-card-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
 .catalog-card p {
     color: var(--text-secondary);
     margin-bottom: 1rem;
     line-height: 1.7;
+}
+
+.catalog-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
 }
 
 .catalog-card ul {
@@ -707,6 +722,30 @@ body {
     left: 0;
     color: var(--accent-green);
     font-family: 'JetBrains Mono', monospace;
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.tech-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+}
+
+.benchmark-meta {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.benchmark-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
 }
 
 .overview-grid {

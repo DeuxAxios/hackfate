@@ -1,0 +1,12 @@
+slug,claim_text,evidence_path,validation_type,notes
+k-elimination,"Exact RNS quotient recovery via single multiply; proof complete in Lean4/Coq","/home/acid/Projects/MYSTIC/nine65_v2_complete/proofs/KElimination.lean",proof,"machine-checked"
+gso-fhe,"Depth-50 demo circuits run without bootstrapping using GSO noise distance","/home/acid/Projects/NINE65/MANA_boosted/README.md",benchmark,"audit snapshot 2026-01-27"
+shadow-entropy,"Entropy from RNS quotient signatures passes NIST SP 800-22 at 284 Mbit/s","/home/acid/Projects/NINE65/MANA_boosted/README.md",test,"quoted rate from audit"
+persistent-montgomery,"Persistent Montgomery form removes conversions in CRTBigInt pipeline","/home/acid/Downloads/QMNF_SYSTEM_INVENTORY_FROM_HISTORY.md",design,"design documented in inventory"
+mobiusint,"Signed residue representation for symmetric ops in NINE65 neural primitives","/home/acid/Projects/NINE65/MANA_boosted/NINE65_COMPLETE_SUMMARY.md",design,""
+pade-engine,"Padé/CORDIC/AGM transcendentals pass 47/47 tests","/home/acid/Projects/exact_transcendentals/README.md",test,""
+mystic-v3,"Basin classification validated on Harvey 2017, Imelda 2019, Memorial Day 2015","/home/acid/Projects/MYSTIC/SYSTEM_STATUS_REPORT.md",case-study,"historic events only"
+toric-grover,"Toric Grover variant demonstrates sqrt-N scaling and 96.13% peak success","/home/acid/Downloads/GROVER_SPEEDUP_VALIDATION_REPORT.md",case-study,""
+cosmos-hd-neural,"COSMOS-HD-Neural v0.6.0 audited with 148 passing tests","/home/acid/Downloads/MASTER_INVENTORY.md",test,""
+chunked-model-delegation,"Chunked tensor inference for local LLMs validated on constrained hardware","/home/acid/Projects/ChunkedModelDelegation/README.md",test,""
+mana-boosted-fhe,"MANA-boosted NINE65 encode/decode/encrypt benchmarks published","/home/acid/Projects/NINE65/MANA_boosted/BENCHMARK_REPORT.md",benchmark,"see reports/nine65-v5-benchmark-results-latest.md"

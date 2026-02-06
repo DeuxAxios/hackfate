@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "parallel-encrypt-10",
+    "name": "Parallel Encrypt (10 ciphertexts)",
+    "variant": "NINE65 v5 MANA-boosted",
+    "metric": "time",
+    "value": 28.101,
+    "unit": "ms",
+    "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU multi-core",
+    "date": "2026-01-27",
+    "source_path": "reports/nine65-v5-benchmark-results-latest.md",
+    "notes": "Parallel encryption vs sequential shows ~5x speedup"
+  },
+  {
+    "slug": "parallel-speedup",
+    "name": "Parallel vs Sequential Encryption",
+    "variant": "NINE65 v5 MANA-boosted",
+    "metric": "speedup",
+    "value": 4.9,
+    "unit": "x",
+    "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU multi-core",
+    "date": "2026-01-27",
+    "source_path": "reports/nine65-v5-benchmark-results-latest.md",
+    "notes": "4.9x throughput improvement over sequential for 10 encryptions"
+  },
+  {
+    "slug": "batch-decode-64",
+    "name": "Batch Decode (n=64)",
+    "variant": "NINE65 v5 MANA-boosted",
+    "metric": "time",
+    "value": 1.378,
+    "unit": "µs",
+    "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU",
+    "date": "2026-01-27",
+    "source_path": "reports/nine65-v5-benchmark-results-latest.md",
+    "notes": "Throughput 46.45 Melem/s"
+  },
+  {
+    "slug": "batch-decode-512-throughput",
+    "name": "Batch Decode (n=512) Throughput",
+    "variant": "NINE65 v5 MANA-boosted",
+    "metric": "throughput",
+    "value": 48.62,
+    "unit": "Melem/s",
+    "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU",
+    "date": "2026-01-27",
+    "source_path": "reports/nine65-v5-benchmark-results-latest.md",
+    "notes": "Peak decode throughput observed"
+  },
+  {
+    "slug": "batch-encode-1024-throughput",
+    "name": "Batch Encode (n=1024) Throughput",
+    "variant": "NINE65 v5 MANA-boosted",
+    "metric": "throughput",
+    "value": 43.26,
+    "unit": "Melem/s",
+    "hardware": "Ubuntu 22.04 x86_64, Rust 1.93.0, CPU",
+    "date": "2026-01-27",
+    "source_path": "reports/nine65-v5-benchmark-results-latest.md",
+    "notes": "Scale-up throughput for largest tested batch"
+  }
+]
