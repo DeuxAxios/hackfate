@@ -1718,3 +1718,348 @@ body {
         align-items: center;
     }
 }
+
+/* =========================================
+   NINE65 SaaS PAGE STYLES
+   ========================================= */
+
+/* Hero Build Tag */
+.hero-build-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.hero-edition {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.25rem;
+    color: var(--accent-magenta);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* Comparison Table */
+.saas-comparison-table {
+    margin-top: 2.5rem;
+    overflow-x: auto;
+}
+
+.saas-comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.saas-comparison-table th,
+.saas-comparison-table td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.saas-comparison-table th {
+    background: var(--bg-primary);
+    color: var(--accent-cyan);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.saas-comparison-table td {
+    color: var(--text-secondary);
+}
+
+.saas-comparison-table td strong {
+    color: var(--accent-green);
+}
+
+.saas-comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.saas-comparison-table tr:hover td {
+    background: rgba(0, 240, 255, 0.03);
+}
+
+/* Feature Grid (Numbered Blocks) */
+.saas-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.saas-feature-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-large);
+    padding: 2rem;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.saas-feature-block:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-4px);
+}
+
+.saas-feature-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-magenta);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.saas-feature-block h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.25rem;
+    color: var(--accent-cyan);
+    margin-bottom: 1.5rem;
+}
+
+.saas-feature-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.saas-feature-item h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.saas-feature-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Status Banner */
+.saas-status-banner {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.saas-status-banner .status-badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.5rem;
+    letter-spacing: 2px;
+}
+
+/* Security Icon in Benchmark Card */
+.saas-security-icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 1rem;
+    color: var(--accent-cyan);
+}
+
+.saas-security-icon svg {
+    stroke: var(--accent-cyan);
+}
+
+/* Integration Flow */
+.saas-integration-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.saas-integration-step {
+    flex: 1;
+    min-width: 220px;
+    max-width: 320px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-large);
+    padding: 2rem;
+    text-align: center;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.saas-integration-step:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-4px);
+}
+
+.saas-step-number {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-magenta);
+    margin-bottom: 1rem;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-magenta);
+}
+
+.saas-integration-step h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--accent-cyan);
+    margin-bottom: 0.75rem;
+}
+
+.saas-integration-step p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.saas-integration-arrow {
+    flex-shrink: 0;
+    width: 40px;
+    height: 24px;
+    color: var(--accent-cyan);
+    opacity: 0.5;
+}
+
+.saas-integration-arrow svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Deployment Grid */
+.saas-deployment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2.5rem;
+    align-items: start;
+}
+
+.saas-deployment-checklist {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-large);
+    padding: 2rem;
+}
+
+.saas-deployment-checklist h3 {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-cyan);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.saas-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.saas-check-item {
+    padding: 0.6rem 0;
+    padding-left: 2rem;
+    position: relative;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(42, 42, 58, 0.5);
+}
+
+.saas-check-item:last-child {
+    border-bottom: none;
+}
+
+.saas-check-item::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+}
+
+.saas-deployment-summary p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* Roadmap Timeline */
+.saas-roadmap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.saas-roadmap-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-large);
+    padding: 2rem;
+    border-top: 3px solid var(--accent-cyan);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.saas-roadmap-item:hover {
+    transform: translateY(-4px);
+    border-top-color: var(--accent-magenta);
+}
+
+.saas-roadmap-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-magenta);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.saas-roadmap-item h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.saas-roadmap-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* SaaS Page Mobile */
+@media (max-width: 768px) {
+    .saas-integration-flow {
+        flex-direction: column;
+    }
+
+    .saas-integration-arrow {
+        transform: rotate(90deg);
+    }
+
+    .saas-integration-step {
+        max-width: 100%;
+    }
+
+    .saas-deployment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .saas-feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
