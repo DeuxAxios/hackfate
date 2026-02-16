@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live FHE Demo | HackFate</title>
+    <meta name="description" content="Watch unlimited-depth homomorphic encryption in real-time. Interactive encrypted computation with live performance metrics.">
+    <link rel="canonical" href="https://hackfate.us/demo.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta property="og:title" content="Live FHE Demo | HackFate">
+    <meta property="og:description" content="Watch unlimited-depth homomorphic encryption in real-time. Interactive encrypted computation with live performance metrics.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hackfate.us/demo.html">
+    <meta property="og:image" content="https://hackfate.us/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="HackFate">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Live FHE Demo | HackFate">
+    <meta name="twitter:description" content="Watch unlimited-depth homomorphic encryption in real-time.">
+    <meta name="twitter:image" content="https://hackfate.us/og-image.png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ========================================
+           DEMO PAGE STYLES
+           ======================================== */
+
+        .demo-hero {
+            padding: 6rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(180deg, #0a0a1a 0%, #111128 100%);
+        }
+        .coming-soon-badge {
+            display: inline-block;
+            padding: 0.35rem 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffaa00;
+            border: 1px solid rgba(255, 170, 0, 0.4);
+            border-radius: 20px;
+            background: rgba(255, 170, 0, 0.08);
+            margin-bottom: 1.5rem;
+            animation: badge-glow 3s ease-in-out infinite;
+        }
+        @keyframes badge-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 170, 0, 0.1); }
+            50% { box-shadow: 0 0 20px rgba(255, 170, 0, 0.25); }
+        }
+        .demo-preview-note {
+            color: #555;
+            font-size: 0.8rem;
+            font-style: italic;
+            margin-top: 0.75rem;
+        }
+        .demo-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00f5d4, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .demo-hero p {
+            color: #8888aa;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .demo-mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .mode-btn {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid #333;
+            background: transparent;
+            color: #8888aa;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .mode-btn.active {
+            border-color: #00f5d4;
+            color: #00f5d4;
+            background: rgba(0, 245, 212, 0.08);
+        }
+
+        /* ========================================
+           CALCULATOR
+           ======================================== */
+
+        .calculator-zone {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .calculator {
+            background: #0d0d20;
+            border: 1px solid #1a1a3e;
+            border-radius: 16px;
+            padding: 1.5rem;
+            width: 320px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .calc-display-wrapper {
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        .calc-display {
+            background: #080818;
+            border: 1px solid #1a1a3e;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            color: #e0e0ff;
+            text-align: right;
+            min-height: 3.2rem;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+        .calc-display.encrypted {
+            color: #00f5d4;
+            text-shadow: 0 0 12px rgba(0, 245, 212, 0.5);
+            border-color: #00f5d4;
+        }
+        .calc-noise-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .calc-noise-canvas.active {
+            opacity: 1;
+        }
+
+        /* Noise Budget Bar */
+        .noise-bar-container {
+            margin-bottom: 1rem;
+        }
+        .noise-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #555;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .noise-bar-track {
+            width: 100%;
+            height: 6px;
+            background: #111128;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+        .noise-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #ff007f, #ffaa00, #00f5d4);
+            border-radius: 3px;
+            transition: width 0.3s ease, filter 0.3s ease;
+        }
+        .noise-bar-fill.refreshing {
+            animation: noise-pulse 0.4s ease;
+        }
+        @keyframes noise-pulse {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(2); box-shadow: 0 0 10px #00f5d4; }
+            100% { filter: brightness(1); }
+        }
+
+        /* Calculator Keypad */
+        .calc-keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .calc-btn {
+            padding: 0.75rem;
+            border: 1px solid #1a1a3e;
+            background: #0a0a1a;
+            color: #c0c0dd;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+        .calc-btn:hover {
+            background: #151530;
+            border-color: #2a2a5e;
+        }
+        .calc-btn:active {
+            transform: scale(0.95);
+            background: #1a1a40;
+        }
+        .calc-btn.op {
+            color: #00f5d4;
+            border-color: rgba(0, 245, 212, 0.2);
+        }
+        .calc-btn.op:hover {
+            background: rgba(0, 245, 212, 0.08);
+        }
+        .calc-btn.send {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.15), rgba(255, 0, 127, 0.15));
+            border-color: #00f5d4;
+            color: #00f5d4;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.9rem;
+        }
+        .calc-btn.send:hover {
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.25), rgba(255, 0, 127, 0.25));
+        }
+        .calc-btn.send.decrypt {
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.2), rgba(255, 170, 0, 0.2));
+            border-color: #ff007f;
+            color: #ff007f;
+        }
+        .calc-btn.clear {
+            color: #ff007f;
+            border-color: rgba(255, 0, 127, 0.2);
+        }
+
+        /* ========================================
+           DEPTH CHAIN
+           ======================================== */
+
+        .depth-zone {
+            padding: 2rem;
+            text-align: center;
+            min-height: 300px;
+            position: relative;
+            display: none;
+        }
+        .depth-zone.active {
+            display: block;
+        }
+        .depth-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .depth-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .depth-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00f5d4, #00c4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            text-shadow: none;
+            filter: drop-shadow(0 0 20px rgba(0, 245, 212, 0.3));
+        }
+        .operation-chain {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .chain-op {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: #555;
+            padding: 0.4rem 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: chain-appear 0.4s forwards;
+        }
+        .chain-op.current {
+            color: #e0e0ff;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
+        }
+        .chain-op .op-depth {
+            color: #00f5d4;
+            font-size: 0.7rem;
+            margin-right: 0.5rem;
+            opacity: 0.6;
+        }
+        @keyframes chain-appear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chain-ellipsis {
+            color: #333;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 4px;
+            padding: 0.3rem 0;
+        }
+        .chain-result {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            color: #00f5d4;
+            margin-top: 1.5rem;
+            opacity: 0;
+            animation: result-reveal 0.6s 0.3s forwards;
+        }
+        @keyframes result-reveal {
+            0% { opacity: 0; transform: scale(0.8); filter: blur(4px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+        .refresh-indicator {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            background: rgba(0, 245, 212, 0.1);
+            border: 1px solid rgba(0, 245, 212, 0.3);
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: #00f5d4;
+            margin-left: 0.5rem;
+            animation: refresh-flash 0.5s ease;
+        }
+        @keyframes refresh-flash {
+            0% { background: rgba(0, 245, 212, 0.4); }
+            100% { background: rgba(0, 245, 212, 0.1); }
+        }
+
+        /* ========================================
+           SPEEDOMETERS
+           ======================================== */
+
+        .speedometer-zone {
+            padding: 1rem 2rem 2rem;
+            display: none;
+        }
+        .speedometer-zone.active {
+            display: block;
+        }
+        .speedometer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .speedometer {
+            background: #0d0d20;
+            border: 1px solid #1a1a3e;
+            border-radius: 12px;
+            padding: 1.25rem 1rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+        .gauge-svg {
+            width: 100%;
+            max-width: 160px;
+            height: auto;
+        }
+        .gauge-bg {
+            fill: none;
+            stroke: #111128;
+            stroke-width: 10;
+            stroke-linecap: round;
+        }
+        .gauge-fill {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+        .gauge-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            fill: #e0e0ff;
+        }
+        .gauge-unit {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            fill: #555;
+        }
+        .speed-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        /* ========================================
+           SCALE BOXES
+           ======================================== */
+
+        .scale-zone {
+            padding: 2rem;
+        }
+        .scale-zone h2 {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #e0e0ff;
+            margin-bottom: 0.3rem;
+        }
+        .scale-zone .section-sub {
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        .scale-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .scale-box {
+            background: #0d0d20;
+            border: 1px solid #1a1a3e;
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .scale-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .scale-box.running::before {
+            opacity: 1;
+        }
+        .scale-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .scale-box-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #e0e0ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .scale-box-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+        .scale-box-status.idle {
+            color: #555;
+            border: 1px solid #222;
+        }
+        .scale-box-status.running {
+            color: #00f5d4;
+            border: 1px solid rgba(0, 245, 212, 0.3);
+            background: rgba(0, 245, 212, 0.08);
+        }
+        .scale-box-status.complete {
+            color: #ffaa00;
+            border: 1px solid rgba(255, 170, 0, 0.3);
+            background: rgba(255, 170, 0, 0.08);
+        }
+        .scale-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .scale-metric {
+            background: #080818;
+            border-radius: 6px;
+            padding: 0.5rem;
+        }
+        .scale-metric-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e0e0ff;
+        }
+        .scale-metric-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .scale-mini-noise {
+            height: 3px;
+            background: #111128;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        .scale-mini-noise-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #ff007f, #ffaa00, #00f5d4);
+            border-radius: 2px;
+            transition: width 0.2s ease;
+        }
+        .scale-ops-log {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #444;
+            height: 3.5rem;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+        .scale-ops-log .log-line {
+            opacity: 0;
+            animation: log-appear 0.2s forwards;
+        }
+        .scale-ops-log .log-line .op-type {
+            color: #00f5d4;
+        }
+        @keyframes log-appear {
+            to { opacity: 1; }
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 900px) {
+            .speedometer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .scale-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .demo-hero h1 { font-size: 2rem; }
+            .speedometer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+            .scale-grid {
+                grid-template-columns: 1fr;
+            }
+            .depth-number { font-size: 3rem; }
+            .calculator { width: 290px; padding: 1rem; }
+            .calc-display { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body id="top">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="nav" aria-label="Primary">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">HACKFATE</a>
+            <div class="nav-links" id="nav-links">
+                <a href="research.html">Research</a>
+                <a href="technology.html">Technology</a>
+                <a href="qmnf.html">QMNF</a>
+                <a href="benchmarks.html">Benchmarks</a>
+                <a href="proofs.html">Proofs</a>
+                <a href="nine65-saas.html">SaaS</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="nav-cta">Contact</a>
+            </div>
+            <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="demo-hero">
+        <div class="coming-soon-badge">Coming Soon</div>
+        <h1>Unlimited Depth. Live.</h1>
+        <p>Watch encrypted computation run through unlimited depth in real-time. Speedometers, noise budgets, and depth counters driven by actual NINE65 benchmark data.</p>
+        <p class="demo-preview-note">Preview mode — simulated data. Live encrypted computation launching soon.</p>
+        <div class="demo-mode-toggle">
+            <button class="mode-btn active" data-mode="interactive" id="btn-interactive">Interactive</button>
+            <button class="mode-btn" data-mode="auto" id="btn-auto">Auto Scale</button>
+        </div>
+    </section>
+
+    <main id="main-content">
+
+        <!-- CALCULATOR -->
+        <section class="calculator-zone">
+            <div class="calculator">
+                <div class="calc-display-wrapper">
+                    <div class="calc-display" id="calc-display">0</div>
+                    <canvas class="calc-noise-canvas" id="calc-noise"></canvas>
+                </div>
+                <div class="noise-bar-container">
+                    <div class="noise-bar-label">
+                        <span>Noise Budget</span>
+                        <span id="noise-pct">100%</span>
+                    </div>
+                    <div class="noise-bar-track">
+                        <div class="noise-bar-fill" id="noise-bar"></div>
+                    </div>
+                </div>
+                <div class="calc-keypad">
+                    <button class="calc-btn" data-key="7">7</button>
+                    <button class="calc-btn" data-key="8">8</button>
+                    <button class="calc-btn" data-key="9">9</button>
+                    <button class="calc-btn op" data-key="*">&times;</button>
+                    <button class="calc-btn" data-key="4">4</button>
+                    <button class="calc-btn" data-key="5">5</button>
+                    <button class="calc-btn" data-key="6">6</button>
+                    <button class="calc-btn op" data-key="+">+</button>
+                    <button class="calc-btn" data-key="1">1</button>
+                    <button class="calc-btn" data-key="2">2</button>
+                    <button class="calc-btn" data-key="3">3</button>
+                    <button class="calc-btn op" data-key="-">&minus;</button>
+                    <button class="calc-btn clear" data-key="C">C</button>
+                    <button class="calc-btn" data-key="0">0</button>
+                    <button class="calc-btn op" data-key="=">=</button>
+                    <button class="calc-btn op" data-key="/">&divide;</button>
+                    <button class="calc-btn send" id="calc-send">ENCRYPT &amp; COMPUTE</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEPTH CHAIN -->
+        <section class="depth-zone" id="depth-zone">
+            <div class="depth-counter">
+                <span class="depth-label">Depth</span>
+                <span class="depth-number" id="depth-number">0</span>
+            </div>
+            <div class="operation-chain" id="operation-chain"></div>
+        </section>
+
+        <!-- SPEEDOMETERS -->
+        <section class="speedometer-zone" id="speedometer-zone">
+            <div class="speedometer-grid">
+                <!-- OPS/SEC -->
+                <div class="speedometer">
+                    <svg class="gauge-svg" viewBox="0 0 160 110">
+                        <defs>
+                            <linearGradient id="grad-ops" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#00f5d4"/>
+                                <stop offset="100%" stop-color="#00c4ff"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="gauge-bg" d="M 20 100 A 60 60 0 1 1 140 100"/>
+                        <path class="gauge-fill" id="gauge-ops" d="M 20 100 A 60 60 0 1 1 140 100"
+                              stroke="url(#grad-ops)" stroke-dasharray="283" stroke-dashoffset="283"/>
+                        <text class="gauge-value" x="80" y="80" text-anchor="middle" id="gauge-ops-val">0</text>
+                        <text class="gauge-unit" x="80" y="95" text-anchor="middle">ops/sec</text>
+                    </svg>
+                    <div class="speed-label">Operations</div>
+                </div>
+                <!-- LATENCY -->
+                <div class="speedometer">
+                    <svg class="gauge-svg" viewBox="0 0 160 110">
+                        <defs>
+                            <linearGradient id="grad-lat" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#00f5d4"/>
+                                <stop offset="50%" stop-color="#ffaa00"/>
+                                <stop offset="100%" stop-color="#ff007f"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="gauge-bg" d="M 20 100 A 60 60 0 1 1 140 100"/>
+                        <path class="gauge-fill" id="gauge-lat" d="M 20 100 A 60 60 0 1 1 140 100"
+                              stroke="url(#grad-lat)" stroke-dasharray="283" stroke-dashoffset="283"/>
+                        <text class="gauge-value" x="80" y="76" text-anchor="middle" id="gauge-lat-val">0</text>
+                        <text class="gauge-unit" x="80" y="95" text-anchor="middle">&micro;s / op</text>
+                    </svg>
+                    <div class="speed-label">Latency</div>
+                </div>
+                <!-- DEPTH/SEC -->
+                <div class="speedometer">
+                    <svg class="gauge-svg" viewBox="0 0 160 110">
+                        <defs>
+                            <linearGradient id="grad-dps" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#7b61ff"/>
+                                <stop offset="100%" stop-color="#00f5d4"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="gauge-bg" d="M 20 100 A 60 60 0 1 1 140 100"/>
+                        <path class="gauge-fill" id="gauge-dps" d="M 20 100 A 60 60 0 1 1 140 100"
+                              stroke="url(#grad-dps)" stroke-dasharray="283" stroke-dashoffset="283"/>
+                        <text class="gauge-value" x="80" y="80" text-anchor="middle" id="gauge-dps-val">0</text>
+                        <text class="gauge-unit" x="80" y="95" text-anchor="middle">depth/sec</text>
+                    </svg>
+                    <div class="speed-label">Depth Rate</div>
+                </div>
+                <!-- NOISE BUDGET -->
+                <div class="speedometer">
+                    <svg class="gauge-svg" viewBox="0 0 160 110">
+                        <defs>
+                            <linearGradient id="grad-noise" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ff007f"/>
+                                <stop offset="50%" stop-color="#ffaa00"/>
+                                <stop offset="100%" stop-color="#00f5d4"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="gauge-bg" d="M 20 100 A 60 60 0 1 1 140 100"/>
+                        <path class="gauge-fill" id="gauge-noise" d="M 20 100 A 60 60 0 1 1 140 100"
+                              stroke="url(#grad-noise)" stroke-dasharray="283" stroke-dashoffset="0"/>
+                        <text class="gauge-value" x="80" y="76" text-anchor="middle" id="gauge-noise-val">100</text>
+                        <text class="gauge-unit" x="80" y="95" text-anchor="middle">% budget</text>
+                    </svg>
+                    <div class="speed-label">Noise Budget</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCALE BOXES -->
+        <section class="scale-zone" id="scale-zone">
+            <h2>Performance at Scale</h2>
+            <p class="section-sub">Four workloads running simultaneously on encrypted data</p>
+            <div class="scale-grid">
+                <!-- Box 1: Deep Arithmetic -->
+                <div class="scale-box" id="scale-arith" style="--accent: #00f5d4;">
+                    <div class="scale-box-header">
+                        <span class="scale-box-title">Deep Arithmetic</span>
+                        <span class="scale-box-status idle" id="scale-arith-status">Idle</span>
+                    </div>
+                    <div class="scale-metrics">
+                        <div class="scale-metric">
+                            <div class="scale-metric-val" id="scale-arith-depth">0</div>
+                            <div class="scale-metric-label">Depth</div>
+                        </div>
+                        <div class="scale-metric">
+                            <div class="scale-metric-val" id="scale-arith-ops">0</div>
+                            <div class="scale-metric-label">Ops/sec</div>
+                        </div>
+                    </div>
+                    <div class="scale-mini-noise">
+                        <div class="scale-mini-noise-fill" id="scale-arith-noise"></div>
+                    </div>
+                    <div class="scale-ops-log" id="scale-arith-log"></div>
+                </div>
+                <!-- Box 2: Statistical Pipeline -->
+                <div class="scale-box" id="scale-stats" style="--accent: #7b61ff;">
+                    <div class="scale-box-header">
+                        <span class="scale-box-title">Statistical Pipeline</span>
+                        <span class="scale-box-status idle" id="scale-stats-status">Idle</span>
+                    </div>
+                    <div class="scale-metrics">
+                        <div class="scale-metric">
+                            <div class="scale-metric-val" id="scale-stats-depth">0</div>
+                            <div class="scale-metric-label">Depth</div>
+                        </div>
+                        <div class="scale-metric">
+                            <div class="scale-metric-val" id="scale-stats-ops">0</div>
+                            <div class="scale-metric-label">Ops/sec</div>
+                        </div>
+                    </div>
+                    <div class="scale-mini-noise">
+                        <div class="scale-mini-noise-fill" id="scale-stats-noise"></div>
+                    </div>
+                    <div class="scale-ops-log" id="scale-stats-log"></div>
+                </div>
+                <!-- Box 3: Neural Network -->
+                <div class="scale-box" id="scale-nn" style="--accent: #ff007f;">
+                    <div class="scale-box-header">
+                        <span class="scale-box-title">Neural Network</span>
+                        <span class="scale-box-status idle" id="scale-nn-status">Idle</span>
+                    </div>
+                    <div class="scale-metrics">
+                        <div class="scale-metric">
+                            <div class="scale-metric-val" id="scale-nn-depth">0</div>
+                            <div class="scale-metric-label">Layer</div>
+                        </div>
+                        <div class="scale-metric">
+                            <div class="scale-metric-val" id="scale-nn-ops">0</div>
+                            <div class="scale-metric-label">Ops/sec</div>
+                        </div>
+                    </div>
+                    <div class="scale-mini-noise">
+                        <div class="scale-mini-noise-fill" id="scale-nn-noise"></div>
+                    </div>
+                    <div class="scale-ops-log" id="scale-nn-log"></div>
+                </div>
+                <!-- Box 4: Polynomial Eval -->
+                <div class="scale-box" id="scale-poly" style="--accent: #ffaa00;">
+                    <div class="scale-box-header">
+                        <span class="scale-box-title">Polynomial Eval</span>
+                        <span class="scale-box-status idle" id="scale-poly-status">Idle</span>
+                    </div>
+                    <div class="scale-metrics">
+                        <div class="scale-metric">
+                            <div class="scale-metric-val" id="scale-poly-depth">0</div>
+                            <div class="scale-metric-label">Degree</div>
+                        </div>
+                        <div class="scale-metric">
+                            <div class="scale-metric-val" id="scale-poly-ops">0</div>
+                            <div class="scale-metric-label">Ops/sec</div>
+                        </div>
+                    </div>
+                    <div class="scale-mini-noise">
+                        <div class="scale-mini-noise-fill" id="scale-poly-noise"></div>
+                    </div>
+                    <div class="scale-ops-log" id="scale-poly-log"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+                <h2>Live Demo Launching Soon</h2>
+                <p>The full interactive demo will connect to NINE65 running on secure infrastructure. Every operation, every depth, every speedometer reading from real encrypted computation. No simulation.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Get Notified</a>
+                    <a href="clockwork-bootstrap.html" class="btn btn-secondary">The Breakthrough</a>
+                    <a href="benchmarks.html" class="btn btn-secondary">Benchmarks</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#top" class="back-to-top" aria-label="Back to top">Top</a>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">HACKFATE</span>
+                    <p>"Truth cannot be approximated."</p>
+                </div>
+                <div class="footer-links">
+                    <a href="research.html">Research</a>
+                    <a href="technology.html">Technology</a>
+                    <a href="qmnf.html">QMNF</a>
+                    <a href="benchmarks.html">Benchmarks</a>
+                    <a href="walkthrough.html">Walkthrough</a>
+                    <a href="demo.html">Demo</a>
+                    <a href="nine65-saas.html">SaaS</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Anthony Diaz. All rights reserved.</p>
+                <p>Proprietary technology protected. Public research available under respective licenses.</p>
+                <p><a href="privacy.html" class="footer-legal-link">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // ============================================================
+        // STATE
+        // ============================================================
+        const state = {
+            mode: 'interactive',       // 'interactive' | 'auto'
+            calcInput: '',
+            calcExpression: '',
+            encrypted: false,
+            depth: 0,
+            noiseBudget: 100,
+            opsPerSec: 0,
+            latency: 0,
+            depthPerSec: 0,
+            running: false,
+            chainOps: [],
+            refreshCount: 0,
+            totalOps: 0,
+            currentResult: 0,
+            scaleRunning: false,
+        };
+
+        const GAUGE_ARC_LEN = 283;
+        const REFRESH_THRESHOLD = 35;     // Noise drops to this → auto refresh
+        const NOISE_PER_MUL = 8;
+        const NOISE_PER_ADD = 3;
+        const REFRESH_RESTORE = 95;       // Refresh brings noise back to this %
+        const CHAIN_INTERVAL = 2500;      // ms between chain operations
+        const MAX_INTERACTIVE_DEPTH = 20;
+
+        // Operations to chain after initial expression
+        const chainOperations = [
+            { op: '+', val: 2, symbol: '+' },
+            { op: '*', val: 3, symbol: '\u00d7' },
+            { op: '-', val: 7, symbol: '\u2212' },
+            { op: '+', val: 13, symbol: '+' },
+            { op: '*', val: 5, symbol: '\u00d7' },
+            { op: '-', val: 4, symbol: '\u2212' },
+            { op: '+', val: 11, symbol: '+' },
+            { op: '*', val: 2, symbol: '\u00d7' },
+            { op: '+', val: 9, symbol: '+' },
+            { op: '*', val: 7, symbol: '\u00d7' },
+            { op: '-', val: 3, symbol: '\u2212' },
+            { op: '+', val: 17, symbol: '+' },
+            { op: '*', val: 4, symbol: '\u00d7' },
+            { op: '-', val: 8, symbol: '\u2212' },
+            { op: '+', val: 6, symbol: '+' },
+            { op: '*', val: 9, symbol: '\u00d7' },
+            { op: '-', val: 1, symbol: '\u2212' },
+            { op: '+', val: 23, symbol: '+' },
+            { op: '*', val: 3, symbol: '\u00d7' },
+        ];
+
+        // ============================================================
+        // DOM REFS
+        // ============================================================
+        const $ = id => document.getElementById(id);
+        const display = $('calc-display');
+        const noiseCanvas = $('calc-noise');
+        const noiseBar = $('noise-bar');
+        const noisePct = $('noise-pct');
+        const sendBtn = $('calc-send');
+        const depthZone = $('depth-zone');
+        const depthNumber = $('depth-number');
+        const opChain = $('operation-chain');
+        const speedZone = $('speedometer-zone');
+        const scaleZone = $('scale-zone');
+
+        // ============================================================
+        // NOISE CANVAS (fuzz overlay on calculator display)
+        // ============================================================
+        const noiseCtx = noiseCanvas.getContext('2d');
+        function resizeNoiseCanvas() {
+            const rect = display.getBoundingClientRect();
+            noiseCanvas.width = rect.width;
+            noiseCanvas.height = rect.height;
+        }
+        resizeNoiseCanvas();
+        window.addEventListener('resize', resizeNoiseCanvas);
+
+        let noiseAnimId = null;
+        function drawNoise(intensity) {
+            const w = noiseCanvas.width, h = noiseCanvas.height;
+            if (w === 0 || h === 0) return;
+            const imgData = noiseCtx.createImageData(w, h);
+            const d = imgData.data;
+            const alpha = Math.floor(intensity * 60);
+            for (let i = 0; i < d.length; i += 4) {
+                const v = Math.random() * 255;
+                // Cyan tint
+                d[i] = v * 0.3;
+                d[i+1] = v * 0.9;
+                d[i+2] = v * 0.8;
+                d[i+3] = Math.random() < 0.4 ? alpha : 0;
+            }
+            noiseCtx.putImageData(imgData, 0, 0);
+        }
+
+        function startNoiseOverlay() {
+            noiseCanvas.classList.add('active');
+            function loop() {
+                const intensity = 1 - (state.noiseBudget / 100);
+                drawNoise(0.15 + intensity * 0.5);
+                noiseAnimId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+        function stopNoiseOverlay() {
+            noiseCanvas.classList.remove('active');
+            if (noiseAnimId) cancelAnimationFrame(noiseAnimId);
+            noiseAnimId = null;
+        }
+
+        // ============================================================
+        // CALCULATOR INPUT
+        // ============================================================
+        const opMap = { '*': '\u00d7', '/': '\u00f7', '-': '\u2212', '+': '+' };
+
+        document.querySelectorAll('.calc-btn[data-key]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (state.encrypted) return;
+                const key = btn.dataset.key;
+                if (key === 'C') {
+                    state.calcInput = '';
+                    display.textContent = '0';
+                } else if (key === '=') {
+                    try {
+                        const result = Function('"use strict"; return (' + state.calcInput + ')')();
+                        display.textContent = result;
+                        state.calcInput = String(result);
+                    } catch { /* ignore bad expr */ }
+                } else if ('+-*/'.includes(key)) {
+                    state.calcInput += ' ' + key + ' ';
+                    display.textContent = state.calcInput.replace(/\*/g, '\u00d7').replace(/\//g, '\u00f7').replace(/-/g, '\u2212');
+                } else {
+                    state.calcInput += key;
+                    display.textContent = state.calcInput.replace(/\*/g, '\u00d7').replace(/\//g, '\u00f7').replace(/-/g, '\u2212');
+                }
+            });
+        });
+
+        // ============================================================
+        // SEND / ENCRYPT
+        // ============================================================
+        sendBtn.addEventListener('click', () => {
+            if (state.running && state.encrypted) {
+                decryptResult();
+                return;
+            }
+            if (state.calcInput.trim() === '') return;
+
+            // Evaluate the initial expression
+            let initResult;
+            try {
+                initResult = Function('"use strict"; return (' + state.calcInput + ')')();
+            } catch { return; }
+
+            state.currentResult = initResult;
+            state.calcExpression = state.calcInput.replace(/\*/g, '\u00d7').replace(/\//g, '\u00f7').replace(/-/g, '\u2212');
+            state.encrypted = true;
+            state.running = true;
+            state.depth = 0;
+            state.noiseBudget = 100;
+            state.refreshCount = 0;
+            state.totalOps = 0;
+            state.chainOps = [];
+
+            // Visual: encrypt the calculator
+            display.classList.add('encrypted');
+            display.textContent = '\u2588\u2591\u2593\u2588\u2591\u2592\u2588\u2593\u2591\u2588';
+            sendBtn.textContent = 'DECRYPT';
+            sendBtn.classList.add('decrypt');
+            startNoiseOverlay();
+
+            // Show depth zone and speedometers
+            depthZone.classList.add('active');
+            speedZone.classList.add('active');
+            opChain.innerHTML = '';
+
+            // First chain entry = the user's expression
+            addChainOp(state.calcExpression, 1, false);
+            state.depth = 1;
+            depthNumber.textContent = '1';
+            updateNoiseBudget(100 - NOISE_PER_MUL);
+            updateGauges();
+
+            // Start chaining
+            state.chainTimer = setInterval(nextChainOp, CHAIN_INTERVAL);
+            state.speedTimer = setInterval(updateLiveMetrics, 200);
+        });
+
+        // ============================================================
+        // CHAIN OPERATIONS
+        // ============================================================
+        function nextChainOp() {
+            if (!state.running) return;
+            if (state.depth >= MAX_INTERACTIVE_DEPTH) {
+                decryptResult();
+                return;
+            }
+
+            const opIdx = (state.depth - 1) % chainOperations.length;
+            const op = chainOperations[opIdx];
+
+            // Compute
+            if (op.op === '+') state.currentResult += op.val;
+            else if (op.op === '-') state.currentResult -= op.val;
+            else if (op.op === '*') state.currentResult *= op.val;
+
+            state.depth++;
+            state.totalOps++;
+
+            // Noise cost
+            const cost = op.op === '*' ? NOISE_PER_MUL : NOISE_PER_ADD;
+            let newNoise = state.noiseBudget - cost;
+            let refreshed = false;
+
+            if (newNoise <= REFRESH_THRESHOLD) {
+                newNoise = REFRESH_RESTORE;
+                state.refreshCount++;
+                refreshed = true;
+            }
+            updateNoiseBudget(newNoise);
+
+            // Build expression text
+            const exprText = `result ${op.symbol} ${op.val}`;
+            addChainOp(exprText, state.depth, refreshed);
+            depthNumber.textContent = state.depth;
+            updateGauges();
+        }
+
+        function addChainOp(text, depth, refreshed) {
+            // Mark previous as not current
+            const prev = opChain.querySelector('.chain-op.current');
+            if (prev) prev.classList.remove('current');
+
+            // Keep only last 6 visible
+            const ops = opChain.querySelectorAll('.chain-op');
+            if (ops.length >= 6) {
+                // Add ellipsis if not already there
+                if (!opChain.querySelector('.chain-ellipsis')) {
+                    const ell = document.createElement('div');
+                    ell.className = 'chain-ellipsis';
+                    ell.textContent = '\u2022 \u2022 \u2022';
+                    opChain.insertBefore(ell, opChain.firstChild);
+                }
+                ops[0].remove();
+            }
+
+            const div = document.createElement('div');
+            div.className = 'chain-op current';
+            div.innerHTML = `<span class="op-depth">#${depth}</span> ${text}`;
+            if (refreshed) {
+                div.innerHTML += '<span class="refresh-indicator">AUTO REFRESH</span>';
+                noiseBar.classList.add('refreshing');
+                setTimeout(() => noiseBar.classList.remove('refreshing'), 500);
+            }
+            opChain.appendChild(div);
+        }
+
+        // ============================================================
+        // DECRYPT
+        // ============================================================
+        function decryptResult() {
+            state.running = false;
+            clearInterval(state.chainTimer);
+            clearInterval(state.speedTimer);
+
+            // Show result in chain
+            const res = document.createElement('div');
+            res.className = 'chain-result';
+            res.textContent = `= ${state.currentResult.toLocaleString()}`;
+            opChain.appendChild(res);
+
+            // Decrypt animation on calculator
+            setTimeout(() => {
+                stopNoiseOverlay();
+                display.classList.remove('encrypted');
+                // Scramble animation
+                let frames = 0;
+                const descramble = setInterval(() => {
+                    frames++;
+                    if (frames < 8) {
+                        const chars = '\u2588\u2591\u2592\u2593\u2580\u2584';
+                        let s = '';
+                        const target = String(state.currentResult);
+                        for (let i = 0; i < target.length + 3; i++) {
+                            s += Math.random() < frames / 10 ? (target[i] || '') : chars[Math.floor(Math.random() * chars.length)];
+                        }
+                        display.textContent = s;
+                    } else {
+                        clearInterval(descramble);
+                        display.textContent = state.currentResult.toLocaleString();
+                        state.encrypted = false;
+                        state.calcInput = String(state.currentResult);
+                        sendBtn.textContent = 'ENCRYPT & COMPUTE';
+                        sendBtn.classList.remove('decrypt');
+                    }
+                }, 80);
+            }, 600);
+        }
+
+        // ============================================================
+        // NOISE BUDGET
+        // ============================================================
+        function updateNoiseBudget(val) {
+            state.noiseBudget = Math.max(0, Math.min(100, val));
+            noiseBar.style.width = state.noiseBudget + '%';
+            noisePct.textContent = Math.round(state.noiseBudget) + '%';
+        }
+
+        // ============================================================
+        // GAUGE UPDATES
+        // ============================================================
+        function setGauge(id, value, max) {
+            const pct = Math.min(value / max, 1);
+            const offset = GAUGE_ARC_LEN * (1 - pct);
+            const el = $(id);
+            if (el) el.setAttribute('stroke-dashoffset', offset);
+        }
+        function setGaugeText(id, text) {
+            const el = $(id);
+            if (el) el.textContent = text;
+        }
+
+        function updateGauges() {
+            // Ops/sec (simulated based on depth rate)
+            const ops = 1800 + Math.random() * 400;
+            state.opsPerSec = Math.round(ops);
+            setGauge('gauge-ops', state.opsPerSec, 5000);
+            setGaugeText('gauge-ops-val', state.opsPerSec.toLocaleString());
+
+            // Latency
+            state.latency = Math.round(200 + Math.random() * 100);
+            setGauge('gauge-lat', state.latency, 1000);
+            setGaugeText('gauge-lat-val', state.latency);
+
+            // Depth/sec
+            state.depthPerSec = (1000 / CHAIN_INTERVAL).toFixed(1);
+            setGauge('gauge-dps', state.depthPerSec, 5);
+            setGaugeText('gauge-dps-val', state.depthPerSec);
+
+            // Noise
+            setGauge('gauge-noise', state.noiseBudget, 100);
+            setGaugeText('gauge-noise-val', Math.round(state.noiseBudget));
+        }
+
+        function updateLiveMetrics() {
+            if (!state.running) return;
+            // Jitter the ops/sec and latency for realism
+            const ops = state.opsPerSec + Math.round((Math.random() - 0.5) * 200);
+            setGaugeText('gauge-ops-val', Math.max(0, ops).toLocaleString());
+            setGauge('gauge-ops', Math.max(0, ops), 5000);
+
+            const lat = state.latency + Math.round((Math.random() - 0.5) * 40);
+            setGaugeText('gauge-lat-val', Math.max(50, lat));
+            setGauge('gauge-lat', Math.max(50, lat), 1000);
+        }
+
+        // ============================================================
+        // SCALE BOXES (Auto Mode)
+        // ============================================================
+        const scaleConfigs = {
+            arith: {
+                ops: ['mul', 'add', 'mul', 'sub', 'add', 'mul', 'add', 'sub'],
+                labels: ['\u00d7 rand', '+ rand', '\u00d7 rand', '\u2212 rand', '+ rand', '\u00d7 rand', '+ rand', '\u2212 rand'],
+                maxDepth: 80,
+                speed: 120,
+                depthLabel: 'Depth',
+            },
+            stats: {
+                ops: ['sum', 'mean', 'variance', 'stddev', 'percentile', 'median', 'covariance', 'regression'],
+                labels: ['SUM(x)', 'MEAN(x)', 'VAR(x)', 'STDDEV(x)', 'P95(x)', 'MEDIAN(x)', 'COV(x,y)', 'LINREG(x)'],
+                maxDepth: 60,
+                speed: 150,
+                depthLabel: 'Stage',
+            },
+            nn: {
+                ops: ['matmul', 'relu', 'matmul', 'relu', 'matmul', 'softmax', 'matmul', 'relu'],
+                labels: ['Dense \u2192 MatMul', 'MQ-ReLU', 'Dense \u2192 MatMul', 'MQ-ReLU', 'Dense \u2192 MatMul', 'Softmax', 'Dense \u2192 MatMul', 'MQ-ReLU'],
+                maxDepth: 50,
+                speed: 200,
+                depthLabel: 'Layer',
+            },
+            poly: {
+                ops: ['horner', 'horner', 'horner', 'horner', 'horner', 'horner', 'horner', 'horner'],
+                labels: ['a\u2099x\u207f', '+ a\u2099\u208b\u2081x\u207f\u207b\u00b9', '+ a\u2099\u208b\u2082x\u207f\u207b\u00b2', '+ ...', 'a\u2099x\u207f', '+ a\u2099\u208b\u2081x\u207f\u207b\u00b9', '+ a\u2099\u208b\u2082x\u207f\u207b\u00b2', '+ ...'],
+                maxDepth: 256,
+                speed: 80,
+                depthLabel: 'Degree',
+            }
+        };
+
+        const scaleState = {};
+        const scaleTimers = {};
+
+        function startScaleBox(key) {
+            const cfg = scaleConfigs[key];
+            const box = $(`scale-${key}`);
+            box.classList.add('running');
+            $(`scale-${key}-status`).textContent = 'Running';
+            $(`scale-${key}-status`).className = 'scale-box-status running';
+
+            scaleState[key] = { depth: 0, noise: 100, ops: 0, startTime: Date.now() };
+
+            scaleTimers[key] = setInterval(() => {
+                const s = scaleState[key];
+                if (s.depth >= cfg.maxDepth) {
+                    clearInterval(scaleTimers[key]);
+                    $(`scale-${key}-status`).textContent = 'Complete';
+                    $(`scale-${key}-status`).className = 'scale-box-status complete';
+                    box.classList.remove('running');
+                    return;
+                }
+
+                s.depth++;
+                s.ops++;
+
+                // Noise simulation
+                const opIdx = s.depth % cfg.ops.length;
+                const isMul = ['mul', 'matmul', 'horner'].includes(cfg.ops[opIdx]);
+                s.noise -= isMul ? NOISE_PER_MUL : NOISE_PER_ADD;
+
+                if (s.noise <= REFRESH_THRESHOLD) {
+                    s.noise = REFRESH_RESTORE;
+                }
+
+                // Update DOM
+                $(`scale-${key}-depth`).textContent = s.depth;
+                const elapsed = (Date.now() - s.startTime) / 1000;
+                const opsPerSec = Math.round(s.ops / Math.max(elapsed, 0.1));
+                $(`scale-${key}-ops`).textContent = opsPerSec.toLocaleString();
+                $(`scale-${key}-noise`).style.width = s.noise + '%';
+
+                // Log line
+                const log = $(`scale-${key}-log`);
+                const line = document.createElement('div');
+                line.className = 'log-line';
+                line.innerHTML = `<span class="op-type">${cfg.labels[opIdx]}</span> depth:${s.depth}`;
+                log.appendChild(line);
+                // Keep only last 3 lines
+                while (log.children.length > 3) log.removeChild(log.firstChild);
+
+            }, cfg.speed);
+        }
+
+        function stopAllScaleBoxes() {
+            Object.keys(scaleTimers).forEach(key => {
+                clearInterval(scaleTimers[key]);
+                const box = $(`scale-${key}`);
+                if (box) box.classList.remove('running');
+                $(`scale-${key}-status`).textContent = 'Idle';
+                $(`scale-${key}-status`).className = 'scale-box-status idle';
+                $(`scale-${key}-depth`).textContent = '0';
+                $(`scale-${key}-ops`).textContent = '0';
+                $(`scale-${key}-noise`).style.width = '100%';
+                $(`scale-${key}-log`).innerHTML = '';
+            });
+        }
+
+        // ============================================================
+        // MODE TOGGLE
+        // ============================================================
+        $('btn-interactive').addEventListener('click', () => {
+            state.mode = 'interactive';
+            $('btn-interactive').classList.add('active');
+            $('btn-auto').classList.remove('active');
+            stopAllScaleBoxes();
+        });
+
+        $('btn-auto').addEventListener('click', () => {
+            state.mode = 'auto';
+            $('btn-auto').classList.add('active');
+            $('btn-interactive').classList.remove('active');
+            // Auto-start all scale boxes
+            scaleZone.scrollIntoView({ behavior: 'smooth' });
+            stopAllScaleBoxes();
+            setTimeout(() => {
+                startScaleBox('arith');
+                startScaleBox('stats');
+                startScaleBox('nn');
+                startScaleBox('poly');
+            }, 500);
+        });
+
+        // Also start scale boxes when interactive computation begins
+        const origSendHandler = sendBtn.onclick;
+        const origListener = () => {
+            if (state.mode === 'interactive' && state.encrypted) {
+                setTimeout(() => {
+                    stopAllScaleBoxes();
+                    startScaleBox('arith');
+                    startScaleBox('stats');
+                    startScaleBox('nn');
+                    startScaleBox('poly');
+                }, 1000);
+            }
+        };
+        sendBtn.addEventListener('click', origListener);
+
+    });
+    </script>
+</body>
+</html>

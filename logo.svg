@@ -1,0 +1,64 @@
+<svg width="400" height="120" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient-primary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f5d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff007f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradient-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f5d4;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ff007f;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background glow (optional, for dark backgrounds) -->
+  <circle cx="60" cy="60" r="45" fill="url(#gradient-glow)" opacity="0.2"/>
+
+  <!-- Outer hexagon (cryptographic cell) -->
+  <path d="M 60 15 L 85.98 30 L 85.98 60 L 60 75 L 34.02 60 L 34.02 30 Z"
+        fill="none"
+        stroke="url(#gradient-primary)"
+        stroke-width="2.5"/>
+
+  <!-- Inner clockwork gear teeth -->
+  <g transform="translate(60, 60)">
+    <!-- Gear teeth circle -->
+    <circle r="25" fill="none" stroke="url(#gradient-primary)" stroke-width="2"/>
+
+    <!-- 8 gear teeth -->
+    <rect x="-2" y="-30" width="4" height="7" fill="url(#gradient-primary)"/>
+    <rect x="-2" y="23" width="4" height="7" fill="url(#gradient-primary)"/>
+    <rect x="-30" y="-2" width="7" height="4" fill="url(#gradient-primary)"/>
+    <rect x="23" y="-2" width="7" height="4" fill="url(#gradient-primary)"/>
+
+    <!-- Diagonal teeth -->
+    <rect x="-21.5" y="-23.5" width="4" height="7" fill="url(#gradient-primary)" transform="rotate(-45)"/>
+    <rect x="-21.5" y="16.5" width="4" height="7" fill="url(#gradient-primary)" transform="rotate(45)"/>
+    <rect x="16.5" y="-23.5" width="4" height="7" fill="url(#gradient-primary)" transform="rotate(45)"/>
+    <rect x="16.5" y="16.5" width="4" height="7" fill="url(#gradient-primary)" transform="rotate(-45)"/>
+
+    <!-- Central prime symbol (modular arithmetic) -->
+    <text x="0" y="0"
+          font-family="JetBrains Mono, monospace"
+          font-size="24"
+          font-weight="bold"
+          fill="url(#gradient-primary)"
+          text-anchor="middle"
+          dominant-baseline="central">%</text>
+  </g>
+
+  <!-- "HACKFATE" wordmark -->
+  <text x="110" y="70"
+        font-family="JetBrains Mono, monospace"
+        font-size="42"
+        font-weight="700"
+        fill="#f5f5f5"
+        letter-spacing="2">HACKFATE</text>
+
+  <!-- Tagline -->
+  <text x="110" y="95"
+        font-family="JetBrains Mono, monospace"
+        font-size="11"
+        fill="url(#gradient-primary)"
+        letter-spacing="3"
+        opacity="0.8">EXACT COMPUTATION</text>
+</svg>
