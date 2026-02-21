@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formal Proofs | HackFate</title>
-    <meta name="description" content="Formally verified mathematical proofs for QMNF unlimited-depth FHE. Coq and Lean4 proofs for K-Elimination, NIST compliance, and exact computation.">
-    <meta name="keywords" content="formal verification, Coq proofs, Lean4 proofs, NIST compliance, FHE security, K-elimination, post-quantum cryptography">
+    <meta name="description" content="70+ machine-checked proofs in Coq 8.18+ and Lean4 with Mathlib. Zero admitted statements. Zero sorry statements. Formal verification for NINE65 v7.">
+    <meta name="keywords" content="formal verification, Coq proofs, Lean4 proofs, NIST compliance, FHE security, K-elimination, post-quantum cryptography, NINE65">
     <meta name="author" content="Anthony Diaz">
     <meta name="theme-color" content="#0a0a0f">
     <meta name="color-scheme" content="dark">
@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
     <meta property="og:title" content="Formal Proofs | HackFate">
-    <meta property="og:description" content="Formally verified proofs for unlimited-depth FHE and exact computation.">
+    <meta property="og:description" content="70+ machine-checked proofs in Coq and Lean4. Zero admitted. Zero sorry. Complete formal verification.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hackfate.us/proofs.html">
     <meta property="og:image" content="https://hackfate.us/og-image.png">
@@ -29,7 +29,7 @@
     <style>
         .proof-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             margin: 2rem 0;
         }
@@ -58,119 +58,48 @@
             color: rgba(255,255,255,0.7);
             font-size: 0.9rem;
         }
-        .filter-bar {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 2rem 0;
-            padding: 1rem;
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-        }
-        .filter-btn {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid rgba(255,255,255,0.2);
-            background: transparent;
-            color: rgba(255,255,255,0.8);
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .filter-btn:hover {
-            border-color: #00ff88;
-            color: #00ff88;
-        }
-        .filter-btn.active {
-            background: #00ff88;
-            border-color: #00ff88;
-            color: #000;
-        }
-        .filter-btn .count {
-            margin-left: 0.5rem;
-            opacity: 0.7;
-        }
-        .proof-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
+        .proof-table-wrapper {
+            overflow-x: auto;
             margin: 2rem 0;
         }
-        .proof-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: transform 0.2s, border-color 0.2s, opacity 0.3s;
-        }
-        .proof-card:hover {
-            transform: translateY(-2px);
-            border-color: #00ff88;
-        }
-        .proof-card.hidden {
-            display: none;
-        }
-        .proof-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.75rem;
-        }
-        .proof-card h3 {
-            font-family: 'JetBrains Mono', monospace;
+        .proof-table {
+            width: 100%;
+            border-collapse: collapse;
             font-size: 0.95rem;
-            color: #fff;
-            margin: 0;
         }
-        .proof-type-badge {
-            font-size: 0.7rem;
+        .proof-table thead {
+            background: rgba(255,255,255,0.05);
+        }
+        .proof-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-family: 'JetBrains Mono', monospace;
             font-weight: 600;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            flex-shrink: 0;
-            margin-left: 0.5rem;
-        }
-        .proof-type-badge.nist {
-            background: rgba(0, 170, 255, 0.2);
-            color: #00aaff;
-        }
-        .proof-type-badge.coq {
-            background: rgba(255, 170, 0, 0.2);
-            color: #ffaa00;
-        }
-        .proof-type-badge.lean4 {
-            background: rgba(170, 0, 255, 0.2);
-            color: #aa00ff;
-        }
-        .proof-card p {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.85rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-        .proof-link {
             color: #00ff88;
-            text-decoration: none;
-            font-size: 0.85rem;
+            border-bottom: 2px solid rgba(0,255,136,0.3);
+            white-space: nowrap;
+        }
+        .proof-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.85);
+            vertical-align: top;
+        }
+        .proof-table tbody tr {
+            transition: background 0.15s;
+        }
+        .proof-table tbody tr:hover {
+            background: rgba(255,255,255,0.04);
+        }
+        .proof-table td:first-child {
+            font-family: 'JetBrains Mono', monospace;
             font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .proof-link:hover {
-            text-decoration: underline;
-        }
-        .proof-link::after {
-            content: '\2192';
+            color: #fff;
+            white-space: nowrap;
         }
         .verification-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin: 2rem 0;
         }
@@ -186,6 +115,9 @@
         .verification-card.info {
             border-left-color: #00aaff;
         }
+        .verification-card.pending {
+            border-left-color: #ffaa00;
+        }
         .verification-card h3 {
             margin-bottom: 0.5rem;
             color: #fff;
@@ -200,6 +132,9 @@
         .verification-card.info .status {
             color: #00aaff;
         }
+        .verification-card.pending .status {
+            color: #ffaa00;
+        }
         .verification-card ul {
             list-style: none;
             padding: 0;
@@ -210,82 +145,48 @@
             font-size: 0.9rem;
             padding: 0.25rem 0;
         }
-        .key-results {
-            background: rgba(255,255,255,0.05);
+        .methodology-block {
+            background: rgba(0,240,255,0.05);
+            border: 1px solid rgba(0,240,255,0.15);
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-        .key-results h3 {
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-        .key-results ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .key-results li {
-            padding: 0.5rem 0;
-            color: rgba(255,255,255,0.8);
-        }
-        .key-results strong {
-            color: #00ff88;
-        }
-        .cta-section {
+            padding: 2rem;
+            margin: 2rem 0;
             text-align: center;
-            padding: 3rem 0;
         }
-        .code-block {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem auto;
-            max-width: 500px;
+        .methodology-block h3 {
+            color: #00f0ff;
+            margin-bottom: 1rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-            text-align: left;
         }
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
+        .methodology-block p {
+            color: rgba(255,255,255,0.8);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s;
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-        .btn-primary {
-            background: #00ff88;
-            color: #000;
-        }
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid #00ff88;
-            color: #00ff88;
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
         .alt-bg {
             background: rgba(255,255,255,0.02);
         }
-        .no-results {
-            text-align: center;
-            padding: 3rem;
-            color: rgba(255,255,255,0.5);
-            display: none;
+        .summary-block {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.7;
         }
-        .no-results.visible {
-            display: block;
+        .summary-block p {
+            margin: 0;
         }
     </style>
 </head>
@@ -298,104 +199,257 @@
             <div class="nav-links" id="nav-links">
                 <a href="research.html">Research</a>
                 <a href="technology.html">Technology</a>
-                <a href="qmnf.html">QMNF</a>
+                <a href="three-lock.html">Three-Lock</a>
+                <a href="innovations.html">Innovations</a>
                 <a href="benchmarks.html">Benchmarks</a>
                 <a href="demo.html">Demo</a>
                 <a href="proofs.html" class="active">Proofs</a>
+                <a href="kiosk.html">Kiosk</a>
                 <a href="nine65-saas.html">SaaS</a>
                 <a href="about.html">About</a>
                 <a href="contact.html" class="nav-cta">Contact</a>
             </div>
             <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
     <section class="page-hero">
         <div class="container">
-            <h1>Formal Verification Proofs</h1>
-            <p>Machine-checked proofs in Coq and Lean4. These formalizations verify correctness of algorithms and security properties.</p>
+            <h1>Formal Verification</h1>
+            <p>70+ machine-checked proofs in Coq 8.18+ and Lean4 with Mathlib. Zero admitted statements. Zero sorry statements.</p>
         </div>
     </section>
 
     <main id="main-content">
+
+        <!-- Methodology -->
         <section class="section">
             <div class="container">
-                <div class="proof-stats">
-                    <div class="stat-card" data-proof-stats>Loading proofs...</div>
-                </div>
-
-                <div class="proof-grid" id="proof-grid" data-proof-grid>
-                    <!-- Populated from reports/inventory_public.json via script.js -->
+                <div class="methodology-block">
+                    <h3>Proof Methodology</h3>
+                    <p>Three axioms used across the proof corpus: Core-SVP hardness assumption, Ring-LWE to SVP reduction, and BKZ cost model. All other results are proven from first principles.</p>
                 </div>
             </div>
         </section>
-<section class="section" id="walkthroughs">
+
+        <!-- Coq Proofs -->
+        <section class="section alt-bg">
             <div class="container">
-                <h2 class="section-title">Proof Walkthroughs</h2>
-                <p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 2rem;">
-                    Deep-dive explanations of our formally verified security proofs.
-                </p>
+                <h2 class="section-title">Coq Proofs</h2>
+                <p class="section-subtitle">14 machine-checked proofs compiled with Coq 8.18+. Zero admitted statements.</p>
 
-                <div class="verification-grid">
-                    <a href="shadow-entropy.html" class="verification-card success" style="text-decoration: none; cursor: pointer;">
-                        <h3 style="color: #fff;">Shadow Entropy Security</h3>
-                        <p class="status">24/24 Verified</p>
-                        <ul>
-                            <li>15/15 NIST SP 800-22 tests</li>
-                            <li>6 Lean4 + 2 Coq proofs</li>
-                            <li>Cryptographic security proof</li>
-                            <li>FHE noise suitability</li>
-                        </ul>
-                    </a>
-                    <a href="proofs/theorem_stack.md" class="verification-card info" style="text-decoration: none; cursor: pointer;">
-                        <h3 style="color: #fff;">Theorem Stack</h3>
-                        <p class="status">Complete DAG</p>
-                        <ul>
-                            <li>Dependency graph visualization</li>
-                            <li>Confidence metrics</li>
-                            <li>Axiom audit</li>
-                            <li>Computational evidence</li>
-                        </ul>
-                    </a>
-                    <a href="innovations.html" class="verification-card success" style="text-decoration: none; cursor: pointer;">
-                        <h3 style="color: #fff;">14 FHE Innovations</h3>
-                        <p class="status">All Verified</p>
-                        <ul>
-                            <li>K-Elimination</li>
-                            <li>GSO-FHE</li>
-                            <li>MQ-ReLU</li>
-                            <li>Unlimited-depth FHE</li>
-                        </ul>
-                    </a>
+                <div class="proof-table-wrapper">
+                    <table class="proof-table">
+                        <thead>
+                            <tr>
+                                <th>Proof</th>
+                                <th>Property Verified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>KElimination</td>
+                                <td>Exact overflow recovery in RNS division</td>
+                            </tr>
+                            <tr>
+                                <td>GSOFHE</td>
+                                <td>Depth management correctness for encrypted circuits</td>
+                            </tr>
+                            <tr>
+                                <td>CRTShadowEntropy</td>
+                                <td>Shadow entropy statistical independence from computation inputs</td>
+                            </tr>
+                            <tr>
+                                <td>OrderFinding</td>
+                                <td>Multiplicative order detection in modular groups</td>
+                            </tr>
+                            <tr>
+                                <td>MQReLU</td>
+                                <td>Integer activation function preserves FHE noise bounds</td>
+                            </tr>
+                            <tr>
+                                <td>IntegerSoftmax</td>
+                                <td>Exact integer softmax summation correctness</td>
+                            </tr>
+                            <tr>
+                                <td>MontgomeryPersistent</td>
+                                <td>Montgomery form persistence across chained operations</td>
+                            </tr>
+                            <tr>
+                                <td>MobiusInt</td>
+                                <td>Mobius function integer arithmetic roundtrip</td>
+                            </tr>
+                            <tr>
+                                <td>CyclotomicPhase</td>
+                                <td>Cyclotomic polynomial phase evaluation correctness</td>
+                            </tr>
+                            <tr>
+                                <td>PadeEngine</td>
+                                <td>Pade approximant identity and zero properties</td>
+                            </tr>
+                            <tr>
+                                <td>ExactCoefficient</td>
+                                <td>Exact polynomial coefficient extraction</td>
+                            </tr>
+                            <tr>
+                                <td>StateCompression</td>
+                                <td>Compressed state preserves computation integrity</td>
+                            </tr>
+                            <tr>
+                                <td>SideChannelResistance</td>
+                                <td>Constant-time operation execution verification</td>
+                            </tr>
+                            <tr>
+                                <td>EncryptedQuantum</td>
+                                <td>Quantum operation simulation in encrypted domain</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
+        <!-- Lean4 Core Proofs -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Lean4 Core Proofs</h2>
+                <p class="section-subtitle">Core formal proofs built on Lean 4 with Mathlib. Zero sorry statements.</p>
+
+                <div class="proof-table-wrapper">
+                    <table class="proof-table">
+                        <thead>
+                            <tr>
+                                <th>Proof</th>
+                                <th>Property Verified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Basic</td>
+                                <td>Core algebraic definitions and axioms</td>
+                            </tr>
+                            <tr>
+                                <td>ShadowEntropy</td>
+                                <td>NIST SP 800-22 statistical test compliance</td>
+                            </tr>
+                            <tr>
+                                <td>ZMod</td>
+                                <td>Modular arithmetic foundations and inverses</td>
+                            </tr>
+                            <tr>
+                                <td>AHOP/Algebra</td>
+                                <td>Post-quantum algebraic structure properties</td>
+                            </tr>
+                            <tr>
+                                <td>AHOP/Hardness</td>
+                                <td>Hardness assumption formalization</td>
+                            </tr>
+                            <tr>
+                                <td>AHOP/Parameters</td>
+                                <td>Parameter instantiation at 128-bit security</td>
+                            </tr>
+                            <tr>
+                                <td>Lattice/CRT</td>
+                                <td>Chinese Remainder Theorem over lattice structures</td>
+                            </tr>
+                            <tr>
+                                <td>Montgomery</td>
+                                <td>Montgomery multiplication correctness</td>
+                            </tr>
+                            <tr>
+                                <td>GSOFHE</td>
+                                <td>Encrypted circuit depth bound proofs</td>
+                            </tr>
+                            <tr>
+                                <td>MQReLU</td>
+                                <td>Integer ReLU noise bound preservation</td>
+                            </tr>
+                            <tr>
+                                <td>IntegerSoftmax</td>
+                                <td>Integer softmax summation exactness</td>
+                            </tr>
+                            <tr>
+                                <td>OrderFinding</td>
+                                <td>Modular order detection correctness</td>
+                            </tr>
+                            <tr>
+                                <td>PadeEngine</td>
+                                <td>Rational approximation identities</td>
+                            </tr>
+                            <tr>
+                                <td>MobiusInt</td>
+                                <td>Integer Mobius function properties</td>
+                            </tr>
+                            <tr>
+                                <td>CyclotomicPhase</td>
+                                <td>Phase polynomial evaluation</td>
+                            </tr>
+                            <tr>
+                                <td>ExactCoefficient</td>
+                                <td>Coefficient extraction exactness</td>
+                            </tr>
+                            <tr>
+                                <td>SideChannel</td>
+                                <td>Timing-independent operation proofs</td>
+                            </tr>
+                            <tr>
+                                <td>EncryptedQuantum</td>
+                                <td>Encrypted quantum gate simulation</td>
+                            </tr>
+                            <tr>
+                                <td>StateCompression</td>
+                                <td>State compression integrity</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Innovation Proofs -->
+        <section class="section alt-bg">
+            <div class="container">
+                <h2 class="section-title">Innovation Proofs</h2>
+                <div class="summary-block">
+                    <p>24 additional Lean4 proofs cover per-innovation mathematical correctness across the full innovation stack, including persistent Montgomery arithmetic, integer neural networks, binary GCD, PLMG rails, GSO depth management, MANA acceleration, Clockwork Prime, bootstrap-free FHE, and real-time FHE operations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NIST Compliance -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">NIST Compliance</h2>
+                <div class="summary-block">
+                    <p>14 dedicated proof files cover NIST compliance: AHOP security reductions, IND-CPA game formalization, ring definitions, homomorphic security, K-Elimination soundness, security lemmas, and the complete security argument.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verification Summary -->
         <section class="section alt-bg" id="verification">
             <div class="container">
-                <h2 class="section-title">Verification Status</h2>
+                <h2 class="section-title">Verification Summary</h2>
 
                 <div class="verification-grid">
                     <div class="verification-card success">
-                        <h3>Coq Proofs</h3>
+                        <h3>Coq</h3>
                         <p class="status">Verified</p>
                         <ul>
-                            <li>Compatible with Coq 8.18+</li>
-                            <li>19 proof files</li>
+                            <li>14 proofs</li>
                             <li>0 admitted statements</li>
+                            <li>Coq 8.18+</li>
                         </ul>
                     </div>
                     <div class="verification-card success">
-                        <h3>Lean 4 Proofs</h3>
+                        <h3>Lean4</h3>
                         <p class="status">Verified</p>
                         <ul>
-                            <li>Uses Mathlib</li>
-                            <li>28 core + 14 NIST proof files</li>
+                            <li>55+ proof files</li>
                             <li>0 sorry statements</li>
+                            <li>Lean 4.x + Mathlib</li>
                         </ul>
                     </div>
                     <div class="verification-card info">
@@ -404,35 +458,21 @@
                         <ul>
                             <li>Core-SVP hardness assumption</li>
                             <li>Ring-LWE to SVP reduction</li>
-                            <li>BKZ cost model (empirical)</li>
+                            <li>BKZ cost model</li>
+                        </ul>
+                    </div>
+                    <div class="verification-card pending">
+                        <h3>External Audit</h3>
+                        <p class="status">Pending</p>
+                        <ul>
+                            <li>Third-party review in progress</li>
+                            <li>Results will be published upon completion</li>
                         </ul>
                     </div>
                 </div>
-
-                <div class="key-results">
-                    <h3>Verified Properties</h3>
-                    <ul>
-                        <li><strong>NIST Category 5:</strong> Parameters satisfy 256-bit security bounds per FIPS-203</li>
-                        <li><strong>K-Elimination Correctness:</strong> Overflow count recoverable from anchor residues</li>
-                        <li><strong>Noise Bounds:</strong> GSO maintains decryption correctness without bootstrapping</li>
-                        <li><strong>Constant-Time:</strong> Operations execute in data-independent time</li>
-                    </ul>
-                </div>
             </div>
         </section>
 
-        <section class="section cta-section">
-            <div class="container">
-                <h2>Source Code</h2>
-                <p>Clone the repository to verify proofs locally:</p>
-                <div class="code-block"><code>git clone https://github.com/DeuxAxios/hackfate.git
-cd hackfate/proofs</code></div>
-                <div class="cta-buttons">
-                    <a href="https://github.com/DeuxAxios/hackfate" class="btn btn-primary">View on GitHub</a>
-                    <a href="proofs/README.md" class="btn btn-secondary">Documentation</a>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="footer">
@@ -440,56 +480,29 @@ cd hackfate/proofs</code></div>
             <div class="footer-content">
                 <div class="footer-brand">
                     <span class="footer-logo">HACKFATE</span>
-                    <p>Independent research in post-quantum cryptography and exact computation.</p>
+                    <p>"Truth cannot be approximated."</p>
                 </div>
                 <div class="footer-links">
+                    <a href="research.html">Research</a>
+                    <a href="technology.html">Technology</a>
+                    <a href="three-lock.html">Three-Lock</a>
+                    <a href="innovations.html">Innovations</a>
+                    <a href="benchmarks.html">Benchmarks</a>
+                    <a href="proofs.html">Proofs</a>
+                    <a href="kiosk.html">Kiosk</a>
                     <a href="nine65-saas.html">SaaS</a>
-                    <a href="privacy.html">Privacy</a>
+                    <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
-                    <a href="https://github.com/DeuxAxios/hackfate">GitHub</a>
                 </div>
             </div>
-            <p class="footer-copyright">&copy; 2026 HackFate. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Anthony Diaz. All rights reserved.</p>
+                <p>Proprietary technology protected. Public research available under respective licenses.</p>
+                <p><a href="privacy.html" class="footer-legal-link">Privacy Policy</a></p>
+            </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const proofCards = document.querySelectorAll('.proof-card');
-            const noResults = document.getElementById('no-results');
-
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const filter = this.dataset.filter;
-
-                    filterBtns.forEach(b => {
-                        b.classList.remove('active');
-                        b.setAttribute('aria-selected', 'false');
-                    });
-                    this.classList.add('active');
-                    this.setAttribute('aria-selected', 'true');
-
-                    let visibleCount = 0;
-                    proofCards.forEach(card => {
-                        const type = card.dataset.type;
-                        if (filter === 'all' || type === filter) {
-                            card.classList.remove('hidden');
-                            visibleCount++;
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
-
-                    if (visibleCount === 0) {
-                        noResults.classList.add('visible');
-                    } else {
-                        noResults.classList.remove('visible');
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

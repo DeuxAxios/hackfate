@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiosk Architecture | HackFate</title>
+    <meta name="description" content="Self-destructing FHE on consumer hardware. Disposable computation units that exist only during active use.">
+    <link rel="canonical" href="https://hackfate.us/kiosk.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta property="og:title" content="Kiosk Architecture | HackFate">
+    <meta property="og:description" content="Self-destructing FHE on consumer hardware. Disposable computation units that exist only during active use.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hackfate.us/kiosk.html">
+    <meta property="og:image" content="https://hackfate.us/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="HackFate - Kiosk Architecture">
+    <meta property="og:site_name" content="HackFate">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kiosk Architecture | HackFate">
+    <meta name="twitter:description" content="Self-destructing FHE on consumer hardware. Disposable computation units that exist only during active use.">
+    <meta name="twitter:image" content="https://hackfate.us/og-image.png">
+    <meta name="twitter:image:alt" content="HackFate - Kiosk Architecture">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="nav" aria-label="Primary">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">HACKFATE</a>
+            <div class="nav-links" id="nav-links">
+                <a href="research.html">Research</a>
+                <a href="technology.html">Technology</a>
+                <a href="three-lock.html">Three-Lock</a>
+                <a href="innovations.html">Innovations</a>
+                <a href="benchmarks.html">Benchmarks</a>
+                <a href="demo.html">Demo</a>
+                <a href="proofs.html">Proofs</a>
+                <a href="kiosk.html">Kiosk</a>
+                <a href="nine65-saas.html">SaaS</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="nav-cta">Contact</a>
+            </div>
+            <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>The Kiosk Model</h1>
+            <p class="hero-subtitle">Self-Destructing FHE on Consumer Hardware</p>
+        </div>
+    </section>
+
+    <main id="main-content">
+        <section class="section">
+            <div class="container">
+                <h2>The Problem with Centralized FHE</h2>
+                <p>Centralized FHE servers hold cryptographic keys in memory continuously, creating a persistent attack surface. The algebraic homomorphism that enables encrypted computation also creates structural vulnerabilities inherent to the deployment model — not bugs that can be patched, but consequences of the architecture itself.</p>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="container">
+                <h2>The Inversion</h2>
+                <p>Instead of running FHE on provider-owned servers, ship self-destructing disposable computation units to consumer hardware. The provider sells cryptographic capability, not compute time. Units exist only during active computation — milliseconds of attack surface instead of 24/7 exposure.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>Three Deployment Models</h2>
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">1</div>
+                        <h3>BULLET</h3>
+                        <p>Single computation. One encrypted operation, then destruction. Secure voting, sealed-bid auctions, medical queries.</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">N</div>
+                        <h3>CAPSULE</h3>
+                        <p>N computations. A measured allocation of encrypted operations before automatic destruction. Recurring analytics, ML inference batches.</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">T</div>
+                        <h3>FUSE</h3>
+                        <p>Time-limited window. Active for a defined duration, then destruction regardless of operations consumed. Development, testing, burst workloads.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="container">
+                <h2>Self-Destruction</h2>
+                <p>Destruction is not cleanup — it is an integral part of the computation lifecycle. After computation completes, cryptographic state is transformed into algebraic meaninglessness and zeroed from memory in microseconds. A destruction receipt — a cryptographic hash of the final system state — proves the computation occurred and the unit self-destructed, without revealing inputs, outputs, or keys.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>Shadow Entropy Metering</h2>
+                <p>Every FHE computation produces an irreducible cryptographic byproduct: shadow entropy. This byproduct serves simultaneously as the billing mechanism and the tamper detection system. The amount of shadow entropy a computation produces is deterministic and predictable from the circuit description — which is always public in FHE. Enforcement is mathematical, not contractual. There is no DRM to crack, no license server to spoof.</p>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="container">
+                <h2>Dead Man's Switch</h2>
+                <p>Five independent triggers fire immediate destruction with no graceful shutdown: integrity mismatch, memory access violation, clock anomaly, heartbeat timeout, and client-initiated abort. If destruction fires from the first four triggers, the client receives no result. The adversary gets nothing.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>Development Status</h2>
+                <div class="modes-grid">
+                    <div class="mode-card">
+                        <div class="mode-badge">Production</div>
+                        <h3>Core FHE Engine</h3>
+                        <p>Production-ready — 935+ tests, 0 failures</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="mode-badge">Implemented</div>
+                        <h3>Shadow Entropy Harvesting</h3>
+                        <p>Implemented</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="mode-badge">Verified</div>
+                        <h3>Three-Lock Bootstrap</h3>
+                        <p>Verified — 3 paths, exact recovery</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="mode-badge">In Progress</div>
+                        <h3>Fold / Destruction / Receipt</h3>
+                        <p>Implementation phase</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="mode-badge">Planned</div>
+                        <h3>WASM Compilation Target</h3>
+                        <p>Planned</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="mode-badge">Design</div>
+                        <h3>Consumer Provisioning</h3>
+                        <p>Design phase</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section cta-section">
+            <div class="container">
+                <h2>Interested in Licensing?</h2>
+                <p>The Kiosk architecture is available for licensing. Get in touch to discuss integration, deployment models, and commercial arrangements.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Contact for Licensing</a>
+                    <a href="technology.html" class="btn btn-secondary">View Technology</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#top" class="back-to-top" aria-label="Back to top">Top</a>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">HACKFATE</span>
+                    <p>"Truth cannot be approximated."</p>
+                </div>
+                <div class="footer-links">
+                    <a href="research.html">Research</a>
+                    <a href="technology.html">Technology</a>
+                    <a href="three-lock.html">Three-Lock</a>
+                    <a href="innovations.html">Innovations</a>
+                    <a href="benchmarks.html">Benchmarks</a>
+                    <a href="proofs.html">Proofs</a>
+                    <a href="kiosk.html">Kiosk</a>
+                    <a href="nine65-saas.html">SaaS</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Anthony Diaz. All rights reserved.</p>
+                <p>Proprietary technology protected. Public research available under respective licenses.</p>
+                <p><a href="privacy.html" class="footer-legal-link">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="script.js"></script>
+</body>
+</html>
