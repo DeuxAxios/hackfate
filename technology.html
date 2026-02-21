@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technology | HackFate</title>
-    <meta name="description" content="Overview of HackFate proprietary technology pillars: QMNF, NINE65, Neural Systems, and Advanced R&D.">
+    <meta name="description" content="The four-layer integer-only FHE stack built from first principles. Exact arithmetic, K-Elimination, integrity verification, and Three-Lock FHE.">
     <link rel="canonical" href="https://hackfate.us/technology.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta property="og:title" content="Technology | HackFate">
-    <meta property="og:description" content="High-level overview of proprietary HackFate technology pillars.">
+    <meta property="og:description" content="The four-layer integer-only FHE stack built from first principles. Exact arithmetic, K-Elimination, integrity verification, and Three-Lock FHE.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hackfate.us/technology.html">
     <meta property="og:image" content="https://hackfate.us/og-image.png">
@@ -20,7 +20,7 @@
     <meta property="og:site_name" content="HackFate">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Technology | HackFate">
-    <meta name="twitter:description" content="High-level overview of proprietary HackFate technology pillars.">
+    <meta name="twitter:description" content="The four-layer integer-only FHE stack built from first principles. Exact arithmetic, K-Elimination, integrity verification, and Three-Lock FHE.">
     <meta name="twitter:image" content="https://hackfate.us/og-image.png">
     <meta name="twitter:image:alt" content="HackFate - Exact Computation, Post-Quantum Security">
     <link rel="stylesheet" href="styles.css">
@@ -34,39 +34,75 @@
             <div class="nav-links" id="nav-links">
                 <a href="research.html">Research</a>
                 <a href="technology.html">Technology</a>
-                <a href="qmnf.html">QMNF</a>
+                <a href="three-lock.html">Three-Lock</a>
+                <a href="innovations.html">Innovations</a>
                 <a href="benchmarks.html">Benchmarks</a>
                 <a href="demo.html">Demo</a>
                 <a href="proofs.html">Proofs</a>
+                <a href="kiosk.html">Kiosk</a>
                 <a href="nine65-saas.html">SaaS</a>
                 <a href="about.html">About</a>
                 <a href="contact.html" class="nav-cta">Contact</a>
             </div>
             <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
     <section class="page-hero">
         <div class="container">
-            <h1>Technology</h1>
-            <p>Proprietary systems focused on exact arithmetic, post-quantum security, and deterministic computation. Technical internals are protected.</p>
+            <h1>The Stack</h1>
+            <p class="hero-subtitle">Integer-only FHE built from first principles. Every layer exists because the one below it created a requirement.</p>
         </div>
     </section>
 
     <main id="main-content">
-        <section class="section technology" id="technology">
+        <section class="section achievement-section" id="stack">
             <div class="container">
-                <div class="tech-grid" data-tech-grid>
-                    <!-- Populated from inventory_public.json via script.js -->
+                <h2>Four-Layer Architecture</h2>
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">L0</div>
+                        <h3>Exact Arithmetic</h3>
+                        <p>All computation in exact integer and rational arithmetic. Zero floating-point operations at any layer -- enforced at compile time, not by convention. Results are deterministic and bit-identical across platforms, compilers, and architectures. Formally verified.</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">L1</div>
+                        <h3>K-Elimination</h3>
+                        <p>Exact division in Residue Number Systems. For 60 years, RNS division required expensive full reconstruction that serialized parallel computation. K-Elimination solves this exactly, enabling practical RNS-based FHE for the first time.</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">L2</div>
+                        <h3>Integrity Verification</h3>
+                        <p>RNS encoding with algebraic integrity checking. Corrupted operations -- whether from hardware faults or adversarial inputs -- are detected at the first computation step, not at the end of the circuit. Failed integrity triggers immediate destruction in Kiosk mode.</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">L3</div>
+                        <h3>Three-Lock FHE</h3>
+                        <p>Unlimited-depth homomorphic encryption with Three-Lock conjunction security. Three independent protection layers during re-encryption. Three verified bootstrap paths: circular, non-circular (KSK), and auto-triggered. 935+ tests, all passing.</p>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="licensing-note">
-                    <p>Implementation details and source code available under licensing agreement.</p>
-                    <a href="contact.html" class="btn btn-secondary">Inquire About Licensing</a>
+        <section class="section capabilities-section" id="why-integer-only">
+            <div class="container">
+                <h2>Why Integer-Only</h2>
+                <div class="capabilities-list">
+                    <div class="capability-item">
+                        <p>Every floating-point operation is a precision loss. In isolation, the error is negligible. Across thousands of operations -- training a neural network, evaluating a deep circuit, computing a financial model -- errors compound into unreliable results. NINE65 eliminates this entirely. The answer is exact, or the system tells you it cannot compute it. There is no silent degradation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section cta-section" id="licensing">
+            <div class="container">
+                <h2>Licensing</h2>
+                <p>Implementation details and source code available under licensing agreement.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Contact for Licensing</a>
                 </div>
             </div>
         </section>
@@ -74,7 +110,7 @@
 
     <a href="#top" class="back-to-top" aria-label="Back to top">Top</a>
 
-<footer class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -84,11 +120,11 @@
                 <div class="footer-links">
                     <a href="research.html">Research</a>
                     <a href="technology.html">Technology</a>
-                    <a href="qmnf.html">QMNF</a>
+                    <a href="three-lock.html">Three-Lock</a>
+                    <a href="innovations.html">Innovations</a>
                     <a href="benchmarks.html">Benchmarks</a>
-                <a href="demo.html">Demo</a>
-                    <a href="walkthrough.html">Walkthrough</a>
-                    <a href="demo.html">Demo</a>
+                    <a href="proofs.html">Proofs</a>
+                    <a href="kiosk.html">Kiosk</a>
                     <a href="nine65-saas.html">SaaS</a>
                     <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>

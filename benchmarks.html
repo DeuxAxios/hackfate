@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benchmarks | HackFate</title>
-    <meta name="description" content="Benchmark highlights for the NINE65 MANA-boosted canonical variant.">
+    <title>NINE65 v7 Benchmarks | HackFate</title>
+    <meta name="description" content="NINE65 v7 benchmark data. FHE operations, RNS arithmetic, lattice security parameters, and test coverage.">
     <link rel="canonical" href="https://hackfate.us/benchmarks.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <meta property="og:title" content="Benchmarks | HackFate">
-    <meta property="og:description" content="Benchmark highlights for the NINE65 MANA-boosted canonical variant.">
+    <meta property="og:title" content="NINE65 v7 Benchmarks | HackFate">
+    <meta property="og:description" content="NINE65 v7 benchmark data. FHE operations, RNS arithmetic, lattice security parameters, and test coverage.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hackfate.us/benchmarks.html">
     <meta property="og:image" content="https://hackfate.us/og-image.png">
@@ -19,8 +19,8 @@
     <meta property="og:image:alt" content="HackFate - Exact Computation, Post-Quantum Security">
     <meta property="og:site_name" content="HackFate">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Benchmarks | HackFate">
-    <meta name="twitter:description" content="Benchmark highlights for the NINE65 MANA-boosted canonical variant.">
+    <meta name="twitter:title" content="NINE65 v7 Benchmarks | HackFate">
+    <meta name="twitter:description" content="NINE65 v7 benchmark data. FHE operations, RNS arithmetic, lattice security parameters, and test coverage.">
     <meta name="twitter:image" content="https://hackfate.us/og-image.png">
     <meta name="twitter:image:alt" content="HackFate - Exact Computation, Post-Quantum Security">
     <link rel="stylesheet" href="styles.css">
@@ -34,112 +34,226 @@
             <div class="nav-links" id="nav-links">
                 <a href="research.html">Research</a>
                 <a href="technology.html">Technology</a>
-                <a href="qmnf.html">QMNF</a>
+                <a href="three-lock.html">Three-Lock</a>
+                <a href="innovations.html">Innovations</a>
                 <a href="benchmarks.html">Benchmarks</a>
                 <a href="demo.html">Demo</a>
                 <a href="proofs.html">Proofs</a>
+                <a href="kiosk.html">Kiosk</a>
                 <a href="nine65-saas.html">SaaS</a>
                 <a href="about.html">About</a>
                 <a href="contact.html" class="nav-cta">Contact</a>
             </div>
             <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-links" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
     <section class="page-hero">
         <div class="container">
-            <h1>NINE65 V5 Benchmarks</h1>
-            <p>Production FHE with CSPRNG entropy, K-Elimination exact division, and unlimited-depth computation. Independent audit snapshot published February 6, 2026.</p>
+            <h1>NINE65 v7 Benchmarks</h1>
+            <p>Internal release build. CPU only, no GPU acceleration. All timings from production hardware.</p>
         </div>
     </section>
 
     <main id="main-content">
-        <section class="section capabilities-highlight">
+        <section class="section" id="fhe-operations">
             <div class="container">
-                <h2>Key Capabilities</h2>
-                <div class="capabilities-showcase">
-                    <div class="capability-highlight">
-                        <h3>Unlimited Computational Depth</h3>
-                        <p>NINE65 v5 achieves unlimited-depth homomorphic encryption. Computations can continue indefinitely without manual intervention or depth ceiling constraints.</p>
-                    </div>
-                    <div class="capability-highlight">
-                        <h3>Automatic Refresh Mechanism</h3>
-                        <p>100+ operations demonstrated successfully with automatic refresh enabling indefinite computation. Symmetric mode: zero bootstrapping. Public mode: transparent automatic refresh.</p>
-                    </div>
-                    <div class="capability-highlight">
-                        <h3>Production-Ready Performance</h3>
-                        <p>Real-time FHE operations suitable for production deployment. Significantly faster than traditional approaches while maintaining unlimited depth.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section comparison-section">
-            <div class="container">
-                <h2>Capability Comparison</h2>
-                <p class="comparison-intro">NINE65 v5 delivers capabilities previously unavailable in homomorphic encryption systems.</p>
+                <h2>FHE Operations</h2>
                 <div class="comparison-table-wrapper">
                     <table class="comparison-table">
                         <thead>
                             <tr>
-                                <th>Capability</th>
-                                <th>Industry Standard</th>
-                                <th>NINE65 v5</th>
+                                <th>Operation</th>
+                                <th>secure_128</th>
+                                <th>secure_192</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Computational Depth</strong></td>
-                                <td>Limited (requires manual bootstrap)</td>
-                                <td class="highlight-cell">Unlimited</td>
+                                <td><strong>Encrypt</strong></td>
+                                <td>23.56 ms</td>
+                                <td>61.59 ms</td>
                             </tr>
                             <tr>
-                                <td><strong>Refresh Requirement</strong></td>
-                                <td>Manual or bootstrapping overhead</td>
-                                <td class="highlight-cell">Automatic (transparent)</td>
+                                <td><strong>Add</strong></td>
+                                <td>0.83 ms</td>
+                                <td>2.10 ms</td>
                             </tr>
                             <tr>
-                                <td><strong>Deep Circuits</strong></td>
-                                <td>Challenging</td>
-                                <td class="highlight-cell">Fully Supported</td>
+                                <td><strong>Multiply (K-Elimination rescale)</strong></td>
+                                <td>152.13 ms</td>
+                                <td>459.02 ms</td>
                             </tr>
                             <tr>
-                                <td><strong>Formal Verification</strong></td>
-                                <td>Varies</td>
-                                <td class="highlight-cell">24/24 Theorems (Coq & Lean4)</td>
+                                <td><strong>Decrypt</strong></td>
+                                <td>11.06 ms</td>
+                                <td>29.00 ms</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="depth-chains">
+            <div class="container">
+                <h2>Depth Chains (Symmetric Mode)</h2>
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Config</th>
+                                <th>Max Depth</th>
+                                <th>Total Time</th>
+                                <th>Avg per Multiply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>secure_128</strong></td>
+                                <td>50</td>
+                                <td>6.29s</td>
+                                <td>125.81 ms</td>
                             </tr>
                             <tr>
-                                <td><strong>Production Readiness</strong></td>
-                                <td>Research-stage</td>
-                                <td class="highlight-cell">Production-Deployed</td>
+                                <td><strong>secure_192</strong></td>
+                                <td>50</td>
+                                <td>10.10s</td>
+                                <td>201.91 ms</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="rns-arithmetic">
+            <div class="container">
+                <h2>RNS Arithmetic (4-lane)</h2>
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Latency</th>
+                                <th>Throughput</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ADD</strong></td>
+                                <td>65.7 ns</td>
+                                <td>15.2 M ops/s</td>
+                            </tr>
+                            <tr>
+                                <td><strong>MUL</strong></td>
+                                <td>95.6 ns</td>
+                                <td>10.5 M ops/s</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="lattice-security">
+            <div class="container">
+                <h2>Lattice Security (Post-Quantum)</h2>
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Config</th>
+                                <th>n</th>
+                                <th>log2(q)</th>
+                                <th>Min Attack Cost (log2 ops)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>secure_128</strong></td>
+                                <td>4,096</td>
+                                <td>89.08</td>
+                                <td>129</td>
+                            </tr>
+                            <tr>
+                                <td><strong>secure_192</strong></td>
+                                <td>8,192</td>
+                                <td>145.08</td>
+                                <td>159</td>
+                            </tr>
+                            <tr>
+                                <td><strong>secure_256</strong></td>
+                                <td>16,384</td>
+                                <td>203.38</td>
+                                <td>226</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="comparison-note">
-                    <p><strong>Note:</strong> Detailed performance metrics and benchmarks available under NDA. Contact for comprehensive benchmark pack.</p>
-                    <a href="contact.html" class="btn btn-primary">Request Detailed Benchmarks</a>
-                    <a href="clockwork-bootstrap.html" class="btn btn-secondary">Learn About Unlimited Depth</a>
+                    <p>NIST Post-Quantum Level 1 (128-bit) verified under both Core-SVP and Matzov cost models. Higher parameter configurations available with measured attack costs shown. Formal external cryptographic audit pending.</p>
                 </div>
             </div>
         </section>
 
-        <section class="section benchmark" id="benchmark">
+        <section class="section" id="test-coverage">
             <div class="container">
-                <h2>Performance Highlights</h2>
-                <div class="benchmark-meta" data-benchmark-meta>Loading curated benchmarks...</div>
-                <div class="benchmark-grid" data-benchmark-grid>
-                    <!-- Populated from reports/benchmarks_curated.json via script.js -->
-                </div>
-                <p class="benchmark-footnote">Benchmarks measured on the canonical MANA-boosted build; values may vary by hardware and configuration.</p>
-                <div class="licensing-note">
-                    <p>View comprehensive benchmark data, audit summaries, and test evidence.</p>
-                    <a href="benchmarks-detailed.html#audit-2026" class="btn btn-primary">View Audit & Benchmarks</a>
-                    <a href="contact.html" class="btn btn-secondary">Request Full Pack</a>
+                <h2>Test Coverage</h2>
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Crate</th>
+                                <th>Tests</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>nine65 (core FHE)</strong></td>
+                                <td>611+</td>
+                                <td>All passing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>clockwork-core</strong></td>
+                                <td>46</td>
+                                <td>All passing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>exact_transcendentals</strong></td>
+                                <td>143</td>
+                                <td>All passing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>nexgen_rational</strong></td>
+                                <td>95</td>
+                                <td>All passing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>fhe-service</strong></td>
+                                <td>22</td>
+                                <td>All passing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>mana</strong></td>
+                                <td>30</td>
+                                <td>All passing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>unhal</strong></td>
+                                <td>10</td>
+                                <td>All passing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total</strong></td>
+                                <td>935+</td>
+                                <td>0 failures</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -147,7 +261,7 @@
 
     <a href="#top" class="back-to-top" aria-label="Back to top">Top</a>
 
-<footer class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -157,11 +271,11 @@
                 <div class="footer-links">
                     <a href="research.html">Research</a>
                     <a href="technology.html">Technology</a>
-                    <a href="qmnf.html">QMNF</a>
+                    <a href="three-lock.html">Three-Lock</a>
+                    <a href="innovations.html">Innovations</a>
                     <a href="benchmarks.html">Benchmarks</a>
-                <a href="demo.html">Demo</a>
-                    <a href="walkthrough.html">Walkthrough</a>
-                    <a href="demo.html">Demo</a>
+                    <a href="proofs.html">Proofs</a>
+                    <a href="kiosk.html">Kiosk</a>
                     <a href="nine65-saas.html">SaaS</a>
                     <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
