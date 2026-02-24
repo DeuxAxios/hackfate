@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initVisibilityHandler();
     initActiveNav();
     initBackToTop();
+    initPrismaticNav();
     loadInventorySections();
     loadBenchmarkSection();
 });
@@ -275,6 +276,44 @@ function initBackToTop() {
     }, 100);
     window.addEventListener('scroll', toggle);
     toggle();
+}
+
+// Prismatic Nav — mouse-tracking gradient spotlight
+function initPrismaticNav() {
+    if (prefersReducedMotion) return;
+
+    const links = document.querySelectorAll('.nav-links a.nav-prismatic');
+    const BEAM_HALF = 35; // half the 70px beam width
+
+    links.forEach(link => {
+        let rafId = null;
+
+        link.addEventListener('mousemove', (e) => {
+            const rect = link.getBoundingClientRect();
+            const x = e.clientX - rect.left - BEAM_HALF;
+            link.style.setProperty('--prism-x', x + 'px');
+        });
+
+        link.addEventListener('mouseleave', (e) => {
+            const rect = link.getBoundingClientRect();
+            const lastX = e.clientX - rect.left - BEAM_HALF;
+            const exitRight = e.clientX >= rect.right;
+            const target = exitRight ? rect.width + 20 : -70;
+            let current = lastX;
+            const step = exitRight ? 8 : -8;
+
+            function animate() {
+                current += step;
+                link.style.setProperty('--prism-x', current + 'px');
+                const done = exitRight ? current >= target : current <= target;
+                if (!done) {
+                    rafId = requestAnimationFrame(animate);
+                }
+            }
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(animate);
+        });
+    });
 }
 
 // Scroll-triggered Animations
