@@ -140,6 +140,28 @@ body {
     text-shadow: var(--glow-cyan);
 }
 
+/* Prismatic sweep for major nav links */
+.nav-links a.nav-prismatic {
+    background: linear-gradient(
+        90deg,
+        var(--text-secondary) 0%,
+        var(--accent-cyan) 25%,
+        var(--accent-magenta) 50%,
+        var(--accent-purple) 75%,
+        var(--accent-cyan) 100%
+    );
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.5s ease;
+}
+
+.nav-links a.nav-prismatic:hover {
+    background-position: 0% 0;
+}
+
 .nav-cta {
     background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
     padding: 0.5rem 1.25rem !important;
