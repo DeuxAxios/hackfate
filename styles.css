@@ -117,8 +117,9 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.25rem;
     align-items: center;
+    flex-wrap: nowrap;
 }
 
 .nav-links a {
@@ -127,6 +128,7 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -1032,6 +1034,18 @@ body {
 .contact-inquiries strong {
     color: var(--accent-cyan);
     font-weight: 500;
+}
+
+.contact-inquiries .contact-link {
+    color: var(--accent-cyan);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-inquiries .contact-link:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
 }
 
 /* Footer */
